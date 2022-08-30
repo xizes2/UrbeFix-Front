@@ -1,9 +1,12 @@
 import AppStyled from "./AppStyled";
+import RegisterForm from "./components/forms/RegisterForm";
 
 const App = (): JSX.Element => {
   return (
     <>
-      <AppStyled className="main-container"></AppStyled>
+      <AppStyled className="main-container">
+        <RegisterForm />
+      </AppStyled>
     </>
   );
 };
