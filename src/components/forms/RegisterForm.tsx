@@ -1,13 +1,9 @@
 import { SyntheticEvent, useState } from "react";
-import { useSelector } from "react-redux";
-import { RootState } from "../../app/store/store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { MainHeader, RegisterContainer } from "./RegisterFormStyled";
 
 const RegisterForm = () => {
-  const userState = useSelector((state: RootState) => state.users);
-
   const [registerData, setRegisterData] = useState({
     firstName: "",
     lastName: "",
