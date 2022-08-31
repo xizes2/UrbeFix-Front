@@ -1,7 +1,7 @@
 export interface UnregisteredUser {
   firstName: string;
-  lastName: string;
-  profileImage: string;
+  firstSurname: string;
+  profileImage?: string;
   userEmail: string;
   password: string;
 }
