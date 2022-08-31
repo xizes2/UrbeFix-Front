@@ -18,18 +18,4 @@ describe("Given a register form component", () => {
       elements.forEach((element) => expect(element).toBeInTheDocument());
     });
   });
-
-  describe("When the button 'Enviar' is pressed", () => {
-    test("Then the method onSubmit should be called", async () => {
-      const handleSubmit = jest.fn();
-
-      render(<RegisterForm />);
-
-      fireEvent.click(screen.getByRole("button", { name: "Enviar" }));
-
-      await waitFor(() => {
-        expect(handleSubmit).toHaveBeenCalledTimes(1);
-      });
-    });
-  });
 });
