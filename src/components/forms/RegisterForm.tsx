@@ -2,31 +2,29 @@ import { SyntheticEvent, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { MainHeader, RegisterContainer } from "./RegisterFormStyled";
+import useUser from "../../hooks/useUsersApi";
 
 const RegisterForm = () => {
-  const [registerData, setRegisterData] = useState({
+  const { registerUser } = useUser();
+
+  const initialState = {
     firstName: "",
-    lastName: "",
-    profileimage: "",
+    firstSurname: "",
+    profileImage: "",
     userEmail: "",
     password: "",
-  });
-
-  const formData = new FormData();
-
-  const handleSubmit = async (ev: SyntheticEvent) => {
-    ev.preventDefault();
-    formData.append("user", JSON.stringify(registerData));
-    console.log("Submit", formData.get("image"), formData.get("user"));
   };
 
-  const handleChange = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    setRegisterData({ ...registerData, [ev.target.name]: ev.target.value });
-    formData.append(ev.target.name, ev.target.value);
+  const [registerData, setRegisterData] = useState(initialState);
+
+  const handleSubmit = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    registerUser(registerData);
+    setRegisterData(initialState);
   };
 
-  const handleChangeFile = (ev: React.ChangeEvent<HTMLInputElement>) => {
-    formData.append("image", ev.target.files![0]);
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setRegisterData({ ...registerData, [event.target.id]: event.target.value });
   };
 
   return (
@@ -39,7 +37,7 @@ const RegisterForm = () => {
         <div className="form-fields">
           <input
             type="text"
-            name="firstName"
+            id="firstName"
             placeholder="Primer Nombre"
             required
             autoComplete="off"
@@ -48,16 +46,25 @@ const RegisterForm = () => {
           />
           <input
             type="text"
-            name="lastName"
-            placeholder="Último Nombre"
+            id="firstSurname"
+            placeholder="Primer Apellido"
             required
             autoComplete="off"
-            value={registerData.lastName}
+            value={registerData.firstSurname}
             onChange={handleChange}
           />
           <input
             type="email"
-            name="password"
+            id="userEmail"
+            placeholder="Email"
+            required
+            autoComplete="off"
+            value={registerData.userEmail}
+            onChange={handleChange}
+          />
+          <input
+            type="password"
+            id="password"
             placeholder="Contraseña"
             required
             autoComplete="off"
@@ -66,11 +73,10 @@ const RegisterForm = () => {
           />
           <input
             type="password"
-            name="confirmPassword"
+            id="confirmPassword"
             placeholder="Confirmar Contraseña"
             required
             autoComplete="off"
-            value={registerData.password}
             onChange={handleChange}
           />
           <div className="image-container">
@@ -83,11 +89,10 @@ const RegisterForm = () => {
             </label>
             <input
               type="file"
-              id="imageInput"
-              name="image"
+              id="profileImage"
               style={{ display: "none" }}
-              value={registerData.profileimage}
-              onChange={handleChangeFile}
+              value={registerData.profileImage}
+              onChange={() => {}}
             />
           </div>
         </div>
