@@ -5,16 +5,19 @@ import { UnregisteredUser } from "../interfaces/users/User";
 export const loadingModal = (message: string) =>
   toast.loading(message, {
     position: toast.POSITION.TOP_CENTER,
+    autoClose: 2000,
   });
 
 export const successModal = (message: string) =>
   toast.success(message, {
     position: toast.POSITION.TOP_CENTER,
+    autoClose: 3000,
   });
 
 export const errorModal = (error: string) =>
   toast.error(error, {
     position: toast.POSITION.TOP_CENTER,
+    autoClose: 3000,
   });
 
 const useUser = () => {
