@@ -4,7 +4,6 @@ import { UnregisteredUser } from "../../../../interfaces/users/User";
 const usersInitialState: UnregisteredUser = {
   firstName: "",
   firstSurname: "",
-  profileImage: "",
   userEmail: "",
   password: "",
 };

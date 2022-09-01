@@ -3,14 +3,14 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { MainHeader, RegisterContainer } from "./RegisterFormStyled";
 import useUser from "../../hooks/useUsersApi";
+import { UnregisteredUser } from "../../interfaces/users/User";
 
 const RegisterForm = () => {
   const { registerUser } = useUser();
 
-  const initialState = {
+  const initialState: UnregisteredUser = {
     firstName: "",
     firstSurname: "",
-    profileImage: "",
     userEmail: "",
     password: "",
   };
@@ -71,14 +71,6 @@ const RegisterForm = () => {
             value={registerData.password}
             onChange={handleChange}
           />
-          <input
-            type="password"
-            id="confirmPassword"
-            placeholder="Confirmar Contraseña"
-            required
-            autoComplete="off"
-            onChange={handleChange}
-          />
           <div className="image-container">
             <label htmlFor="imageInput" className="image-button">
               <span>Imagen de perfil</span>
@@ -92,7 +84,7 @@ const RegisterForm = () => {
               id="profileImage"
               style={{ display: "none" }}
               value={registerData.profileImage}
-              onChange={() => {}}
+              onChange={handleChange}
             />
           </div>
         </div>
