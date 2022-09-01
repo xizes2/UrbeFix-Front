@@ -1,4 +1,4 @@
-import { fireEvent, render, screen, waitFor } from "@testing-library/react";
+import { render, screen } from "@testing-library/react";
 import RegisterForm from "./RegisterForm";
 
 describe("Given a register form component", () => {
@@ -11,7 +11,6 @@ describe("Given a register form component", () => {
         screen.getByPlaceholderText("Primer Nombre"),
         screen.getByPlaceholderText("Primer Apellido"),
         screen.getByPlaceholderText("Contraseña"),
-        screen.getByPlaceholderText("Confirmar Contraseña"),
         screen.getByRole("button", { name: "Enviar" }),
       ];
 

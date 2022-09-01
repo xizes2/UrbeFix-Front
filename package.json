@@ -21,6 +21,7 @@
     "font-awesome": "^4.7.0",
     "jsonwebtoken": "^8.5.1",
     "jwt-decode": "^3.1.2",
+    "msw": "^0.46.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-redux": "^8.0.2",
@@ -69,7 +70,8 @@
       "!src/react-app-env.d.ts",
       "!src/reportWebVitals.ts",
       "!src/**/*.test.tsx",
-      "!src/**/*.test.ts"
+      "!src/**/*.test.ts",
+      "!src/setupTests.ts"
     ]
   }
 }
