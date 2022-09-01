@@ -1,5 +1,12 @@
 import { render, screen } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
 import RegisterForm from "./RegisterForm";
+
+const mockUser = jest.fn();
+
+jest.mock("../../hooks/useUsersApi", () => () => ({
+  registerUser: mockUser,
+}));
 
 describe("Given a register form component", () => {
   describe("When instantiated", () => {
@@ -15,6 +22,35 @@ describe("Given a register form component", () => {
       ];
 
       elements.forEach((element) => expect(element).toBeInTheDocument());
+    });
+  });
+
+  describe("When the word 'hello' is written to the first name input field", () => {
+    test("Then the value of the username input field should be 'hello'", async () => {
+      const placeHolder = "Primer Nombre";
+      const inputText = "hello";
+
+      render(<RegisterForm />);
+
+      const nameInput: HTMLInputElement =
+        screen.getByPlaceholderText(placeHolder);
+
+      await userEvent.type(nameInput, inputText);
+
+      expect(nameInput).toHaveValue(inputText);
+    });
+  });
+
+  describe("When a user fills the inputs and click the button", () => {
+    test("Then the register function will be called", async () => {
+      const buttonText = "Enviar";
+
+      render(<RegisterForm />);
+
+      const submitButton = screen.getByRole("button", { name: buttonText });
+      await userEvent.click(submitButton);
+
+      expect(mockUser).toHaveBeenCalled();
     });
   });
 });
