@@ -5,7 +5,7 @@ const NotFoundPage = (): JSX.Element => {
     <>
       <NotFoundPageStyled>
         <span>NoOOoOoOOooOo!</span>
-        <img src="images/man-screaming.png" alt="man screaming vector" />
+        <img src="/images/man-screaming.png" alt="man screaming vector" />
         <span>Intenta otra vez</span>
       </NotFoundPageStyled>
     </>
