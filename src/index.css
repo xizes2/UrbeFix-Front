@@ -2,7 +2,7 @@ body {
   margin: 0 auto;
   box-sizing: border-box;
   font-family: "Poppins", sans-serif, Verdana, Geneva, Tahoma;
-  height: 100vh;
+  min-height: 100vh;
 }
 
 h1,
