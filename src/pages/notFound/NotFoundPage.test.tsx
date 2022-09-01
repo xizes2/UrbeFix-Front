@@ -1,14 +1,14 @@
 import { render, screen } from "@testing-library/react";
-import RegisterPage from "./registerPage";
+import NotFoundPage from "./NotFoundPage";
 
 describe("Given a route '/users/register'", () => {
   describe("When it  is accessed", () => {
     test("Then it should show the registerForm", () => {
-      render(<RegisterPage />);
+      render(<NotFoundPage />);
 
-      const registerHeading = screen.getByRole("heading", { name: "Registro" });
+      const notFoundMessage = screen.getByText("Not Found Page");
 
-      expect(registerHeading).toBeInTheDocument();
+      expect(notFoundMessage).toBeInTheDocument();
     });
   });
 });
