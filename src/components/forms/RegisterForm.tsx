@@ -4,6 +4,8 @@ import { faCamera, faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import { MainHeader, RegisterContainer } from "./RegisterFormStyled";
 import useUser from "../../hooks/useUsersApi";
 import { UnregisteredUser } from "../../interfaces/users/User";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegisterForm = () => {
   const { registerUser } = useUser();
@@ -29,6 +31,7 @@ const RegisterForm = () => {
 
   return (
     <>
+      <ToastContainer />
       <MainHeader className="main-header">
         <FontAwesomeIcon className="main-header__icon" icon={faUserCircle} />
         <h2>Registro</h2>
