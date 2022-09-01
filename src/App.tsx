@@ -1,17 +1,13 @@
-import AppStyled from "./AppStyled";
-import { Navigate, Route, Routes } from "react-router-dom";
-import RegisterPage from "./pages/registerPage";
+import { Route, Routes } from "react-router-dom";
+import NotFoundPage from "./pages/notFound/NotFoundPage";
+import RegisterPage from "./pages/register/RegisterPage";
 
 const App = (): JSX.Element => {
   return (
     <>
       <Routes>
-        <AppStyled className="main-container">
-          <main className="main-container">
-            <Route path="/" element={<Navigate to="/home" />} />
-            <Route path="users/register" element={<RegisterPage />} />
-          </main>
-        </AppStyled>
+        <Route path="/users/register" element={<RegisterPage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );
