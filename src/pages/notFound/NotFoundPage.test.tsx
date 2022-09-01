@@ -6,7 +6,7 @@ describe("Given a route '/users/register'", () => {
     test("Then it should show the registerForm", () => {
       render(<NotFoundPage />);
 
-      const notFoundMessage = screen.getByText("Not Found Page");
+      const notFoundMessage = screen.getByText("NoOOoOoOOooOo!");
 
       expect(notFoundMessage).toBeInTheDocument();
     });
