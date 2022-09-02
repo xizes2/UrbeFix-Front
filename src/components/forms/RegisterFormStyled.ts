@@ -57,7 +57,6 @@ export const RegisterContainer = styled.form`
 
   .buttons-container {
     display: flex;
-    position: fixed;
     bottom: 0;
     left: 0;
     right: 0;

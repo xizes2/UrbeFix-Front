@@ -9,7 +9,8 @@ const App = (): JSX.Element => {
       <Routes>
         <Route path="/home" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/*" element={<NotFoundPage />} />
+        <Route path="" element={<HomePage />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>
   );
