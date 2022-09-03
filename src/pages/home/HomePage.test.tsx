@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+import { BrowserRouter } from "react-router-dom";
 import HomePage from "./HomePage";
 
 describe("Given a route '/home'", () => {
@@ -9,7 +10,11 @@ describe("Given a route '/home'", () => {
       const paragrapghText =
         "Aqui podrás hacer quejas sobre distintas infraestructuras de la ciudad ayudando a mantenerla en orden para todos.";
 
-      render(<HomePage />);
+      render(
+        <BrowserRouter>
+          <HomePage />
+        </BrowserRouter>
+      );
 
       const image = screen.getByAltText(altText);
       const title = screen.getByText(titleText);
