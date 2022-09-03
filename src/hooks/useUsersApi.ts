@@ -1,6 +1,14 @@
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
+import jwtDecode from "jwt-decode";
 import { toast } from "react-toastify";
-import { UnregisteredUser } from "../interfaces/users/User";
+import { loginUserActionCreator } from "../app/store/feature/user/userSlicer";
+import { useAppDispatch } from "../app/store/hooks";
+import {
+  LoginData,
+  RegisteredUser,
+  UnregisteredUser,
+  UserToken,
+} from "../interfaces/users/User";
 
 export const loadingModal = (message: string) =>
   toast.loading(message, {
@@ -21,19 +29,41 @@ export const errorModal = (error: string) =>
   });
 
 const useUser = () => {
+  const dispatch = useAppDispatch();
+
   const registerUser = async (registerData: UnregisteredUser) => {
     const url: string = `${process.env.REACT_APP_API_URL}users/register`;
+    loadingModal("Give us a second...");
     try {
-      loadingModal("Give us a second...");
-      const data = await axios.post(url, registerData);
+      await axios.post(url, registerData);
       successModal("Registered with success!");
-      return data;
     } catch (error) {
       errorModal("NoOoOoOoo! Please try again.");
     }
   };
 
-  return { registerUser };
+  const loginUser = async (loginData: LoginData) => {
+    loadingModal("Give us a second...");
+    try {
+      const {
+        data: { token },
+      }: AxiosResponse<UserToken> = await axios.post(
+        `${process.env.REACT_APP_API_URL}users/login`,
+        loginData
+      );
+
+      if (token) {
+        localStorage.setItem("token", token);
+        const userInfo: RegisteredUser = jwtDecode(token);
+        dispatch(loginUserActionCreator(userInfo));
+      }
+      successModal("Logged with success!");
+    } catch (error) {
+      errorModal("NoOoOoOoo! Please try again.");
+    }
+  };
+
+  return { registerUser, loginUser };
 };
 
 export default useUser;
