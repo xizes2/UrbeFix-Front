@@ -1,7 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useUser from "../../../hooks/useUsersApi";
 import { UnregisteredUser } from "../../../interfaces/users/User";
@@ -31,7 +30,6 @@ const RegisterForm = () => {
 
   return (
     <>
-      <ToastContainer />
       <MainHeader className="main-header">
         <FontAwesomeIcon className="main-header__icon" icon={faUserCircle} />
         <h2>Registro</h2>
