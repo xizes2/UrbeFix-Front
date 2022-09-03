@@ -1,8 +1,10 @@
+import Header from "../../components/header/Header";
 import HomePageStyled from "./HomePageStyled";
 
 const HomePage = (): JSX.Element => {
   return (
     <>
+      <Header />
       <HomePageStyled>
         <img src="/images/city-drawing.png" alt="city landscape vector" />
         <h2>Bienvenido a UrbeFix!</h2>
