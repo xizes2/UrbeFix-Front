@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { BrowserRouter } from "react-router-dom";
 import RegisterForm from "./RegisterForm";
 
 const mockUser = jest.fn();
@@ -11,7 +12,11 @@ jest.mock("../../../hooks/useUsersApi", () => () => ({
 describe("Given a register form component", () => {
   describe("When instantiated", () => {
     test("Then it should display a form with a title, 5 inputs and 2 buttons", () => {
-      render(<RegisterForm />);
+      render(
+        <BrowserRouter>
+          <RegisterForm />
+        </BrowserRouter>
+      );
 
       const elements = [
         screen.getByText("Registro"),
@@ -30,7 +35,11 @@ describe("Given a register form component", () => {
       const placeHolder = "Primer Nombre";
       const inputText = "hello";
 
-      render(<RegisterForm />);
+      render(
+        <BrowserRouter>
+          <RegisterForm />
+        </BrowserRouter>
+      );
 
       const nameInput: HTMLInputElement =
         screen.getByPlaceholderText(placeHolder);
@@ -45,7 +54,11 @@ describe("Given a register form component", () => {
     test("Then the register function will be called", async () => {
       const buttonText = "Enviar";
 
-      render(<RegisterForm />);
+      render(
+        <BrowserRouter>
+          <RegisterForm />
+        </BrowserRouter>
+      );
 
       const submitButton = screen.getByRole("button", { name: buttonText });
       await userEvent.click(submitButton);

@@ -70,8 +70,12 @@ export const LoginFormStyled = styled.form`
       font-size: 1.2em;
     }
 
-    > :nth-child(2) {
+    &__nav-link {
       flex-grow: 1;
+    }
+
+    &__return {
+      width: 100%;
       padding: 20px;
       background-color: #fff;
       color: #3fb87b;

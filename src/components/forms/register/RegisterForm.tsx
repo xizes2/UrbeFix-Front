@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import useUser from "../../../hooks/useUsersApi";
 import { UnregisteredUser } from "../../../interfaces/users/User";
 import { MainHeader, RegisterFormStyled } from "./RegisterFormStyled";
+import { Link } from "react-router-dom";
 
 const RegisterForm = () => {
   const { registerUser } = useUser();
@@ -91,7 +92,9 @@ const RegisterForm = () => {
         </div>
         <div className="buttons-container">
           <button type="submit">Enviar</button>
-          <button type="submit">Volver</button>
+          <Link className="buttons-container__nav-link" to={"/home"}>
+            <button className="buttons-container__return">Volver</button>
+          </Link>
         </div>
       </RegisterFormStyled>
     </>
