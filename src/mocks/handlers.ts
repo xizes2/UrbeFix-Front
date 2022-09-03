@@ -32,4 +32,28 @@ export const handlers = [
       );
     }
   ),
+  rest.post(
+    `${process.env.REACT_APP_API_URL}users/login`,
+    async (req, res, ctx) => {
+      const body = await req.json();
+      if (!body.userEmail || !body.password) {
+        return res(
+          ctx.status(403),
+          ctx.json({
+            error: "Wrong data",
+          })
+        );
+      }
+
+      return res(
+        ctx.status(201),
+        ctx.json([
+          {
+            userEmail: "adam@gmail.com",
+            password: "adampass",
+          },
+        ])
+      );
+    }
+  ),
 ];
