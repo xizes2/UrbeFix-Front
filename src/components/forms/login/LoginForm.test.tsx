@@ -1,24 +1,29 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import RegisterForm from "./RegisterForm";
+import Wrapper from "../../../utils/Wrapper";
+import LoginForm from "./LoginForm";
 
 const mockUser = jest.fn();
 
-jest.mock("../../hooks/useUsersApi", () => () => ({
-  registerUser: mockUser,
+jest.mock("../../../hooks/useUsersApi", () => () => ({
+  loginUser: mockUser,
 }));
 
-describe("Given a register form component", () => {
+describe("Given a login form component", () => {
   describe("When instantiated", () => {
-    test("Then it should display a form with a title, 5 inputs and 2 buttons", () => {
-      render(<RegisterForm />);
+    test("Then it should display a form with a title 2 inputs and 2 buttons", () => {
+      render(
+        <Wrapper>
+          <LoginForm />
+        </Wrapper>
+      );
 
       const elements = [
-        screen.getByText("Registro"),
-        screen.getByPlaceholderText("Primer Nombre"),
-        screen.getByPlaceholderText("Primer Apellido"),
+        screen.getByText("Login"),
+        screen.getByPlaceholderText("Email"),
         screen.getByPlaceholderText("Contraseña"),
         screen.getByRole("button", { name: "Enviar" }),
+        screen.getByRole("button", { name: "Volver" }),
       ];
 
       elements.forEach((element) => expect(element).toBeInTheDocument());
@@ -27,10 +32,10 @@ describe("Given a register form component", () => {
 
   describe("When the word 'hello' is written to the first name input field", () => {
     test("Then the value of the username input field should be 'hello'", async () => {
-      const placeHolder = "Primer Nombre";
-      const inputText = "hello";
+      const placeHolder = "Email";
+      const inputText = "hello@hello.com";
 
-      render(<RegisterForm />);
+      render(<LoginForm />);
 
       const nameInput: HTMLInputElement =
         screen.getByPlaceholderText(placeHolder);
@@ -45,7 +50,7 @@ describe("Given a register form component", () => {
     test("Then the register function will be called", async () => {
       const buttonText = "Enviar";
 
-      render(<RegisterForm />);
+      render(<LoginForm />);
 
       const submitButton = screen.getByRole("button", { name: buttonText });
       await userEvent.click(submitButton);

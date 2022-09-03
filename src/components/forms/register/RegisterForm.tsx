@@ -1,11 +1,11 @@
 import { SyntheticEvent, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCamera, faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import { MainHeader, RegisterContainer } from "./RegisterFormStyled";
-import useUser from "../../hooks/useUsersApi";
-import { UnregisteredUser } from "../../interfaces/users/User";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useUser from "../../../hooks/useUsersApi";
+import { UnregisteredUser } from "../../../interfaces/users/User";
+import { MainHeader, RegisterFormStyled } from "./RegisterFormStyled";
 
 const RegisterForm = () => {
   const { registerUser } = useUser();
@@ -36,7 +36,7 @@ const RegisterForm = () => {
         <FontAwesomeIcon className="main-header__icon" icon={faUserCircle} />
         <h2>Registro</h2>
       </MainHeader>
-      <RegisterContainer onSubmit={handleSubmit}>
+      <RegisterFormStyled onSubmit={handleSubmit}>
         <div className="form-fields">
           <input
             type="text"
@@ -95,7 +95,7 @@ const RegisterForm = () => {
           <button type="submit">Enviar</button>
           <button type="submit">Volver</button>
         </div>
-      </RegisterContainer>
+      </RegisterFormStyled>
     </>
   );
 };

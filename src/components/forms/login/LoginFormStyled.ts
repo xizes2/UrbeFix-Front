@@ -15,7 +15,7 @@ export const MainHeader = styled.div`
   }
 `;
 
-export const RegisterContainer = styled.form`
+export const LoginFormStyled = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
