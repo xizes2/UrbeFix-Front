@@ -22,7 +22,7 @@ export const LoginFormStyled = styled.form`
   max-width: 400px;
   margin: 0 auto;
   color: #6d6d6d;
-  min-height: 100vh;
+  min-height: 400px;
 
   .form-fields {
     display: flex;
@@ -57,9 +57,7 @@ export const LoginFormStyled = styled.form`
 
   .buttons-container {
     display: flex;
-    bottom: 0;
-    left: 0;
-    right: 0;
+    margin-top: 30px;
 
     > :first-child {
       flex-grow: 1;
@@ -68,6 +66,7 @@ export const LoginFormStyled = styled.form`
       color: #fff;
       border: 1px solid #3fb87b;
       font-size: 1.2em;
+      border-radius: 10px;
     }
 
     &__nav-link {
@@ -81,6 +80,7 @@ export const LoginFormStyled = styled.form`
       color: #3fb87b;
       border: 1px solid #3fb87b;
       font-size: 1.2em;
+      border-radius: 10px;
     }
   }
 `;

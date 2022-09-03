@@ -1,6 +1,6 @@
 import { SyntheticEvent, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCamera, faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import "react-toastify/dist/ReactToastify.css";
 import useUser from "../../../hooks/useUsersApi";
 import { UnregisteredUser } from "../../../interfaces/users/User";
@@ -73,22 +73,6 @@ const RegisterForm = () => {
             value={registerData.password}
             onChange={handleChange}
           />
-          <div className="image-container">
-            <label htmlFor="imageInput" className="image-button">
-              <span>Imagen de perfil</span>
-              <FontAwesomeIcon
-                className="image-button__icon-camera"
-                icon={faCamera}
-              />
-            </label>
-            <input
-              type="file"
-              id="profileImage"
-              style={{ display: "none" }}
-              value={registerData.profileImage}
-              onChange={handleChange}
-            />
-          </div>
         </div>
         <div className="buttons-container">
           <button type="submit">Enviar</button>
