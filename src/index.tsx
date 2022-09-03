@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 import "./index.css";
 import { store } from "./app/store/store";
 import { BrowserRouter } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
 
 const container = document.getElementById("root")!;
 const root = createRoot(container);
@@ -15,6 +16,7 @@ root.render(
   <React.StrictMode>
     <Provider store={store}>
       <BrowserRouter>
+        <ToastContainer />
         <App />
       </BrowserRouter>
     </Provider>

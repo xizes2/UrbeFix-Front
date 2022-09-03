@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { LoginFormStyled, MainHeader } from "./LoginFormStyled";
 import { LoginData } from "../../../interfaces/users/User";
@@ -33,7 +32,6 @@ const LoginForm = () => {
 
   return (
     <>
-      <ToastContainer />
       <MainHeader className="main-header">
         <FontAwesomeIcon className="main-header__icon" icon={faUserCircle} />
         <h2>Login</h2>

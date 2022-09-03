@@ -26,7 +26,7 @@ describe("Given a useUser hook", () => {
 
       expect(toast.loading).toHaveBeenCalledWith("Give us a second...", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000,
+        closeButton: true,
       });
     });
   });
@@ -48,7 +48,7 @@ describe("Given a useUser hook", () => {
 
     expect(toast.success).toHaveBeenCalledWith("Registered with success!", {
       position: toast.POSITION.TOP_CENTER,
-      autoClose: 3000,
+      autoClose: 2000,
     });
   });
 
@@ -70,7 +70,7 @@ describe("Given a useUser hook", () => {
 
       expect(toast.error).toHaveBeenCalledWith("NoOoOoOoo! Please try again.", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
+        autoClose: 2000,
       });
     });
   });
@@ -92,7 +92,7 @@ describe("Given a useUser hook", () => {
 
       expect(toast.loading).toHaveBeenCalledWith("Give us a second...", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000,
+        closeButton: true,
       });
     });
 
@@ -112,7 +112,7 @@ describe("Given a useUser hook", () => {
 
       expect(toast.success).toHaveBeenCalledWith("Logged with success!", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
+        autoClose: 2000,
       });
     });
 
@@ -131,7 +131,7 @@ describe("Given a useUser hook", () => {
 
       expect(toast.error).toHaveBeenCalledWith("NoOoOoOoo! Please try again.", {
         position: toast.POSITION.TOP_CENTER,
-        autoClose: 3000,
+        autoClose: 2000,
       });
     });
   });
