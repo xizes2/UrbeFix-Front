@@ -1,5 +1,6 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { BrowserRouter } from "react-router-dom";
 import Wrapper from "../../../utils/Wrapper";
 import LoginForm from "./LoginForm";
 
@@ -35,7 +36,11 @@ describe("Given a login form component", () => {
       const placeHolder = "Email";
       const inputText = "hello@hello.com";
 
-      render(<LoginForm />);
+      render(
+        <BrowserRouter>
+          <LoginForm />
+        </BrowserRouter>
+      );
 
       const nameInput: HTMLInputElement =
         screen.getByPlaceholderText(placeHolder);
@@ -50,7 +55,11 @@ describe("Given a login form component", () => {
     test("Then the register function will be called", async () => {
       const buttonText = "Enviar";
 
-      render(<LoginForm />);
+      render(
+        <BrowserRouter>
+          <LoginForm />
+        </BrowserRouter>
+      );
 
       const submitButton = screen.getByRole("button", { name: buttonText });
       await userEvent.click(submitButton);
