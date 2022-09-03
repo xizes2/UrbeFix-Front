@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Header from "../../components/header/Header";
 import HomePageStyled from "./HomePageStyled";
 
@@ -12,6 +13,16 @@ const HomePage = (): JSX.Element => {
           Aqui podrás hacer quejas sobre distintas infraestructuras de la ciudad
           ayudando a mantenerla en orden para todos.
         </p>
+        <div className="buttons-container">
+          <Link className="buttons-container__link" to={"/login"}>
+            <button className="buttons-container__login" type="submit">
+              Login
+            </button>
+          </Link>
+          <Link className="buttons-container__link" to={"/register"}>
+            <button className="buttons-container__register">Registrarse</button>
+          </Link>
+        </div>
       </HomePageStyled>
     </>
   );
