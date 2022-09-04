@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { RegisteredUser } from "../../../../interfaces/users/User";
+import { IRegisteredUser } from "../../../../interfaces/users/User";
 
-const usersInitialState: RegisteredUser = {
+const usersInitialState: IRegisteredUser = {
   userEmail: "",
   token: "",
   id: "",
@@ -11,7 +11,7 @@ const usersSlice = createSlice({
   name: "users",
   initialState: usersInitialState,
   reducers: {
-    loginUser: (previousState, action: PayloadAction<RegisteredUser>) =>
+    loginUser: (previousState, action: PayloadAction<IRegisteredUser>) =>
       action.payload,
   },
 });
