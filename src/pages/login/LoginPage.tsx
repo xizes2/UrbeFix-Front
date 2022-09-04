@@ -5,7 +5,7 @@ const LoginPage = (): JSX.Element => {
   return (
     <>
       <Header />
-      <LoginForm />;
+      <LoginForm />
     </>
   );
 };

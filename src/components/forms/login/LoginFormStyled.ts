@@ -22,7 +22,6 @@ export const LoginFormStyled = styled.form`
   max-width: 400px;
   margin: 0 auto;
   color: #6d6d6d;
-  min-height: 400px;
 
   .form-fields {
     display: flex;
@@ -39,25 +38,23 @@ export const LoginFormStyled = styled.form`
     font-family: inherit;
   }
 
-  .image-button {
-    display: flex;
-    flex-direction: column;
-    text-align: center;
-    justify-content: center;
-    padding: 10px;
-
-    span {
-      padding: 10px;
-    }
-
-    &__icon-camera {
-      font-size: 40px;
-    }
-  }
-
   .buttons-container {
     display: flex;
     margin-top: 30px;
+
+    @media screen and (min-width: 601px) {
+      align-self: center;
+      width: 100%;
+      justify-content: space-between;
+    }
+
+    &__return-container {
+      flex-grow: 1;
+
+      @media screen and (min-width: 601px) {
+        flex-grow: 0;
+      }
+    }
 
     > :first-child {
       flex-grow: 1;
@@ -66,11 +63,19 @@ export const LoginFormStyled = styled.form`
       color: #fff;
       border: 1px solid #3fb87b;
       font-size: 1.2em;
-      border-radius: 10px;
+
+      @media screen and (min-width: 601px) {
+        border-radius: 10px;
+        max-width: 100px;
+      }
     }
 
     &__nav-link {
       flex-grow: 1;
+
+      @media screen and (min-width: 601px) {
+        width: 100%;
+      }
     }
 
     &__return {
@@ -80,7 +85,11 @@ export const LoginFormStyled = styled.form`
       color: #3fb87b;
       border: 1px solid #3fb87b;
       font-size: 1.2em;
-      border-radius: 10px;
+
+      @media screen and (min-width: 601px) {
+        border-radius: 10px;
+        width: 100px;
+      }
     }
   }
 `;
