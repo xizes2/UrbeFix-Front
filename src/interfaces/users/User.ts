@@ -1,4 +1,4 @@
-export interface UnregisteredUser {
+export interface IUnregisteredUser {
   firstName: string;
   firstSurname: string;
   profileImage?: string;
@@ -6,17 +6,17 @@ export interface UnregisteredUser {
   password: string;
 }
 
-export interface RegisteredUser {
+export interface IRegisteredUser {
   userEmail: string;
   token: string;
   id: string;
 }
 
-export interface LoginData {
+export interface ILoginData {
   userEmail: string;
   password: string;
 }
 
-export interface UserToken {
+export interface IUserToken {
   token: string;
 }

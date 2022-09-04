@@ -1,7 +1,7 @@
 import { renderHook } from "@testing-library/react";
 import { toast } from "react-toastify";
-import { LoginData, UnregisteredUser } from "../interfaces/users/User";
-import Wrapper from "../utils/Wrapper";
+import { ILoginData, IUnregisteredUser } from "../../interfaces/users/User";
+import Wrapper from "../../utils/Wrapper";
 import useUser from "./useUsersApi";
 
 jest.mock("react-toastify");
@@ -9,7 +9,7 @@ jest.mock("react-toastify");
 describe("Given a useUser hook", () => {
   describe("When invoke register function with a mockUser", () => {
     test("Then it should show a loading", async () => {
-      const mockUser: UnregisteredUser = {
+      const mockUser: IUnregisteredUser = {
         firstName: "Adam",
         firstSurname: "Super",
         userEmail: "adam@gmail.com",
@@ -32,7 +32,7 @@ describe("Given a useUser hook", () => {
   });
 
   test("Then it should post a new user", async () => {
-    const mockUser: UnregisteredUser = {
+    const mockUser: IUnregisteredUser = {
       firstName: "Adam",
       firstSurname: "Super",
       userEmail: "adam@gmail.com",
@@ -54,7 +54,7 @@ describe("Given a useUser hook", () => {
 
   describe("When invoke register function with a mockUser without required properties", () => {
     test("Then it should send a modal error", async () => {
-      const mockUser2: UnregisteredUser = {
+      const mockUser2: IUnregisteredUser = {
         firstName: "Adam",
         firstSurname: "Super",
         userEmail: "adam@gmail.com",
@@ -77,7 +77,7 @@ describe("Given a useUser hook", () => {
 
   describe("When invoke login function with a mockUser", () => {
     test("Then it should show a loading", async () => {
-      const mockUser: LoginData = {
+      const mockUser: ILoginData = {
         userEmail: "adam@gmail.com",
         password: "adampass",
       };
@@ -97,7 +97,7 @@ describe("Given a useUser hook", () => {
     });
 
     test("Then it should show a success toaster", async () => {
-      const mockUser: LoginData = {
+      const mockUser: ILoginData = {
         userEmail: "adam@gmail.com",
         password: "adampass",
       };
@@ -117,7 +117,7 @@ describe("Given a useUser hook", () => {
     });
 
     test("Then it should show an error toaster", async () => {
-      const mockUser: LoginData = {
+      const mockUser: ILoginData = {
         userEmail: "adam@gmail.com",
         password: "",
       };
