@@ -2,15 +2,15 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import "react-toastify/dist/ReactToastify.css";
 import { LoginFormStyled, MainHeader } from "./LoginFormStyled";
-import { LoginData } from "../../../interfaces/users/User";
+import { ILoginData } from "../../../interfaces/users/User";
 import { SyntheticEvent, useState } from "react";
-import useUser from "../../../hooks/useUsersApi";
 import { Link } from "react-router-dom";
+import useUser from "../../../hooks/users/useUsersApi";
 
 const LoginForm = () => {
   const { loginUser } = useUser();
 
-  const initialState: LoginData = {
+  const initialState: ILoginData = {
     userEmail: "",
     password: "",
   };
