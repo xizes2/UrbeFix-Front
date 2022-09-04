@@ -1,14 +1,14 @@
 import axios, { AxiosResponse } from "axios";
 import jwtDecode from "jwt-decode";
 import { toast } from "react-toastify";
-import { loginUserActionCreator } from "../app/store/feature/user/userSlicer";
-import { useAppDispatch } from "../app/store/hooks";
+import { loginUserActionCreator } from "../../app/store/feature/user/userSlicer";
+import { useAppDispatch } from "../../app/store/hooks";
 import {
-  LoginData,
-  RegisteredUser,
-  UnregisteredUser,
-  UserToken,
-} from "../interfaces/users/User";
+  ILoginData,
+  IRegisteredUser,
+  IUnregisteredUser,
+  IUserToken,
+} from "../../interfaces/users/User";
 
 export const loadingModal = (message: string) =>
   toast.loading(message, {
@@ -31,7 +31,7 @@ export const errorModal = (error: string) =>
 const useUser = () => {
   const dispatch = useAppDispatch();
 
-  const registerUser = async (registerData: UnregisteredUser) => {
+  const registerUser = async (registerData: IUnregisteredUser) => {
     const url: string = `${process.env.REACT_APP_API_URL}users/register`;
     loadingModal("Give us a second...");
     try {
@@ -42,19 +42,19 @@ const useUser = () => {
     }
   };
 
-  const loginUser = async (loginData: LoginData) => {
+  const loginUser = async (loginData: ILoginData) => {
     loadingModal("Give us a second...");
     try {
       const {
         data: { token },
-      }: AxiosResponse<UserToken> = await axios.post(
+      }: AxiosResponse<IUserToken> = await axios.post(
         `${process.env.REACT_APP_API_URL}users/login`,
         loginData
       );
 
       if (token) {
         localStorage.setItem("token", token);
-        const userInfo: RegisteredUser = jwtDecode(token);
+        const userInfo: IRegisteredUser = jwtDecode(token);
         dispatch(loginUserActionCreator(userInfo));
       }
       successModal("Logged with success!");

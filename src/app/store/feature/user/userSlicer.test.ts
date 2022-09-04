@@ -1,4 +1,4 @@
-import { RegisteredUser } from "../../../../interfaces/users/User";
+import { IRegisteredUser } from "../../../../interfaces/users/User";
 import { loginUserActionCreator, usersReducer } from "./userSlicer";
 
 describe("Given a userSlice reducer", () => {
@@ -8,13 +8,13 @@ describe("Given a userSlice reducer", () => {
         id: "",
         userEmail: "",
         token: "",
-      } as RegisteredUser;
+      } as IRegisteredUser;
 
       const user = {
         id: "654fd54",
         userEmail: "biro@gmail.com",
         token: "biropass",
-      } as RegisteredUser;
+      } as IRegisteredUser;
 
       const action = loginUserActionCreator(user);
 

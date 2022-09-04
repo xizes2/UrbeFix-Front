@@ -2,15 +2,15 @@ import { SyntheticEvent, useState } from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import "react-toastify/dist/ReactToastify.css";
-import useUser from "../../../hooks/useUsersApi";
-import { UnregisteredUser } from "../../../interfaces/users/User";
+import { IUnregisteredUser } from "../../../interfaces/users/User";
 import { MainHeader, RegisterFormStyled } from "./RegisterFormStyled";
 import { Link } from "react-router-dom";
+import useUser from "../../../hooks/users/useUsersApi";
 
 const RegisterForm = () => {
   const { registerUser } = useUser();
 
-  const initialState: UnregisteredUser = {
+  const initialState: IUnregisteredUser = {
     firstName: "",
     firstSurname: "",
     userEmail: "",
