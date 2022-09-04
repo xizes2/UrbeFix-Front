@@ -62,9 +62,11 @@ const LoginForm = () => {
           <button className="buttons-container__send" type="submit">
             Enviar
           </button>
-          <Link className="buttons-container__nav-link" to={"/home"}>
-            <button className="buttons-container__return">Volver</button>
-          </Link>
+          <div className="buttons-container__return-container">
+            <Link className="buttons-container__nav-link" to={"/home"}>
+              <button className="buttons-container__return">Volver</button>
+            </Link>
+          </div>
         </div>
       </LoginFormStyled>
     </>
