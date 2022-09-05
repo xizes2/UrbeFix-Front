@@ -8,21 +8,25 @@ const Complaint = ({
 }: IComplaint): JSX.Element => {
   return (
     <ComplaintStyled className="complaint-card">
-      <div className="image container">
+      <div className="image-container">
         <img
           src={image}
           alt={title}
-          className="complaint-card__image"
+          className="image-container__image"
           height={"50px"}
         />
       </div>
-      <h3 className="complaint-card__title">{category}</h3>
-      <div className="complaint-card__add-complaint-container">
-        <span className="add-complaint-container__text">Agregar queja</span>
-        <FontAwesomeIcon
-          className="add-complaint__add-icon"
-          icon={faCirclePlus}
-        />
+      <div className="complaint-card__text-container">
+        <h3 className="complaint-card__title">{category}</h3>
+        <div className="complaint-card__add-complaint-container">
+          <span className="complaint-card__text">Agregar queja</span>
+          <div className="icon-container">
+            <FontAwesomeIcon
+              className="icon-container__add-icon"
+              icon={faCirclePlus}
+            />
+          </div>
+        </div>
       </div>
       <button className="complaint-card__delete-container">
         <FontAwesomeIcon
