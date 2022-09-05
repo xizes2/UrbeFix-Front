@@ -34,11 +34,14 @@ const useUser = () => {
   const registerUser = async (registerData: IUnregisteredUser) => {
     const url: string = `${process.env.REACT_APP_API_URL}users/register`;
     loadingModal("Give us a second...");
+
     try {
       await axios.post(url, registerData);
+      toast.dismiss();
       successModal("Registered with success!");
     } catch (error) {
-      errorModal("NoOoOoOoo! Please try again.");
+      toast.dismiss();
+      errorModal("NoOoOoOoo! Email already exists.");
     }
   };
 
@@ -57,9 +60,11 @@ const useUser = () => {
         const userInfo: IRegisteredUser = jwtDecode(token);
         dispatch(loginUserActionCreator(userInfo));
       }
+      toast.dismiss();
       successModal("Logged with success!");
     } catch (error) {
-      errorModal("NoOoOoOoo! Please try again.");
+      toast.dismiss();
+      errorModal("User or password not valid.");
     }
   };
 

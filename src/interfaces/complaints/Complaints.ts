@@ -1,4 +1,4 @@
-interface IRegisteredComplaint {
+export interface IRegisteredComplaint {
   category: string;
   title: string;
   description?: string;
@@ -8,4 +8,6 @@ interface IRegisteredComplaint {
   id: string;
 }
 
-export default IRegisteredComplaint;
+export interface IComplaint {
+  complaint: IRegisteredComplaint;
+}

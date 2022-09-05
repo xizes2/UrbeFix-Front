@@ -53,6 +53,7 @@ const HomePageStyled = styled.div`
       font-size: 1.2em;
       border-radius: 10px;
       width: 140px;
+      cursor: pointer;
     }
 
     &__register {
@@ -63,6 +64,7 @@ const HomePageStyled = styled.div`
       font-size: 1.2em;
       border-radius: 10px;
       width: 140px;
+      cursor: pointer;
     }
   }
 `;

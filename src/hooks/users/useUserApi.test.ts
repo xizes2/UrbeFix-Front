@@ -68,10 +68,13 @@ describe("Given a useUser hook", () => {
       } = renderHook(useUser, { wrapper: Wrapper });
       await registerUser(mockUser2);
 
-      expect(toast.error).toHaveBeenCalledWith("NoOoOoOoo! Please try again.", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000,
-      });
+      expect(toast.error).toHaveBeenCalledWith(
+        "NoOoOoOoo! Email already exists.",
+        {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 2000,
+        }
+      );
     });
   });
 
@@ -129,7 +132,7 @@ describe("Given a useUser hook", () => {
       } = renderHook(useUser, { wrapper: Wrapper });
       await loginUser(mockUser);
 
-      expect(toast.error).toHaveBeenCalledWith("NoOoOoOoo! Please try again.", {
+      expect(toast.error).toHaveBeenCalledWith("User or password not valid.", {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
       });
