@@ -4,7 +4,7 @@ const ComplaintsListStyled = styled.div`
   .buttons-container {
     display: flex;
     justify-content: space-between;
-    padding: 30px;
+    padding: 20px;
 
     &__filter-buttons {
       display: flex;
@@ -60,15 +60,22 @@ const ComplaintsListStyled = styled.div`
   }
 
   .complaints-container {
-    display: table;
     margin: 0 auto;
-    padding: 0;
+    padding: 20px;
 
     &__complaint {
       list-style: none;
-      margin: 10px;
+      margin: 15px 0;
       box-shadow: 5px 5px 10px #999;
       border-radius: 10px;
+
+      @media screen and (min-width: 601px) {
+        width: 300px;
+        height: 400px;
+        display: inline-block;
+        margin: 15px;
+        box-shadow: 0 5px 5px #999;
+      }
     }
   }
 `;

@@ -24,6 +24,7 @@ const useComplaints = () => {
   const getAllComplaints = useCallback(async (): Promise<void> => {
     const token = localStorage.getItem("token");
     const url: string = `${process.env.REACT_APP_API_URL}complaints`;
+
     try {
       loadingModal("Give us a second...");
       const {
