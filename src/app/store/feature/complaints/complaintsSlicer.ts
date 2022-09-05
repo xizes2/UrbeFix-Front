@@ -1,5 +1,5 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import IRegisteredComplaint from "../../../../interfaces/complaints/Complaints";
+import { IRegisteredComplaint } from "../../../../interfaces/complaints/Complaints";
 
 const complaintsInitialState: IRegisteredComplaint[] = [
   {

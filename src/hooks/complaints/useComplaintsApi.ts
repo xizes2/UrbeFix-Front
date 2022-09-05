@@ -1,9 +1,9 @@
-import axios, { AxiosResponse } from "axios";
+import axios from "axios";
 import { useCallback } from "react";
 import { toast } from "react-toastify";
 import { getAllComplaintsActionCreator } from "../../app/store/feature/complaints/complaintsSlicer";
-import { useAppDispatch } from "../../app/store/hooks";
-import IRegisteredComplaint from "../../interfaces/complaints/Complaints";
+import { useAppDispatch, useAppSelector } from "../../app/store/hooks";
+import { IRegisteredComplaint } from "../../interfaces/complaints/Complaints";
 
 export const loadingModal = (message: string) =>
   toast.loading(message, {
@@ -19,18 +19,18 @@ export const errorModal = (error: string) =>
 
 const useComplaints = () => {
   const dispatch = useAppDispatch();
+  const complaints = useAppSelector((complaints) => complaints);
+
   const getAllComplaints = useCallback(async (): Promise<void> => {
     const token = localStorage.getItem("token");
     const url: string = `${process.env.REACT_APP_API_URL}complaints`;
     try {
       loadingModal("Give us a second...");
-
       const {
         data: { complaints },
       } = await axios.get(url, {
         headers: { authorization: `Bearer ${token}` },
       });
-
       const complaintsList = complaints.map(
         (complaint: IRegisteredComplaint) => ({
           ...complaint,
@@ -44,7 +44,8 @@ const useComplaints = () => {
     }
   }, [dispatch]);
 
-  return { getAllComplaints };
+  toast.dismiss();
+  return { complaints, getAllComplaints };
 };
 
 export default useComplaints;

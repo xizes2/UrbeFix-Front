@@ -3,19 +3,17 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
 import { useAppSelector } from "../../app/store/hooks";
 import useComplaints from "../../hooks/complaints/useComplaintsApi";
-import IRegisteredComplaint from "../../interfaces/complaints/Complaints";
+import Complaint from "../complaint/Complaint";
 import ComplaintsListStyled from "./ComplaintsListStyled";
 
 const ComplaintsList = (): JSX.Element => {
-  const complaints = useAppSelector<IRegisteredComplaint[]>(
-    (state) => state.complaints
-  );
+  const complaintsList = useAppSelector((state) => state.complaints);
 
-  // const { getAllComplaints } = useComplaints();
+  const { getAllComplaints } = useComplaints();
 
-  // useEffect(() => {
-  //   getAllComplaints();
-  // }, [getAllComplaints]);
+  useEffect(() => {
+    getAllComplaints();
+  }, [getAllComplaints]);
 
   return (
     <ComplaintsListStyled>
@@ -31,10 +29,13 @@ const ComplaintsList = (): JSX.Element => {
           Crear Queja
         </button>
       </div>
-      <ul>
-        {complaints.map((complaint, index) => (
-          <li key={complaint.id}>
-            {/* <ComplaintCard complaint={complaint} /> */}
+      <ul className="complaints-container">
+        {complaintsList.map((complaintItem) => (
+          <li
+            className="complaints-container__complaint"
+            key={complaintItem.id}
+          >
+            <Complaint complaint={complaintItem} />
           </li>
         ))}
       </ul>
