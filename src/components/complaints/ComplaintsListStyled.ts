@@ -19,6 +19,7 @@ const ComplaintsListStyled = styled.div`
       border-radius: 10px;
       margin-right: 20px;
       font-size: 1.1em;
+      cursor: pointer;
 
       @media screen and (min-width: 601px) {
         font-size: 1.2em;
@@ -33,6 +34,7 @@ const ComplaintsListStyled = styled.div`
       width: 34px;
       height: 34px;
       padding: 10px;
+      cursor: pointer;
 
       @media screen and (min-width: 601px) {
         margin: 0 20px;
@@ -48,6 +50,7 @@ const ComplaintsListStyled = styled.div`
       border: 1px solid #3fb87b;
       border-radius: 10px;
       font-size: 1.1em;
+      cursor: pointer;
 
       @media screen and (min-width: 601px) {
         font-size: 1.2em;
@@ -56,8 +59,17 @@ const ComplaintsListStyled = styled.div`
     }
   }
 
-  ul {
-    list-style: none;
+  .complaints-container {
+    display: table;
+    margin: 0 auto;
+    padding: 0;
+
+    &__complaint {
+      list-style: none;
+      margin: 10px;
+      box-shadow: 5px 5px 10px #999;
+      border-radius: 10px;
+    }
   }
 `;
 

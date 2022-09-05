@@ -63,6 +63,7 @@ export const LoginFormStyled = styled.form`
       color: #fff;
       border: 1px solid #3fb87b;
       font-size: 1.2em;
+      cursor: pointer;
 
       @media screen and (min-width: 601px) {
         border-radius: 10px;
@@ -85,6 +86,7 @@ export const LoginFormStyled = styled.form`
       color: #3fb87b;
       border: 1px solid #3fb87b;
       font-size: 1.2em;
+      cursor: pointer;
 
       @media screen and (min-width: 601px) {
         border-radius: 10px;
