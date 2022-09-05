@@ -60,7 +60,15 @@ describe("Given a register form component", () => {
         </BrowserRouter>
       );
 
+      const firsrtName = screen.getByPlaceholderText("Primer Nombre");
+      const firstSurname = screen.getByPlaceholderText("Primer Apellido");
+      const password = screen.getByPlaceholderText("Contraseña");
       const submitButton = screen.getByRole("button", { name: buttonText });
+
+      userEvent.type(firsrtName, "Alejandro");
+      userEvent.type(firstSurname, "Alejandro");
+      userEvent.type(password, "Alejandro");
+
       await userEvent.click(submitButton);
 
       expect(mockUser).toHaveBeenCalled();
