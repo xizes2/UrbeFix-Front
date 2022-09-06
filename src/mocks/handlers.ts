@@ -48,12 +48,12 @@ export const handlers = [
 
       return res(
         ctx.status(201),
-        ctx.json([
-          {
-            userEmail: "adam@gmail.com",
-            password: "adampass",
+        ctx.json({
+          user: {
+            token:
+              "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTY0Yzc2OTQ2NDAwNGNmNzhjZmFiMiIsInVzZXJFbWFpbCI6Im1penVraUBnbWFpbWl6dWtpbC5jb20iLCJpYXQiOjE2NjI0ODk3Mjd9.Z_cDzD8Xh4zSfooYAHtmx0vEIrwfFtDfTMs-ZqiRYJU",
           },
-        ])
+        })
       );
     }
   ),
