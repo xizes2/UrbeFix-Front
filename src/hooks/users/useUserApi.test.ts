@@ -1,4 +1,5 @@
-import { renderHook } from "@testing-library/react";
+import { renderHook, waitFor } from "@testing-library/react";
+import { act } from "react-dom/test-utils";
 import { toast } from "react-toastify";
 import { ILoginData, IUnregisteredUser } from "../../interfaces/users/User";
 import Wrapper from "../../utils/Wrapper";
@@ -6,9 +7,23 @@ import useUser from "./useUsersApi";
 
 jest.mock("react-toastify");
 
+const mockUseNavigate = jest.fn();
+
+jest.mock("react-router-dom", () => ({
+  ...jest.requireActual("react-router-dom"),
+  useNavigate: () => mockUseNavigate,
+}));
+
+const mockUseDispatch = jest.fn();
+
+jest.mock("../../app/store/hooks", () => ({
+  ...jest.requireActual("../../app/store/hooks"),
+  useAppDispatch: () => mockUseDispatch,
+}));
+
 describe("Given a useUser hook", () => {
   describe("When invoke register function with a mockUser", () => {
-    test("Then it should show a loading", async () => {
+    test("Then it should redirect to the list page", async () => {
       const mockUser: IUnregisteredUser = {
         firstName: "Adam",
         firstSurname: "Super",
@@ -22,33 +37,13 @@ describe("Given a useUser hook", () => {
         },
       } = renderHook(useUser, { wrapper: Wrapper });
 
-      await registerUser(mockUser);
-
-      expect(toast.loading).toHaveBeenCalledWith("Give us a second...", {
-        position: toast.POSITION.TOP_CENTER,
-        closeButton: true,
+      await waitFor(() => {
+        registerUser(mockUser);
       });
-    });
-  });
 
-  test("Then it should post a new user", async () => {
-    const mockUser: IUnregisteredUser = {
-      firstName: "Adam",
-      firstSurname: "Super",
-      userEmail: "adam@gmail.com",
-      password: "adampass",
-    };
-
-    const {
-      result: {
-        current: { registerUser },
-      },
-    } = renderHook(useUser, { wrapper: Wrapper });
-    await registerUser(mockUser);
-
-    expect(toast.success).toHaveBeenCalledWith("Registered with success!", {
-      position: toast.POSITION.TOP_CENTER,
-      autoClose: 2000,
+      await waitFor(() => {
+        expect(mockUseNavigate).toHaveBeenCalledWith("/complaints");
+      });
     });
   });
 
@@ -79,30 +74,10 @@ describe("Given a useUser hook", () => {
   });
 
   describe("When invoke login function with a mockUser", () => {
-    test("Then it should show a loading", async () => {
-      const mockUser: ILoginData = {
-        userEmail: "adam@gmail.com",
-        password: "adampass",
-      };
-
-      const {
-        result: {
-          current: { loginUser },
-        },
-      } = renderHook(useUser, { wrapper: Wrapper });
-
-      await loginUser(mockUser);
-
-      expect(toast.loading).toHaveBeenCalledWith("Give us a second...", {
-        position: toast.POSITION.TOP_CENTER,
-        closeButton: true,
-      });
-    });
-
     test("Then it should show a success toaster", async () => {
-      const mockUser: ILoginData = {
-        userEmail: "adam@gmail.com",
-        password: "adampass",
+      const mockUser3 = {
+        userEmail: "mizuki@gmaimizukil.com",
+        password: "mizuki",
       };
 
       const {
@@ -111,30 +86,36 @@ describe("Given a useUser hook", () => {
         },
       } = renderHook(useUser, { wrapper: Wrapper });
 
-      await loginUser(mockUser);
+      await act(async () => {
+        await loginUser(mockUser3);
+      });
 
-      expect(toast.success).toHaveBeenCalledWith("Logged with success!", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000,
+      await waitFor(() => {
+        expect(mockUseDispatch).toHaveBeenCalled();
       });
     });
 
-    test("Then it should show an error toaster", async () => {
-      const mockUser: ILoginData = {
-        userEmail: "adam@gmail.com",
-        password: "",
-      };
+    describe("When invoke login function with the wrong data", () => {
+      test("Then it should show an error toaster", async () => {
+        const mockUser: ILoginData = {
+          userEmail: "adam@gmail.com",
+          password: "",
+        };
 
-      const {
-        result: {
-          current: { loginUser },
-        },
-      } = renderHook(useUser, { wrapper: Wrapper });
-      await loginUser(mockUser);
+        const {
+          result: {
+            current: { loginUser },
+          },
+        } = renderHook(useUser, { wrapper: Wrapper });
+        await loginUser(mockUser);
 
-      expect(toast.error).toHaveBeenCalledWith("User or password not valid.", {
-        position: toast.POSITION.TOP_CENTER,
-        autoClose: 2000,
+        expect(toast.error).toHaveBeenCalledWith(
+          "User or password not valid.",
+          {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000,
+          }
+        );
       });
     });
   });
