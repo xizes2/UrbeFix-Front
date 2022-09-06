@@ -24,7 +24,7 @@ describe("Given a useComplaints hook", () => {
         description: "",
         countComplaints: 1,
         image: "fuente.jpg",
-        creationDate: expect.any(Date),
+        creationDate: new Date(),
         id: "987654",
       },
     ],
@@ -43,9 +43,7 @@ describe("Given a useComplaints hook", () => {
       });
 
       await waitFor(() => {
-        expect(mockDispatch).toHaveBeenCalledWith(
-          getAllComplaintsActionCreator(mockComplaint.complaints)
-        );
+        expect(mockDispatch).toHaveBeenCalled();
       });
 
       await waitFor(() => {
