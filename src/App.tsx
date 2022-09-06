@@ -1,11 +1,25 @@
+import { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
+import { loginUserActionCreator } from "./app/store/feature/user/userSlicer";
+import { useAppDispatch } from "./app/store/hooks";
 import ComplaintsPage from "./pages/complaintsPage/ComplaintsPage";
 import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/login/LoginPage";
 import NotFoundPage from "./pages/notFound/NotFoundPage";
 import RegisterPage from "./pages/register/RegisterPage";
+import { fetchToken } from "./utils/auth";
 
 const App = (): JSX.Element => {
+  const dispatch = useAppDispatch();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      const localUser = fetchToken(token);
+      dispatch(loginUserActionCreator(localUser));
+    }
+  }, [dispatch]);
+
   return (
     <>
       <Routes>

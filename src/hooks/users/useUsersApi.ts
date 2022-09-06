@@ -1,5 +1,6 @@
 import axios, { AxiosResponse } from "axios";
 import jwtDecode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { loginUserActionCreator } from "../../app/store/feature/user/userSlicer";
 import { useAppDispatch } from "../../app/store/hooks";
@@ -49,7 +50,9 @@ const useUser = () => {
     loadingModal("Give us a second...");
     try {
       const {
-        data: { token },
+        data: {
+          user: { token },
+        },
       }: AxiosResponse<IUserToken> = await axios.post(
         `${process.env.REACT_APP_API_URL}users/login`,
         loginData
@@ -67,7 +70,8 @@ const useUser = () => {
       errorModal("User or password not valid.");
     }
   };
-
+  const navigateTo = useNavigate();
+  navigateTo("/complaints");
   return { registerUser, loginUser };
 };
 
