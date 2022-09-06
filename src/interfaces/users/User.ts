@@ -18,5 +18,5 @@ export interface ILoginData {
 }
 
 export interface IUserToken {
-  user: { token: string };
+  token: string;
 }

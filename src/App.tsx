@@ -11,6 +11,8 @@ import { fetchToken } from "./utils/auth";
 
 const App = (): JSX.Element => {
   const dispatch = useAppDispatch();
+  const { pathname } = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -18,7 +20,10 @@ const App = (): JSX.Element => {
       const localUser = fetchToken(token);
       dispatch(loginUserActionCreator(localUser));
     }
-  }, [dispatch]);
+    navigate(pathname);
+  }, [dispatch, navigate, pathname]);
+
+  const token = useAppSelector((state) => state.users.token);
 
   return (
     <>
@@ -26,7 +31,10 @@ const App = (): JSX.Element => {
         <Route path="/home" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/complaints" element={<ComplaintsPage />} />
+        <Route
+          path="/complaints"
+          element={token ? <ComplaintsPage /> : <LoginPage />}
+        />
         <Route path="" element={<HomePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

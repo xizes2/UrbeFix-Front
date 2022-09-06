@@ -1,10 +1,9 @@
 import jwt from "jwt-decode";
 
-const fetchToken = (token: string) => {
+export const fetchToken = (token: string) => {
   const payloadToken: {
     userEmail: string;
     id: string;
-    iat: string;
   } = jwt(token);
 
   return {
@@ -13,5 +12,3 @@ const fetchToken = (token: string) => {
     id: payloadToken.id,
   };
 };
-
-export default fetchToken;
