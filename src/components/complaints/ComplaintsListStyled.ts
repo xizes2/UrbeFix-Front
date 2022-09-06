@@ -4,7 +4,7 @@ const ComplaintsListStyled = styled.div`
   .buttons-container {
     display: flex;
     justify-content: space-between;
-    padding: 20px;
+    margin: 20px;
 
     &__filter-buttons {
       display: flex;
@@ -73,7 +73,7 @@ const ComplaintsListStyled = styled.div`
         width: 300px;
         height: 400px;
         display: inline-block;
-        margin: 15px;
+        margin-right: 15px;
         box-shadow: 0 5px 5px #999;
       }
     }
