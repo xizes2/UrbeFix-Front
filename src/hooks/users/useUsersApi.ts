@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from "axios";
-import jwtDecode from "jwt-decode";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { loginUserActionCreator } from "../../app/store/feature/user/userSlicer";
 import { useAppDispatch } from "../../app/store/hooks";
@@ -9,12 +9,7 @@ import {
   IUnregisteredUser,
   IUserToken,
 } from "../../interfaces/users/User";
-
-export const loadingModal = (message: string) =>
-  toast.loading(message, {
-    position: toast.POSITION.TOP_CENTER,
-    closeButton: true,
-  });
+import fetchToken from "../../utils/auth";
 
 export const successModal = (message: string) =>
   toast.success(message, {
@@ -30,15 +25,20 @@ export const errorModal = (error: string) =>
 
 const useUser = () => {
   const dispatch = useAppDispatch();
+  const navigateTo = useNavigate();
 
   const registerUser = async (registerData: IUnregisteredUser) => {
     const url: string = `${process.env.REACT_APP_API_URL}users/register`;
-    loadingModal("Give us a second...");
 
     try {
       await axios.post(url, registerData);
-      toast.dismiss();
-      successModal("Registered with success!");
+
+      const loginData = {
+        userEmail: registerData.userEmail,
+        password: registerData.password,
+      };
+      loginUser(loginData);
+      navigateTo("/complaints");
     } catch (error) {
       toast.dismiss();
       errorModal("NoOoOoOoo! Email already exists.");
@@ -46,22 +46,27 @@ const useUser = () => {
   };
 
   const loginUser = async (loginData: ILoginData) => {
-    loadingModal("Give us a second...");
     try {
       const {
-        data: { token },
+        data: {
+          user: { token },
+        },
       }: AxiosResponse<IUserToken> = await axios.post(
         `${process.env.REACT_APP_API_URL}users/login`,
         loginData
       );
 
       if (token) {
+        const userInfo: IRegisteredUser = fetchToken(token);
         localStorage.setItem("token", token);
-        const userInfo: IRegisteredUser = jwtDecode(token);
         dispatch(loginUserActionCreator(userInfo));
+
+        toast.dismiss();
+        successModal("Logged with success!");
+
+        navigateTo("/complaints");
+        return;
       }
-      toast.dismiss();
-      successModal("Logged with success!");
     } catch (error) {
       toast.dismiss();
       errorModal("User or password not valid.");
