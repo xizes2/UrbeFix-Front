@@ -35,7 +35,9 @@ const useComplaints = () => {
       const complaintsList = complaints.map(
         (complaint: IRegisteredComplaint) => ({
           ...complaint,
-          creationDate: new Date(complaint.creationDate as Date),
+          creationDate: new Date(
+            complaint.creationDate as Date
+          ).toLocaleDateString(),
         })
       );
 
