@@ -12,6 +12,10 @@ const ComplaintStyled = styled.div`
   .complaint-card {
     box-shadow: 10px 10px 10px black;
 
+    &__date {
+      padding: 10px;
+    }
+
     &__add-complaint-container {
       display: flex;
       position: absolute;

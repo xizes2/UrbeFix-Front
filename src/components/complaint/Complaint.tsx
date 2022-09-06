@@ -1,11 +1,23 @@
 import { faCirclePlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useState } from "react";
 import { IComplaint } from "../../interfaces/complaints/Complaints";
 import ComplaintStyled from "./ComplaintStyled";
 
 const Complaint = ({
-  complaint: { category, image, title },
+  complaint: { category, image, title, creationDate },
 }: IComplaint): JSX.Element => {
+  const [windowSize, setWindowSize] = useState(window.innerWidth > 601);
+
+  const setViewPortSize = () => {
+    setWindowSize(window.innerWidth > 601);
+  };
+
+  useEffect(() => {
+    window.addEventListener("resize", setViewPortSize);
+    return () => window.removeEventListener("resize", setViewPortSize);
+  });
+
   return (
     <ComplaintStyled className="complaint-card">
       <div className="image-container">
@@ -18,6 +30,13 @@ const Complaint = ({
       </div>
       <div className="complaint-card__text-container">
         <h3 className="complaint-card__title">{category}</h3>
+        {windowSize ? (
+          <span className="complaint-card__date">
+            Fecha de creación: {creationDate as unknown as string}
+          </span>
+        ) : (
+          ""
+        )}
         <div className="complaint-card__add-complaint-container">
           <span className="complaint-card__text">Agregar queja</span>
           <div className="icon-container">
