@@ -1,7 +1,10 @@
 import axios from "axios";
 import { useCallback } from "react";
 import { toast } from "react-toastify";
-import { getAllComplaintsActionCreator } from "../../app/store/feature/complaints/complaintsSlicer";
+import {
+  deleteComplaintActionCreator,
+  getAllComplaintsActionCreator,
+} from "../../app/store/feature/complaints/complaintsSlicer";
 import { useAppDispatch, useAppSelector } from "../../app/store/hooks";
 import { IRegisteredComplaint } from "../../interfaces/complaints/Complaints";
 
@@ -9,6 +12,12 @@ export const loadingModal = (message: string) =>
   toast.loading(message, {
     position: toast.POSITION.TOP_CENTER,
     closeButton: true,
+  });
+
+export const successModal = (message: string) =>
+  toast.success(message, {
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 2000,
   });
 
 export const errorModal = (error: string) =>
@@ -47,8 +56,28 @@ const useComplaints = () => {
     }
   }, [dispatch]);
 
+  const deleteComplaint = useCallback(
+    async (complaintId: string) => {
+      const token = localStorage.getItem("token");
+      const url: string = `${process.env.REACT_APP_API_URL}complaints/delete/${complaintId}`;
+
+      try {
+        await axios.delete(url, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        dispatch(deleteComplaintActionCreator(complaintId));
+        successModal("The complaint has been deleted!");
+      } catch (error) {
+        errorModal("NoOoOoOoo! Please try again.");
+      }
+    },
+    [dispatch]
+  );
+
   toast.dismiss();
-  return { complaints, getAllComplaints };
+  return { complaints, getAllComplaints, deleteComplaint };
 };
 
 export default useComplaints;

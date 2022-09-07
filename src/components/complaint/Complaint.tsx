@@ -1,13 +1,15 @@
 import { faCirclePlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
+import useComplaints from "../../hooks/complaints/useComplaintsApi";
 import { IComplaint } from "../../interfaces/complaints/Complaints";
 import ComplaintStyled from "./ComplaintStyled";
 
 const Complaint = ({
-  complaint: { category, image, title, creationDate },
+  complaint: { id, category, image, title, creationDate },
 }: IComplaint): JSX.Element => {
   const [windowSize, setWindowSize] = useState(window.innerWidth > 601);
+  const { deleteComplaint } = useComplaints();
 
   const setViewPortSize = () => {
     setWindowSize(window.innerWidth > 601);
@@ -17,6 +19,10 @@ const Complaint = ({
     window.addEventListener("resize", setViewPortSize);
     return () => window.removeEventListener("resize", setViewPortSize);
   });
+
+  const handleDelete = () => {
+    deleteComplaint(id);
+  };
 
   return (
     <ComplaintStyled className="complaint-card">
@@ -47,7 +53,10 @@ const Complaint = ({
           </div>
         </div>
       </div>
-      <button className="complaint-card__delete-container">
+      <button
+        className="complaint-card__delete-container"
+        onClick={handleDelete}
+      >
         <FontAwesomeIcon
           className="add-complaint__delete-icon"
           icon={faTrashCan}
