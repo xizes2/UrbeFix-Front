@@ -2,7 +2,6 @@ import { render } from "@testing-library/react";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { useAppDispatch } from "./app/store/hooks";
 import { store } from "./app/store/store";
 
 const mockDispatch = jest.fn();
