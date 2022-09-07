@@ -57,6 +57,7 @@ describe("Given a useComplaints hook", () => {
         position: toast.POSITION.TOP_CENTER,
         autoClose: 2000,
       });
+      delete axios.defaults.headers.get["IsTestError"];
     });
   });
 
@@ -97,7 +98,6 @@ describe("Given a useComplaints hook", () => {
     } = renderHook(useComplaints, { wrapper: Wrapper });
 
     test("Then it should return an error", async () => {
-      // axios.defaults.headers.get["IsTestError"] = true;
       const nonExistingComplaintId = "ff0ds312uxh";
 
       await act(async () => {
