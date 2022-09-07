@@ -1,14 +1,14 @@
 import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import Wrapper from "../../utils/Wrapper";
 import NotFoundPage from "./NotFoundPage";
 
 describe("Given a route '/users/register'", () => {
   describe("When it  is accessed", () => {
     test("Then it should show the registerForm", () => {
       render(
-        <BrowserRouter>
+        <Wrapper>
           <NotFoundPage />
-        </BrowserRouter>
+        </Wrapper>
       );
 
       const notFoundMessage = screen.getByText("NoOOoOoOOooOo!");

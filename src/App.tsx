@@ -1,5 +1,11 @@
 import { useEffect } from "react";
-import { Route, Routes, useLocation, useNavigate } from "react-router-dom";
+import {
+  Navigate,
+  Route,
+  Routes,
+  useLocation,
+  useNavigate,
+} from "react-router-dom";
 import { loginUserActionCreator } from "./app/store/feature/user/userSlicer";
 import { useAppDispatch, useAppSelector } from "./app/store/hooks";
 import ComplaintsPage from "./pages/complaintsPage/ComplaintsPage";
@@ -33,7 +39,7 @@ const App = (): JSX.Element => {
         <Route path="/login" element={<LoginPage />} />
         <Route
           path="/complaints"
-          element={token ? <ComplaintsPage /> : <LoginPage />}
+          element={token ? <ComplaintsPage /> : <Navigate to="/login" />}
         />
         <Route path="" element={<HomePage />} />
         <Route path="*" element={<NotFoundPage />} />

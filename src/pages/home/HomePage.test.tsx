@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import { BrowserRouter } from "react-router-dom";
+import Wrapper from "../../utils/Wrapper";
 import HomePage from "./HomePage";
 
 describe("Given a route '/home'", () => {
@@ -11,9 +11,9 @@ describe("Given a route '/home'", () => {
         "Aqui podrás hacer quejas sobre distintas infraestructuras de la ciudad ayudando a mantenerla en orden para todos.";
 
       render(
-        <BrowserRouter>
+        <Wrapper>
           <HomePage />
-        </BrowserRouter>
+        </Wrapper>
       );
 
       const image = screen.getByAltText(altText);
