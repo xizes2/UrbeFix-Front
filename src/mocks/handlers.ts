@@ -1,5 +1,8 @@
 import { rest } from "msw";
 
+const complaintId = "654654jhgjhg";
+const nonExistingComplaintId = "ff0ds312uxh";
+
 export const handlers = [
   rest.post(
     `${process.env.REACT_APP_API_URL}users/register`,
@@ -88,6 +91,36 @@ export const handlers = [
           ],
         })
       );
+    }
+  ),
+
+  rest.delete(
+    `${process.env.REACT_APP_API_URL}complaints/delete/${complaintId}`,
+    async (req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          complaintDelete: {
+            id: complaintId,
+          },
+        })
+      );
+    }
+  ),
+
+  rest.delete(
+    `${process.env.REACT_APP_API_URL}complaints/delete/${nonExistingComplaintId}`,
+    async (req, res, ctx) => {
+      const headerTestError = req.headers.get("IsTestError");
+
+      if (headerTestError) {
+        return res(
+          ctx.status(404),
+          ctx.json({
+            error: "Something went wrong",
+          })
+        );
+      }
     }
   ),
 ];
