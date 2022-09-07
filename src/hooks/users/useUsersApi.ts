@@ -1,7 +1,11 @@
+import { PayloadAction } from "@reduxjs/toolkit";
 import axios, { AxiosResponse } from "axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import { loginUserActionCreator } from "../../app/store/feature/user/userSlicer";
+import {
+  loginUserActionCreator,
+  logoutUserActionCreator,
+} from "../../app/store/feature/user/userSlicer";
 import { useAppDispatch } from "../../app/store/hooks";
 import {
   ILoginData,
@@ -73,7 +77,13 @@ const useUser = () => {
     }
   };
 
-  return { registerUser, loginUser };
+  const logoutUser = () => {
+    dispatch<PayloadAction>(logoutUserActionCreator());
+    localStorage.removeItem("token");
+    navigateTo("/login");
+  };
+
+  return { registerUser, loginUser, logoutUser };
 };
 
 export default useUser;
