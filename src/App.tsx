@@ -8,7 +8,7 @@ import {
 } from "react-router-dom";
 import { loginUserActionCreator } from "./app/store/feature/user/userSlicer";
 import { useAppDispatch, useAppSelector } from "./app/store/hooks";
-import ComplaintsPage from "./pages/complaintsPage/ComplaintsPage";
+import ComplaintsPage from "./pages/complaints/ComplaintsPage";
 import HomePage from "./pages/home/HomePage";
 import LoginPage from "./pages/login/LoginPage";
 import NotFoundPage from "./pages/notFound/NotFoundPage";
