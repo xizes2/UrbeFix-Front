@@ -56,6 +56,7 @@ const Complaint = ({
       <button
         className="complaint-card__delete-container"
         onClick={handleDelete}
+        aria-label="delete-complaint-button"
       >
         <FontAwesomeIcon
           className="add-complaint__delete-icon"
