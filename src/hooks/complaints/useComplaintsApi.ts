@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useCallback } from "react";
+import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
   deleteComplaintActionCreator,
@@ -12,6 +13,7 @@ export const loadingModal = (message: string) =>
   toast.loading(message, {
     position: toast.POSITION.TOP_CENTER,
     closeButton: true,
+    toastId: "error modal",
   });
 
 export const successModal = (message: string) =>
@@ -28,6 +30,7 @@ export const errorModal = (error: string) =>
 
 const useComplaints = () => {
   const dispatch = useAppDispatch();
+  const navigateTo = useNavigate();
   const complaints = useAppSelector((complaints) => complaints);
 
   const getAllComplaints = useCallback(async (): Promise<void> => {
@@ -51,6 +54,7 @@ const useComplaints = () => {
       );
 
       dispatch(getAllComplaintsActionCreator(complaintsList));
+      toast.dismiss("error modal");
     } catch (error) {
       errorModal("NoOoOoOoo! Please try again.");
     }
@@ -76,8 +80,23 @@ const useComplaints = () => {
     [dispatch]
   );
 
-  toast.dismiss();
-  return { complaints, getAllComplaints, deleteComplaint };
+  const getComplaint = useCallback(
+    async (complaintId: string) => {
+      const url: string = `${process.env.REACT_APP_API_URL}complaints/details/${complaintId}`;
+      try {
+        const {
+          data: { complaint },
+        } = await axios.get(url);
+        return complaint;
+      } catch (error) {
+        errorModal("Cannot show complaint's details");
+        navigateTo("/complaints");
+      }
+    },
+    [navigateTo]
+  );
+
+  return { complaints, getAllComplaints, deleteComplaint, getComplaint };
 };
 
 export default useComplaints;
