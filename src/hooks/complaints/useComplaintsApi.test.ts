@@ -17,7 +17,7 @@ jest.mock("../../app/store/hooks", () => ({
 
 describe("Given a useComplaints hook", () => {
   describe("When invoke getAllComplaints function with a mockUser", () => {
-    test("Then it should show a loading and", async () => {
+    test("Then it should show a loading modal", async () => {
       const {
         result: {
           current: { getAllComplaints },
@@ -36,6 +36,7 @@ describe("Given a useComplaints hook", () => {
         expect(toast.loading).toHaveBeenCalledWith("Give us a second...", {
           position: toast.POSITION.TOP_CENTER,
           closeButton: true,
+          toastId: "error modal",
         });
       });
     });

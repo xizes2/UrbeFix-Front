@@ -27,7 +27,7 @@ const HeaderStyled = styled.div`
     margin: 20px;
 
     @media screen and (min-width: 601px) {
-      font-size: 1.2em;
+      font-size: 1.5rem;
       padding: 20px;
       margin: 20px;
     }
@@ -36,6 +36,11 @@ const HeaderStyled = styled.div`
   .main-header__location {
     color: #fff;
     text-align: center;
+    font-size: 1.2em;
+
+    @media screen and (min-width: 601px) {
+      font-size: 1.5rem;
+    }
   }
 `;
 

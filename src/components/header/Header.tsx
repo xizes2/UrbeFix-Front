@@ -7,7 +7,7 @@ const Header = (): JSX.Element => {
   const { logoutUser } = useUser();
 
   const showLogoutBUtton = () => {
-    if (pathname === "/complaints") {
+    if (pathname === "/complaints" || pathname === "comlaints/details/:id") {
       return true;
     }
   };
@@ -15,6 +15,9 @@ const Header = (): JSX.Element => {
   const showLocation = () => {
     if (pathname === "/complaints") {
       return "Listado de Quejas";
+    }
+    if (pathname === "comlaints/details/:id") {
+      return "Detalles de Queja";
     }
   };
 
