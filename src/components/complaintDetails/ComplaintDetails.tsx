@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import useComplaints from "../../hooks/complaints/useComplaintsApi";
 import { IRegisteredComplaint } from "../../interfaces/complaints/Complaints";
+import Map from "../map/Map";
 import ComplaintDetailsStyled from "./ComplaintDetailsStyled";
 
 const ComplaintDetails = () => {
@@ -29,6 +30,7 @@ const ComplaintDetails = () => {
   return (
     <ComplaintDetailsStyled>
       <div className="complaint-card">
+        <Map />
         <div className="complaint-card__detail-container">
           <h3 className="complaint-card__title">Categoría:</h3>
           <span className="title-container__text">{complaint.category}</span>
