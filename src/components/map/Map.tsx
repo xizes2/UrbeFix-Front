@@ -34,7 +34,7 @@ const Map = (): JSX.Element => {
       width="450"
       height="250"
       style={{ border: 0 }}
-      src={`https://www.google.com/maps/embed/v1/place?key=${"AIzaSyBKL-riXyqF4uN3DVLmo0hRH4fYh5NeZn4"}&q=${
+      src={`https://www.google.com/maps/embed/v1/place?key=${mapsKey}&q=${
         status
           ? [lat, lng] + `&zoom=16`
           : { bcnCoordinates: barcelonaCoordinates } + `&zoom=11`

@@ -1,7 +1,7 @@
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import useComplaints from "../../hooks/complaints/useComplaintsApi";
 import { IRegisteredComplaint } from "../../interfaces/complaints/Complaints";
 import Map from "../map/Map";
@@ -89,6 +89,16 @@ const ComplaintDetails = () => {
             icon={faPenToSquare}
           />
         </button>
+        <div className="return-button-container">
+          <Link
+            className="return-button-container__nav-link"
+            to={"/complaints"}
+          >
+            <button className="return-button-container__return">
+              Volver al Listado
+            </button>
+          </Link>
+        </div>
       </div>
     </ComplaintDetailsStyled>
   );

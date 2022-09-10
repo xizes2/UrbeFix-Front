@@ -98,6 +98,36 @@ const ComplaintDetailsStyled = styled.div`
       }
     }
   }
+
+  .return-button-container {
+    text-align: center;
+    position: sticky;
+    bottom: 0;
+    background-color: #3fb87b;
+
+    @media screen and (min-width: 601px) {
+      position: absolute;
+      top: 240px;
+      right: 20px;
+      width: fit-content;
+      bottom: initial;
+      border-radius: 10px;
+      font-size: 0.9em;
+    }
+
+    &__return {
+      padding: 15px;
+      font-size: 1.2em;
+      cursor: pointer;
+      border: none;
+      background-color: inherit;
+      color: #fff;
+
+      @media screen and (min-width: 601px) {
+        padding: 15px;
+      }
+    }
+  }
 `;
 
 export default ComplaintDetailsStyled;
