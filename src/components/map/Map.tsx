@@ -2,14 +2,14 @@ import { useCallback, useEffect, useState } from "react";
 import MapStyled from "./MapStyled";
 
 const Map = (): JSX.Element => {
+  const mapsKey = process.env.REACT_APP_MAPS_API_KEY;
+  const isUserGeolocationActive = navigator.geolocation;
+  const barcelonaCoordinates = [41.390205, 2.154007];
   const [lat, setLat] = useState<number>();
   const [lng, setLng] = useState<number>();
   const [status, setStatus] = useState<boolean>();
-
-  const isLocationAllowed = navigator.geolocation;
-
   const getLocation = useCallback(() => {
-    if (!isLocationAllowed) {
+    if (!isUserGeolocationActive) {
       setStatus(false);
     } else {
       setStatus(true);
@@ -23,7 +23,7 @@ const Map = (): JSX.Element => {
         }
       );
     }
-  }, [isLocationAllowed]);
+  }, [isUserGeolocationActive]);
 
   useEffect(() => {
     getLocation();
@@ -34,8 +34,10 @@ const Map = (): JSX.Element => {
       width="450"
       height="250"
       style={{ border: 0 }}
-      src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyBKL-riXyqF4uN3DVLmo0hRH4fYh5NeZn4&q=${
-        status ? [lat, lng] + `&zoom=16` : [41.390205, 2.154007] + `&zoom=11`
+      src={`https://www.google.com/maps/embed/v1/place?key=${"AIzaSyBKL-riXyqF4uN3DVLmo0hRH4fYh5NeZn4"}&q=${
+        status
+          ? [lat, lng] + `&zoom=16`
+          : { bcnCoordinates: barcelonaCoordinates } + `&zoom=11`
       }`}
       allowFullScreen={false}
     ></MapStyled>

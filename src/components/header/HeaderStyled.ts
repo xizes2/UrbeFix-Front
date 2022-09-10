@@ -25,11 +25,13 @@ const HeaderStyled = styled.div`
     cursor: pointer;
     height: fit-content;
     margin: 20px;
+    height: 54px;
 
     @media screen and (min-width: 601px) {
-      font-size: 1.5rem;
-      padding: 20px;
+      font-size: 1.3rem;
+      padding: 10px 20px;
       margin: 20px;
+      height: 64px;
     }
   }
 
