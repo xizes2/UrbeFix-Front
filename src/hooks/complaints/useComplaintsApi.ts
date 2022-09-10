@@ -83,10 +83,14 @@ const useComplaints = () => {
   const getComplaint = useCallback(
     async (complaintId: string) => {
       const url: string = `${process.env.REACT_APP_API_URL}complaints/details/${complaintId}`;
+      const token = localStorage.getItem("token");
+
       try {
         const {
           data: { complaint },
-        } = await axios.get(url);
+        } = await axios.get(url, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         return complaint;
       } catch (error) {
         errorModal("Cannot show complaint's details");
