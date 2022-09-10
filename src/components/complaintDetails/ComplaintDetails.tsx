@@ -26,7 +26,6 @@ const ComplaintDetails = () => {
       setComplaint(complaint);
     })();
   }, [getComplaint, id]);
-
   return (
     <ComplaintDetailsStyled>
       <div className="complaint-card">
@@ -44,7 +43,7 @@ const ComplaintDetails = () => {
         <div className="complaint-card__detail-container">
           <h3 className="complaint-card__title">Fecha:</h3>
           <span className="date-container__text">
-            {complaint.creationDate?.toLocaleDateString()}
+            {new Date(complaint.creationDate as Date).toDateString()}
           </span>
         </div>
         <span className="complaint-card__complaint-count">
