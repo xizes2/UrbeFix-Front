@@ -82,7 +82,7 @@ const useComplaints = () => {
 
   const getComplaint = useCallback(
     async (complaintId: string) => {
-      const url: string = `${process.env.REACT_APP_API_URL}complaints/details/${complaintId}`;
+      const url: string = `http://localhost:4001/complaints/details/${complaintId}`;
       const token = localStorage.getItem("token");
 
       try {
