@@ -32,10 +32,16 @@ const ComplaintStyled = styled.div`
       width: 100%;
       padding-left: 10px;
       position: relative;
+      text-decoration: none;
 
       @media screen and (min-width: 601px) {
         padding: 0;
         height: 100%;
+      }
+
+      a {
+        text-decoration: none;
+        color: #000;
       }
     }
 

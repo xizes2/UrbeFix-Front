@@ -1,6 +1,7 @@
 import { faCirclePlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import useComplaints from "../../hooks/complaints/useComplaintsApi";
 import { IComplaint } from "../../interfaces/complaints/Complaints";
 import ComplaintStyled from "./ComplaintStyled";
@@ -35,23 +36,25 @@ const Complaint = ({
         />
       </div>
       <div className="complaint-card__text-container">
-        <h3 className="complaint-card__title">{category}</h3>
-        {windowSize ? (
-          <span className="complaint-card__date">
-            Fecha de creación: {creationDate as unknown as string}
-          </span>
-        ) : (
-          ""
-        )}
-        <div className="complaint-card__add-complaint-container">
-          <span className="complaint-card__text">Agregar queja</span>
-          <div className="icon-container">
-            <FontAwesomeIcon
-              className="icon-container__add-icon"
-              icon={faCirclePlus}
-            />
+        <Link to={`/details/${id}`}>
+          <h3 className="complaint-card__title">{category}</h3>
+          {windowSize ? (
+            <span className="complaint-card__date">
+              Fecha de creación: {creationDate as unknown as string}
+            </span>
+          ) : (
+            ""
+          )}
+          <div className="complaint-card__add-complaint-container">
+            <span className="complaint-card__text">Agregar queja</span>
+            <div className="icon-container">
+              <FontAwesomeIcon
+                className="icon-container__add-icon"
+                icon={faCirclePlus}
+              />
+            </div>
           </div>
-        </div>
+        </Link>
       </div>
       <button
         className="complaint-card__delete-container"
