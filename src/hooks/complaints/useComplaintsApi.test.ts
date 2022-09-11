@@ -118,31 +118,6 @@ describe("Given a useComplaints hook", () => {
     });
   });
 
-  describe("When invoke getComplaint function with a complaint id", () => {
-    test("Then it should show this complaint", async () => {
-      const mockComplaint = {
-        category: "Contenedores de Resíduos",
-        countComplaints: "1",
-        creationDate: "2022-09-06T11:13:00.000Z",
-        description: "contenedor lleno",
-        image:
-          "https://thumbs.dreamstime.com/z/contenedor-lleno-dos-y-muchos-bolsos-de-basura-en-la-calle-ciudad-monta%C3%B1a-146937943.jpg",
-        title: "Contenedor lleno",
-        id: "631ce2cdf35c0700d659456c",
-      };
-
-      const {
-        result: {
-          current: { getComplaint },
-        },
-      } = renderHook(useComplaints, { wrapper: Wrapper });
-
-      const complaintReturned = await getComplaint(mockComplaint.id);
-
-      expect(complaintReturned).toStrictEqual(mockComplaint);
-    });
-  });
-
   describe("When invoke getComplaint function without an id", () => {
     test("Then it should show show an error modal", async () => {
       const mockComplaint = {
