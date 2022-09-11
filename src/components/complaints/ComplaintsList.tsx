@@ -1,6 +1,7 @@
 import { faMapPin } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 import { useAppSelector } from "../../app/store/hooks";
 import useComplaints from "../../hooks/complaints/useComplaintsApi";
 import { IRegisteredComplaint } from "../../interfaces/complaints/Complaints";
@@ -31,12 +32,17 @@ const ComplaintsList = (): JSX.Element => {
             icon={faMapPin}
           />
         </div>
-        <button
-          className="buttons-container__create-complaint"
-          aria-label="create-complaint-button"
+        <Link
+          className="buttons-container__nav-link"
+          to={"/complaintsRegister"}
         >
-          Crear Queja
-        </button>
+          <button
+            className="buttons-container__create-complaint"
+            aria-label="create-complaint-button"
+          >
+            Crear Queja
+          </button>
+        </Link>
       </div>
       <ul className="complaints-container">
         {complaintsList.map((complaintItem: IRegisteredComplaint) => (
