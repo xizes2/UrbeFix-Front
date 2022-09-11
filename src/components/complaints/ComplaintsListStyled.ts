@@ -43,6 +43,10 @@ const ComplaintsListStyled = styled.div`
       }
     }
 
+    &__nav-link {
+      height: 64px;
+    }
+
     &__create-complaint {
       padding: 10px;
       background-color: #3fb87b;

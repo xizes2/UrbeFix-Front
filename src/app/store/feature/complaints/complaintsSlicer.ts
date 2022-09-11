@@ -13,6 +13,10 @@ const complaintsSlice = createSlice({
     ) => action.payload,
     deleteComplaint: (previouState, action: PayloadAction<string>) =>
       previouState.filter((complaint) => complaint.id !== action.payload),
+    createComplaint: (
+      previousState,
+      action: PayloadAction<IRegisteredComplaint>
+    ) => [...previousState, action.payload],
   },
 });
 
@@ -21,4 +25,5 @@ export const complaintsReducer = complaintsSlice.reducer;
 export const {
   getAllComplaints: getAllComplaintsActionCreator,
   deleteComplaint: deleteComplaintActionCreator,
+  createComplaint: createComplaintActionCreator,
 } = complaintsSlice.actions;
