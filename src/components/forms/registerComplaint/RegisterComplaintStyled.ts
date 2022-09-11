@@ -33,19 +33,41 @@ const RegisterComplaintStyled = styled.form`
     font-family: inherit;
   }
 
-  .image-button {
+  input:focus {
+    outline: none;
+    border-bottom: 2px solid #3fb87b;
+  }
+
+  .image-container {
     display: flex;
-    flex-direction: column;
-    text-align: center;
     justify-content: center;
-    padding: 10px;
 
-    span {
+    .image-button {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+      justify-content: center;
       padding: 10px;
-    }
+      width: fit-content;
 
-    &__icon-camera {
-      font-size: 40px;
+      span {
+        padding: 10px;
+      }
+
+      .icon-container {
+        border: 1px solid #3fb87b;
+        width: fit-content;
+        align-self: center;
+        border-radius: 10px;
+        box-shadow: 2px 2px 2px #6d6d6d;
+        cursor: pointer;
+      }
+
+      &__icon-camera {
+        font-size: 40px;
+        color: #3fb87b;
+        padding: 5px;
+      }
     }
   }
 

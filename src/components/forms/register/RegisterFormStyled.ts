@@ -39,6 +39,11 @@ export const RegisterFormStyled = styled.form`
     font-family: inherit;
   }
 
+  input:focus {
+    outline: none;
+    border-bottom: 2px solid #3fb87b;
+  }
+
   .image-button {
     display: flex;
     flex-direction: column;

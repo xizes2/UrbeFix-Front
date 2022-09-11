@@ -32,7 +32,8 @@ const Complaint = ({
           src={image}
           alt={title}
           className="image-container__image"
-          height={"50px"}
+          height={"100px"}
+          width={"100px"}
         />
       </div>
       <div className="complaint-card__text-container">
