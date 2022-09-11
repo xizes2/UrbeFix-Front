@@ -5,6 +5,7 @@ export interface IRegisteredComplaint {
   countComplaints: number;
   image: string;
   creationDate?: Date;
+  location?: string;
   id: string;
 }
 
