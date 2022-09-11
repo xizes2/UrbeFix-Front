@@ -1,23 +1,40 @@
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { SyntheticEvent, useState } from "react";
 import { Link } from "react-router-dom";
+import useComplaints from "../../../hooks/complaints/useComplaintsApi";
+import { IUnegisteredComplaint } from "../../../interfaces/complaints/Complaints";
 import RegisterComplaintStyled from "./RegisterComplaintStyled";
 
+let newFormData = new FormData();
+
 const RegisterComplaint = () => {
-  const initialState = {
+  const initialState: IUnegisteredComplaint = {
     category: "",
     title: "",
     description: "",
     countComplaints: 0,
     image: "",
-    creationDate: "",
     location: "",
   };
 
-  const formData = initialState;
-  const handleSubmit = () => {};
-  const handleChange = () => {};
-  const handleFileChange = () => {};
+  const { createComplaint } = useComplaints();
+  const [newComplaint, setNewComplaint] = useState(initialState);
+
+  const handleSubmit = async (event: SyntheticEvent) => {
+    event.preventDefault();
+    await createComplaint(newComplaint);
+    setNewComplaint(initialState);
+  };
+  const handleChange = (
+    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+  ) => {
+    setNewComplaint({ ...newComplaint, [event.target.id]: event.target.value });
+  };
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    newFormData.append("image", event.target.files![0]);
+    handleChange(event);
+  };
 
   return (
     <>
@@ -27,7 +44,7 @@ const RegisterComplaint = () => {
           data-testid="select-category"
           id="category"
           placeholder="Category"
-          value={formData.category}
+          value={newComplaint.category}
           onChange={handleChange}
           required
         >
@@ -35,7 +52,7 @@ const RegisterComplaint = () => {
           <option value="Acera">Acera</option>
           <option value="saBicingxo">Bicing</option>
           <option value="Arbolado en vis pública">
-            Arbolado en vis pública
+            Arbolado en via pública
           </option>
           <option value="Bancos">Bancos</option>
           <option value="Calzada">Calzada</option>
@@ -55,7 +72,7 @@ const RegisterComplaint = () => {
           placeholder="Título"
           required
           autoComplete="off"
-          value={formData.title}
+          value={newComplaint.title}
           onChange={handleChange}
         />
         <input
@@ -63,7 +80,7 @@ const RegisterComplaint = () => {
           id="description"
           placeholder="Descripción"
           autoComplete="off"
-          value={formData.description}
+          value={newComplaint.description}
           onChange={handleChange}
         />
         <input
@@ -71,23 +88,25 @@ const RegisterComplaint = () => {
           id="location"
           placeholder="Ubicación"
           autoComplete="off"
-          value={formData.location}
+          value={newComplaint.location}
           onChange={handleChange}
         />
         <div className="image-container">
           <label htmlFor="image" className="image-button">
             <span>Añadir foto</span>
-            <FontAwesomeIcon
-              className="image-button__icon-camera"
-              icon={faCamera}
-            />
+            <span className="icon-container">
+              <FontAwesomeIcon
+                className="image-button__icon-camera"
+                icon={faCamera}
+              />
+            </span>
           </label>
           <input
             type="file"
             id="image"
             name="image"
             style={{ display: "none" }}
-            value={formData.image}
+            value={newComplaint.image}
             onChange={handleFileChange}
           />
         </div>
