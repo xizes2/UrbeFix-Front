@@ -8,7 +8,7 @@ const complaintsSlice = createSlice({
   initialState: complaintsInitialState,
   reducers: {
     getAllComplaints: (
-      previousState,
+      _previousState,
       action: PayloadAction<Array<IRegisteredComplaint>>
     ) => action.payload,
     deleteComplaint: (previouState, action: PayloadAction<string>) =>

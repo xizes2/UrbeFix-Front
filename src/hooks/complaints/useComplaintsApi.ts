@@ -8,13 +8,16 @@ import {
   getAllComplaintsActionCreator,
 } from "../../app/store/feature/complaints/complaintsSlicer";
 import { useAppDispatch, useAppSelector } from "../../app/store/hooks";
-import { IRegisteredComplaint } from "../../interfaces/complaints/Complaints";
+import {
+  IRegisteredComplaint,
+  IUnegisteredComplaint,
+} from "../../interfaces/complaints/Complaints";
 
 export const loadingModal = (message: string) =>
   toast.loading(message, {
     position: toast.POSITION.TOP_CENTER,
     closeButton: true,
-    toastId: "error modal",
+    toastId: "loading modal",
   });
 
 export const successModal = (message: string) =>
@@ -55,7 +58,7 @@ const useComplaints = () => {
       );
 
       dispatch(getAllComplaintsActionCreator(complaintsList));
-      toast.dismiss("error modal");
+      toast.dismiss("loading modal");
     } catch (error) {
       errorModal("NoOoOoOoo! Please try again.");
     }
@@ -102,7 +105,7 @@ const useComplaints = () => {
   );
 
   const createComplaint = useCallback(
-    async (complaint: IRegisteredComplaint) => {
+    async (complaint: IUnegisteredComplaint) => {
       const url: string = `${process.env.REACT_APP_API_URL}complaints/`;
       const token = localStorage.getItem("token");
       try {
@@ -113,7 +116,7 @@ const useComplaints = () => {
             Authorization: `Bearer ${token}`,
           },
         });
-        successModal("Your songs has been correctly uploaded!");
+        successModal("Your complaint has been correctly registered!");
         dispatch(createComplaintActionCreator(newComplaint));
         return newComplaint;
       } catch (error) {

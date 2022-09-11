@@ -1,6 +1,7 @@
 import { renderHook, waitFor } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
 import { toast } from "react-toastify";
+import { logoutUserActionCreator } from "../../app/store/feature/user/userSlicer";
 import { ILoginData, IUnregisteredUser } from "../../interfaces/users/User";
 import Wrapper from "../../utils/Wrapper";
 import useUser from "./useUsersApi";
@@ -73,7 +74,7 @@ describe("Given a useUser hook", () => {
     });
   });
 
-  describe("When invoke login function with a mockUser", () => {
+  describe("When invoke loginUser function with a mockUser", () => {
     test("Then it should dispatch the login action", async () => {
       const mockUser3 = {
         userEmail: "mizuki@gmaimizukil.com",
@@ -118,6 +119,22 @@ describe("Given a useUser hook", () => {
           }
         );
       });
+    });
+  });
+
+  describe("When invoke logoutUser function", () => {
+    test("Then it should dispatch the logout action creator", async () => {
+      const {
+        result: {
+          current: { logoutUser },
+        },
+      } = renderHook(useUser, { wrapper: Wrapper });
+
+      act(() => {
+        logoutUser();
+      });
+
+      expect(mockUseDispatch).toHaveBeenCalledWith(logoutUserActionCreator());
     });
   });
 });
