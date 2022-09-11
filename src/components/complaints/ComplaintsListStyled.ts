@@ -43,10 +43,6 @@ const ComplaintsListStyled = styled.div`
       }
     }
 
-    &__nav-link {
-      height: 64px;
-    }
-
     &__create-complaint {
       padding: 10px;
       background-color: #3fb87b;
@@ -55,6 +51,7 @@ const ComplaintsListStyled = styled.div`
       border-radius: 10px;
       font-size: 1.1em;
       cursor: pointer;
+      height: 64px;
 
       @media screen and (min-width: 601px) {
         font-size: 1.2em;

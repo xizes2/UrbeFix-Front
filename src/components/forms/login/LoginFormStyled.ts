@@ -38,6 +38,11 @@ export const LoginFormStyled = styled.form`
     font-family: inherit;
   }
 
+  input:focus {
+    outline: none;
+    border-bottom: 2px solid #3fb87b;
+  }
+
   .buttons-container {
     display: flex;
     margin-top: 30px;

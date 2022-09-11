@@ -36,7 +36,7 @@ const ComplaintStyled = styled.div`
 
       @media screen and (min-width: 601px) {
         padding: 0;
-        height: 100%;
+        height: 300px;
       }
 
       a {
@@ -100,21 +100,23 @@ const ComplaintStyled = styled.div`
   .image-container {
     height: 100px;
     width: 100px;
+    width: 40%;
 
     @media screen and (min-width: 601px) {
       height: 150px;
       width: 100%;
+      height: 100%;
     }
 
     &__image {
       border-radius: 10px 0 0 10px;
       height: inherit;
-      width: inherit;
-      object-fit: fill;
+      width: 100%;
+      object-fit: cover;
 
       @media screen and (min-width: 601px) {
         border-radius: 10px 10px 0 0;
-        object-fit: cover;
+        height: 100%;
       }
     }
   }
