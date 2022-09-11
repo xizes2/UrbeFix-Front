@@ -96,7 +96,7 @@ export const handlers = [
 
   rest.delete(
     `${process.env.REACT_APP_API_URL}complaints/delete/${complaintId}`,
-    async (req, res, ctx) => {
+    async (_req, res, ctx) => {
       return res(
         ctx.status(200),
         ctx.json({
@@ -110,12 +110,43 @@ export const handlers = [
 
   rest.delete(
     `${process.env.REACT_APP_API_URL}complaints/delete/${nonExistingComplaintId}`,
-    async (req, res, ctx) => {
+    async (_req, res, ctx) => {
       return res(
         ctx.status(404),
         ctx.json({
           error: "Complaint not found",
         })
+      );
+    }
+  ),
+
+  rest.post(
+    `${process.env.REACT_APP_API_URL}complaints/`,
+    async (req, res, ctx) => {
+      const body = await req.json();
+      if (!body.category || !body.title || !body.image) {
+        return res(
+          ctx.status(400),
+          ctx.json({
+            error: "Wrong data",
+          })
+        );
+      }
+
+      return res(
+        ctx.status(201),
+        ctx.json([
+          {
+            category: "",
+            title: "ratas en el jardin",
+            description:
+              "Especialmente por la noche se ve muchas ratas paseando por el jardin",
+            countComplaints: 1,
+            image:
+              "https://www.lavanguardia.com/files/content_image_mobile_filter/uploads/2022/07/28/62e2d7628699e.jpeg",
+            location: "Eixample",
+          },
+        ])
       );
     }
   ),

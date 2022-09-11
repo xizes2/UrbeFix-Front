@@ -3,6 +3,7 @@ import axios from "axios";
 import { act } from "react-dom/test-utils";
 import { toast } from "react-toastify";
 import { deleteComplaintActionCreator } from "../../app/store/feature/complaints/complaintsSlicer";
+import { IUnegisteredComplaint } from "../../interfaces/complaints/Complaints";
 import Wrapper from "../../utils/Wrapper";
 import useComplaints from "./useComplaintsApi";
 
@@ -16,7 +17,7 @@ jest.mock("../../app/store/hooks", () => ({
 }));
 
 describe("Given a useComplaints hook", () => {
-  describe("When invoke getAllComplaints function with a mockUser", () => {
+  describe("When invoke getAllComplaints function", () => {
     test("Then it should show a loading modal", async () => {
       const {
         result: {
@@ -36,13 +37,13 @@ describe("Given a useComplaints hook", () => {
         expect(toast.loading).toHaveBeenCalledWith("Give us a second...", {
           position: toast.POSITION.TOP_CENTER,
           closeButton: true,
-          toastId: "error modal",
+          toastId: "loading modal",
         });
       });
     });
   });
 
-  describe("When invoke getAllComplaints function and it not receives a mockComplaint List", () => {
+  describe("When invoke getAllComplaints function without a token", () => {
     test("Then it should send an error message modal", async () => {
       axios.defaults.headers.get["IsTestError"] = true;
 
@@ -114,6 +115,130 @@ describe("Given a useComplaints hook", () => {
           }
         );
       });
+    });
+  });
+
+  describe("When invoke getComplaint function with a complaint id", () => {
+    test("Then it should show this complaint", async () => {
+      const mockComplaint = {
+        category: "Contenedores de Resíduos",
+        countComplaints: "1",
+        creationDate: "2022-09-06T11:13:00.000Z",
+        description: "contenedor lleno",
+        image:
+          "https://thumbs.dreamstime.com/z/contenedor-lleno-dos-y-muchos-bolsos-de-basura-en-la-calle-ciudad-monta%C3%B1a-146937943.jpg",
+        title: "Contenedor lleno",
+        id: "631ce2cdf35c0700d659456c",
+      };
+
+      const {
+        result: {
+          current: { getComplaint },
+        },
+      } = renderHook(useComplaints, { wrapper: Wrapper });
+
+      const complaintReturned = await getComplaint(mockComplaint.id);
+
+      expect(complaintReturned).toStrictEqual(mockComplaint);
+    });
+  });
+
+  describe("When invoke getComplaint function without an id", () => {
+    test("Then it should show show an error modal", async () => {
+      const mockComplaint = {
+        category: "Contenedores de Resíduos",
+        countComplaints: "1",
+        creationDate: "2022-09-06T11:13:00.000Z",
+        description: "contenedor lleno",
+        image:
+          "https://thumbs.dreamstime.com/z/contenedor-lleno-dos-y-muchos-bolsos-de-basura-en-la-calle-ciudad-monta%C3%B1a-146937943.jpg",
+        title: "Contenedor lleno",
+        id: "",
+      };
+
+      const {
+        result: {
+          current: { getComplaint },
+        },
+      } = renderHook(useComplaints, { wrapper: Wrapper });
+
+      await getComplaint(mockComplaint.id);
+
+      await waitFor(() => {
+        expect(toast.error).toHaveBeenCalledWith(
+          "Cannot show complaint's details",
+          {
+            position: toast.POSITION.TOP_CENTER,
+            autoClose: 2000,
+          }
+        );
+      });
+    });
+  });
+
+  describe("When invoke createComplaint function with a new complaint", () => {
+    test("Then it should call the succes modal", async () => {
+      const {
+        result: {
+          current: { createComplaint },
+        },
+      } = renderHook(useComplaints, { wrapper: Wrapper });
+
+      const mockComplaint: IUnegisteredComplaint = {
+        category: "Plaga en via pública",
+        title: "ratas en el jardin",
+        description:
+          "Especialmente por la noche se ve muchas ratas paseando por el jardin",
+        countComplaints: 1,
+        image:
+          "https://www.lavanguardia.com/files/content_image_mobile_filter/uploads/2022/07/28/62e2d7628699e.jpeg",
+        location: "Eixample",
+      };
+
+      await act(async () => {
+        await createComplaint(mockComplaint);
+      });
+
+      expect(toast.success).toHaveBeenCalledWith(
+        "Your complaint has been correctly registered!",
+        {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 2000,
+        }
+      );
+    });
+  });
+
+  describe("When invoke createComplaint function with a new complaint with wrong data", () => {
+    test("Then it should call the error modal", async () => {
+      const {
+        result: {
+          current: { createComplaint },
+        },
+      } = renderHook(useComplaints, { wrapper: Wrapper });
+
+      const mockComplaint: IUnegisteredComplaint = {
+        category: "",
+        title: "ratas en el jardin",
+        description:
+          "Especialmente por la noche se ve muchas ratas paseando por el jardin",
+        countComplaints: 1,
+        image:
+          "https://www.lavanguardia.com/files/content_image_mobile_filter/uploads/2022/07/28/62e2d7628699e.jpeg",
+        location: "Eixample",
+      };
+
+      await act(async () => {
+        await createComplaint(mockComplaint);
+      });
+
+      expect(toast.error).toHaveBeenCalledWith(
+        "Couldn't create the complaint.",
+        {
+          position: toast.POSITION.TOP_CENTER,
+          autoClose: 2000,
+        }
+      );
     });
   });
 });
