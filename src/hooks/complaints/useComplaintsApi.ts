@@ -3,6 +3,7 @@ import { useCallback } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
+  createComplaintActionCreator,
   deleteComplaintActionCreator,
   getAllComplaintsActionCreator,
 } from "../../app/store/feature/complaints/complaintsSlicer";
@@ -100,7 +101,35 @@ const useComplaints = () => {
     [navigateTo]
   );
 
-  return { complaints, getAllComplaints, deleteComplaint, getComplaint };
+  const createComplaint = useCallback(
+    async (complaint: IRegisteredComplaint) => {
+      const url: string = `${process.env.REACT_APP_API_URL}complaints/`;
+      const token = localStorage.getItem("token");
+      try {
+        const {
+          data: { newComplaint },
+        } = await axios.post(url, complaint, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        successModal("Your songs has been correctly uploaded!");
+        dispatch(createComplaintActionCreator(newComplaint));
+        return newComplaint;
+      } catch (error) {
+        errorModal("Couldn't create the complaint.");
+      }
+    },
+    [dispatch]
+  );
+
+  return {
+    complaints,
+    getAllComplaints,
+    deleteComplaint,
+    getComplaint,
+    createComplaint,
+  };
 };
 
 export default useComplaints;
