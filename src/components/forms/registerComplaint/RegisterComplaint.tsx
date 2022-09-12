@@ -1,12 +1,12 @@
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { SyntheticEvent, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useComplaints from "../../../hooks/complaints/useComplaintsApi";
 import { IUnegisteredComplaint } from "../../../interfaces/complaints/Complaints";
 import RegisterComplaintStyled from "./RegisterComplaintStyled";
 
-let newFormData = new FormData();
+let formData = new FormData();
 
 const RegisterComplaint = () => {
   const initialState: IUnegisteredComplaint = {
@@ -17,22 +17,38 @@ const RegisterComplaint = () => {
     image: "",
     location: "",
   };
-
+  const navigate = useNavigate();
   const { createComplaint } = useComplaints();
   const [newComplaint, setNewComplaint] = useState(initialState);
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-    await createComplaint(newComplaint);
+
+    formData.append(
+      "newComplaint",
+      JSON.stringify({
+        category: newComplaint.category,
+        title: newComplaint.title,
+        description: newComplaint.description,
+        countComplaints: newComplaint.countComplaints,
+        location: newComplaint.location,
+      })
+    );
+    await createComplaint(formData);
+
     setNewComplaint(initialState);
+    formData = new FormData();
+    navigate("/complaints");
   };
+
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
     setNewComplaint({ ...newComplaint, [event.target.id]: event.target.value });
   };
+
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    newFormData.append("image", event.target.files![0]);
+    formData.append("image", event.target.files![0]);
     handleChange(event);
   };
 
@@ -50,8 +66,8 @@ const RegisterComplaint = () => {
         >
           <option value="select">Seleccione una categoría</option>
           <option value="Acera">Acera</option>
-          <option value="saBicingxo">Bicing</option>
-          <option value="Arbolado en vis pública">
+          <option value="Bicing">Bicing</option>
+          <option value="Arbolado en via pública">
             Arbolado en via pública
           </option>
           <option value="Bancos">Bancos</option>
@@ -59,7 +75,7 @@ const RegisterComplaint = () => {
           <option value="Contenedores de basura">Contenedores de basura</option>
           <option value="Fuentes">Fuentes</option>
           <option value="Instalaciones de ócio">Instalaciones de ócio</option>
-          <option value="Limpieza en via públic">
+          <option value="Limpieza en via pública">
             Limpieza en via pública
           </option>
           <option value="Plagas en via pública">Plagas en via pública</option>

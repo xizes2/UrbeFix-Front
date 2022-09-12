@@ -11,7 +11,7 @@ const RegisterComplaintStyled = styled.form`
 
   .category-selection {
     background-color: #3fb87b;
-    width: fit-content;
+    width: inherit;
     margin: 20px;
     border: none;
     padding: 10px;

@@ -10,7 +10,6 @@ import ComplaintsListStyled from "./ComplaintsListStyled";
 
 const ComplaintsList = (): JSX.Element => {
   const complaintsList = useAppSelector((state) => state.complaints);
-
   const { getAllComplaints } = useComplaints();
 
   useEffect(() => {
