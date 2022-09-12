@@ -4,6 +4,7 @@ import React, { SyntheticEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useComplaints from "../../../hooks/complaints/useComplaintsApi";
+import { IUnegisteredComplaint } from "../../../interfaces/complaints/Complaints";
 import RegisterComplaintStyled from "./RegisterComplaintStyled";
 
 let formData = new FormData();
@@ -14,7 +15,7 @@ const errorModal = (error: string) =>
   });
 
 const RegisterComplaint = () => {
-  const initialState = {
+  const initialState: IUnegisteredComplaint = {
     category: "",
     title: "",
     description: "",
