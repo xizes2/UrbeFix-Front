@@ -21,7 +21,6 @@ describe("Given a register form component", () => {
         screen.getByText("Seleccione una categoría"),
         screen.getByPlaceholderText("Título"),
         screen.getByPlaceholderText("Descripción"),
-        screen.getByPlaceholderText("Ubicación"),
         screen.getByRole("button", { name: "Enviar" }),
       ];
 

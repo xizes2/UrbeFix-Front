@@ -15,6 +15,13 @@ import {
 } from "../../interfaces/users/User";
 import fetchToken from "../../utils/auth";
 
+export const loadingModal = (message: string) =>
+  toast.loading(message, {
+    position: toast.POSITION.TOP_CENTER,
+    closeButton: true,
+    toastId: "loading modal",
+  });
+
 export const successModal = (message: string) =>
   toast.success(message, {
     position: toast.POSITION.TOP_CENTER,
@@ -51,6 +58,7 @@ const useUser = () => {
 
   const loginUser = async (loginData: ILoginData) => {
     try {
+      loadingModal("Give us a second...");
       const {
         data: {
           user: { token },

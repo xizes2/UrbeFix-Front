@@ -6,6 +6,14 @@ import useComplaints from "../../hooks/complaints/useComplaintsApi";
 import { IRegisteredComplaint } from "../../interfaces/complaints/Complaints";
 import Map from "../map/Map";
 import ComplaintDetailsStyled from "./ComplaintDetailsStyled";
+import Geocode from "react-geocode";
+
+const geocodeKey = process.env.REACT_APP_GEOCODE_KEY;
+
+Geocode.setLanguage("es");
+Geocode.setRegion("es");
+Geocode.setLocationType("ROOFTOP");
+Geocode.setApiKey(geocodeKey!);
 
 const ComplaintDetails = () => {
   const complaintInitialState: IRegisteredComplaint = {
@@ -23,6 +31,22 @@ const ComplaintDetails = () => {
   const { getComplaint, deleteComplaint } = useComplaints();
   const { id } = useParams();
 
+  const catalunyaSquareLat = 41.387016;
+  const catalunyaSquareLng = 2.170047;
+  const [lat, setLat] = useState(catalunyaSquareLat);
+  const [lng, setLng] = useState(catalunyaSquareLng);
+  const [address, setAddres] = useState("Barcelona");
+
+  useEffect(() => {
+    setLat(complaint.location?.[0] ? complaint.location?.[0] : lat);
+    setLng(complaint.location?.[1] ? complaint.location?.[1] : lng);
+  }, [complaint.location, lat, lng]);
+
+  Geocode.fromLatLng(lat.toString(), lng.toString()).then((response) => {
+    const address: string = response.results[0].formatted_address;
+    setAddres(address);
+  });
+
   const handleDelete = () => {
     deleteComplaint(id!);
     navigateTo("/complaints");
@@ -38,14 +62,14 @@ const ComplaintDetails = () => {
   return (
     <ComplaintDetailsStyled>
       <div className="complaint-card">
-        <Map />
+        <Map lat={lat} lng={lng} />
         <div className="complaint-card__detail-container">
           <h3 className="complaint-card__title">Categoría:</h3>
           <span className="title-container__text">{complaint.category}</span>
         </div>
         <div className="complaint-card__detail-container">
           <h3 className="complaint-card__title">Ubicación:</h3>
-          <span className="location-container__text">{complaint.location}</span>
+          <span className="location-container__text">{address}</span>
         </div>
         <div className="complaint-card__detail-container">
           <h3 className="complaint-card__title">Fecha:</h3>
