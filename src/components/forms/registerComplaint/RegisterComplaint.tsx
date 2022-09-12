@@ -4,7 +4,6 @@ import React, { SyntheticEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useComplaints from "../../../hooks/complaints/useComplaintsApi";
-import { IUnegisteredComplaint } from "../../../interfaces/complaints/Complaints";
 import RegisterComplaintStyled from "./RegisterComplaintStyled";
 
 let formData = new FormData();
@@ -15,7 +14,7 @@ const errorModal = (error: string) =>
   });
 
 const RegisterComplaint = () => {
-  const initialState: IUnegisteredComplaint = {
+  const initialState = {
     category: "",
     title: "",
     description: "",
@@ -123,13 +122,6 @@ const RegisterComplaint = () => {
           value={newComplaint.description}
           onChange={handleChange}
         />
-        {/* <input
-          type="text"
-          id="location"
-          placeholder="Ubicación"
-          autoComplete="off"
-          onChange={handleChange}
-        /> */}
         <div className="image-container">
           <label htmlFor="image" className="image-button">
             <span>Añadir foto</span>
