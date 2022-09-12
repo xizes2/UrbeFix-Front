@@ -3,13 +3,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { SyntheticEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import useComplaints from "../../../hooks/complaints/useComplaintsApi";
-import { IUnegisteredComplaint } from "../../../interfaces/complaints/Complaints";
 import RegisterComplaintStyled from "./RegisterComplaintStyled";
 
 let formData = new FormData();
 
 const RegisterComplaint = () => {
-  const initialState: IUnegisteredComplaint = {
+  const initialState = {
     category: "",
     title: "",
     description: "",
