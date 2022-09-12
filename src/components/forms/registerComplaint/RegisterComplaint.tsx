@@ -2,11 +2,17 @@ import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { SyntheticEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 import useComplaints from "../../../hooks/complaints/useComplaintsApi";
 import { IUnegisteredComplaint } from "../../../interfaces/complaints/Complaints";
 import RegisterComplaintStyled from "./RegisterComplaintStyled";
 
 let formData = new FormData();
+const errorModal = (error: string) =>
+  toast.error(error, {
+    position: toast.POSITION.TOP_CENTER,
+    autoClose: 2000,
+  });
 
 const RegisterComplaint = () => {
   const initialState: IUnegisteredComplaint = {
@@ -15,11 +21,30 @@ const RegisterComplaint = () => {
     description: "",
     countComplaints: 0,
     image: "",
-    location: "",
+    location: [],
   };
+  const catalunyaSquareLat = 41.387016;
+  const catalunyaSquareLng = 2.170047;
   const navigate = useNavigate();
   const { createComplaint } = useComplaints();
   const [newComplaint, setNewComplaint] = useState(initialState);
+  const [lat, setLat] = useState(catalunyaSquareLat);
+  const [lng, setLng] = useState(catalunyaSquareLng);
+
+  const isUserGeolocationActive = navigator.geolocation;
+
+  if (!isUserGeolocationActive) {
+    errorModal("Por favor, activa la ubicación del dispositivo.");
+  } else {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        setLat(position.coords.latitude);
+        setLng(position.coords.longitude);
+      },
+      () => {},
+      { enableHighAccuracy: true }
+    );
+  }
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -31,7 +56,7 @@ const RegisterComplaint = () => {
         title: newComplaint.title,
         description: newComplaint.description,
         countComplaints: newComplaint.countComplaints,
-        location: newComplaint.location,
+        location: [lat, lng],
       })
     );
     await createComplaint(formData);
@@ -51,7 +76,6 @@ const RegisterComplaint = () => {
     formData.append("image", event.target.files![0]);
     handleChange(event);
   };
-
   return (
     <>
       <RegisterComplaintStyled onSubmit={handleSubmit}>
@@ -99,14 +123,13 @@ const RegisterComplaint = () => {
           value={newComplaint.description}
           onChange={handleChange}
         />
-        <input
+        {/* <input
           type="text"
           id="location"
           placeholder="Ubicación"
           autoComplete="off"
-          value={newComplaint.location}
           onChange={handleChange}
-        />
+        /> */}
         <div className="image-container">
           <label htmlFor="image" className="image-button">
             <span>Añadir foto</span>
