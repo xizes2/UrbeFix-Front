@@ -5,7 +5,7 @@ export interface IRegisteredComplaint {
   countComplaints: number;
   image: string;
   creationDate?: Date;
-  location?: string;
+  location?: number[];
   id: string;
 }
 
@@ -20,5 +20,5 @@ export interface IUnegisteredComplaint {
   countComplaints: number;
   image: string;
   creationDate?: Date;
-  location?: string;
+  location?: number[];
 }
