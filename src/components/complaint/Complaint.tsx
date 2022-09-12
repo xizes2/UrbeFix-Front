@@ -9,6 +9,8 @@ import ComplaintStyled from "./ComplaintStyled";
 const Complaint = ({
   complaint: { id, category, image, title, creationDate },
 }: IComplaint): JSX.Element => {
+  const urlProduction = process.env.REACT_APP_API_URL;
+
   const [windowSize, setWindowSize] = useState(window.innerWidth > 601);
   const { deleteComplaint } = useComplaints();
 
@@ -29,11 +31,11 @@ const Complaint = ({
     <ComplaintStyled className="complaint-card">
       <div className="image-container">
         <img
-          src={image}
+          src={`${urlProduction}${image}`}
           alt={title}
           className="image-container__image"
-          height={"100px"}
-          width={"100px"}
+          height={100}
+          width={100}
         />
       </div>
       <div className="complaint-card__text-container">

@@ -1,7 +1,7 @@
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useComplaints from "../../hooks/complaints/useComplaintsApi";
 import { IRegisteredComplaint } from "../../interfaces/complaints/Complaints";
 import Map from "../map/Map";
@@ -16,9 +16,17 @@ const ComplaintDetails = () => {
     id: "",
   };
 
+  const urlProduction = process.env.REACT_APP_API_URL;
+
+  const navigateTo = useNavigate();
   const [complaint, setComplaint] = useState(complaintInitialState);
-  const { getComplaint } = useComplaints();
+  const { getComplaint, deleteComplaint } = useComplaints();
   const { id } = useParams();
+
+  const handleDelete = () => {
+    deleteComplaint(id!);
+    navigateTo("/complaints");
+  };
 
   useEffect(() => {
     (async () => {
@@ -26,6 +34,7 @@ const ComplaintDetails = () => {
       setComplaint(complaint);
     })();
   }, [getComplaint, id]);
+
   return (
     <ComplaintDetailsStyled>
       <div className="complaint-card">
@@ -35,10 +44,8 @@ const ComplaintDetails = () => {
           <span className="title-container__text">{complaint.category}</span>
         </div>
         <div className="complaint-card__detail-container">
-          <h3 className="complaint-card__title">Dirección:</h3>
-          <span className="location-container__text">
-            Carrer de Bismark, 43
-          </span>
+          <h3 className="complaint-card__title">Ubicación:</h3>
+          <span className="location-container__text">{complaint.location}</span>
         </div>
         <div className="complaint-card__detail-container">
           <h3 className="complaint-card__title">Fecha:</h3>
@@ -57,21 +64,15 @@ const ComplaintDetails = () => {
         </div>
         <div className="image-container">
           <img
-            src={complaint.image}
+            src={`${urlProduction}${complaint.image}`}
             alt={complaint.image}
             className="image-container__image"
-            height={"50px"}
-          />
-          <img
-            src={complaint.image}
-            alt={complaint.image}
-            className="image-container__image"
-            height={"50px"}
+            height={100}
           />
         </div>
         <button
           className="complaint-card__delete-container"
-          onClick={() => {}}
+          onClick={handleDelete}
           aria-label="delete-complaint-button"
         >
           <FontAwesomeIcon

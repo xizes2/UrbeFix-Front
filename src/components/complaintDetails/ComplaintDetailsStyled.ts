@@ -7,7 +7,9 @@ const ComplaintDetailsStyled = styled.div`
 
   @media screen and (min-width: 601px) {
     height: 100%;
+    max-width: 1000px;
     flex-direction: column;
+    margin: auto;
   }
   .complaint-card {
     .leaflet-container {

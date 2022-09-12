@@ -12,7 +12,7 @@ describe("Given a ComplaintDetails component", () => {
       );
 
       const textCategory = screen.getByText("Categoría:");
-      const textAddress = screen.getByText("Dirección:");
+      const textAddress = screen.getByText("Ubicación:");
       const textDate = screen.getByText("Fecha:");
       const textDescription = screen.getByText("Descripción:");
 
