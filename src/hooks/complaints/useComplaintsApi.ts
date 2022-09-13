@@ -113,6 +113,7 @@ const useComplaints = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+
         successModal("Your complaint has been correctly registered!");
         dispatch(createComplaintActionCreator(newComplaint));
         return newComplaint;
