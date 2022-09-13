@@ -22,9 +22,8 @@ const ComplaintDetails = () => {
     countComplaints: 0,
     image: "",
     id: "",
+    imageBackUp: "",
   };
-
-  const urlProduction = process.env.REACT_APP_API_URL;
 
   const navigateTo = useNavigate();
   const [complaint, setComplaint] = useState(complaintInitialState);
@@ -88,10 +87,11 @@ const ComplaintDetails = () => {
         </div>
         <div className="image-container">
           <img
-            src={`${urlProduction}${complaint.image}`}
+            src={complaint.imageBackUp}
             alt={complaint.image}
             className="image-container__image"
             height={100}
+            width={100}
           />
         </div>
         <button

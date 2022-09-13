@@ -7,6 +7,7 @@ export interface IRegisteredComplaint {
   creationDate?: Date;
   location?: number[];
   id: string;
+  imageBackUp: string;
 }
 
 export interface IComplaint {
