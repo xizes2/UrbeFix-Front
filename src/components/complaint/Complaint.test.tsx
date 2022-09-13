@@ -11,6 +11,8 @@ describe("Given a Complaint component", () => {
         countComplaints: 1,
         image: "fuente.jpg",
         id: "654ds65s",
+        imageBackUp:
+          "https://gddtzsfibvhkrjzrphxo.supabase.co/storage/v1/object/public/urbefix/1663067160059ocio.jpg",
       };
       Object.defineProperty(window, "innerWidth", {
         writable: true,

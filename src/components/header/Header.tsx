@@ -35,6 +35,8 @@ const Header = (): JSX.Element => {
           className="urbefix-logo"
           src="/images/urbefixlogo.png"
           alt="urbefix logo"
+          height={100}
+          width={100}
         />
       </h1>
       <h2 className="main-header__location">{showLocation()}</h2>

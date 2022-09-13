@@ -19,6 +19,8 @@ describe("Given a complaintSlice reducer", () => {
             "https://thumbs.dreamstime.com/z/contenedor-lleno-dos-y-muchos-bolsos-de-basura-en-la-calle-ciudad-monta%C3%B1a-146937943.jpg",
           title: "Contenedor lleno",
           id: "631ce2cdf35c0700d659456c",
+          imageBackUp:
+            "https://gddtzsfibvhkrjzrphxo.supabase.co/storage/v1/object/public/urbefix/1663067160059ocio.jpg",
         },
       ];
 
@@ -42,6 +44,8 @@ describe("Given a complaintSlice reducer", () => {
             "https://thumbs.dreamstime.com/z/contenedor-lleno-dos-y-muchos-bolsos-de-basura-en-la-calle-ciudad-monta%C3%B1a-146937943.jpg",
           title: "Contenedor lleno",
           id: "631ce2cdf35c0700d659456c",
+          imageBackUp:
+            "https://gddtzsfibvhkrjzrphxo.supabase.co/storage/v1/object/public/urbefix/1663067160059ocio.jpg",
         },
       ];
 
@@ -66,6 +70,8 @@ describe("Given a complaintSlice reducer", () => {
           "https://thumbs.dreamstime.com/z/contenedor-lleno-dos-y-muchos-bolsos-de-basura-en-la-calle-ciudad-monta%C3%B1a-146937943.jpg",
         title: "Contenedor lleno",
         id: "631ce2cdf35c0700d659456c",
+        imageBackUp:
+          "https://gddtzsfibvhkrjzrphxo.supabase.co/storage/v1/object/public/urbefix/1663067160059ocio.jpg",
       };
 
       const action = createComplaintActionCreator(complaint);
