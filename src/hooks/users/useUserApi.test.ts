@@ -87,12 +87,22 @@ describe("Given a useUser hook", () => {
         },
       } = renderHook(useUser, { wrapper: Wrapper });
 
+      const expectedUser = {
+        payload: {
+          id: "63164c769464004cf78cfab2",
+          token:
+            "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYzMTY0Yzc2OTQ2NDAwNGNmNzhjZmFiMiIsInVzZXJFbWFpbCI6Im1penVraUBnbWFpbWl6dWtpbC5jb20iLCJpYXQiOjE2NjI0ODk3Mjd9.Z_cDzD8Xh4zSfooYAHtmx0vEIrwfFtDfTMs-ZqiRYJU",
+          userEmail: "mizuki@gmaimizukil.com",
+        },
+        type: "users/loginUser",
+      };
+
       await act(async () => {
         await loginUser(mockUser3);
       });
 
       await waitFor(() => {
-        expect(mockUseDispatch).toHaveBeenCalled();
+        expect(mockUseDispatch).toHaveBeenCalledWith(expectedUser);
       });
     });
 

@@ -94,6 +94,27 @@ export const handlers = [
     }
   ),
 
+  rest.get(
+    `${process.env.REACT_APP_API_URL}complaints/details/${complaintId}`,
+    (_req, res, ctx) => {
+      return res(
+        ctx.status(200),
+        ctx.json({
+          complaint: {
+            category: "Contenedores de Resíduos",
+            countComplaints: "1",
+            creationDate: "2022-09-06T11:13:00.000Z",
+            description: "contenedor lleno",
+            image:
+              "https://thumbs.dreamstime.com/z/contenedor-lleno-dos-y-muchos-bolsos-de-basura-en-la-calle-ciudad-monta%C3%B1a-146937943.jpg",
+            title: "Contenedor lleno",
+            id: "654654jhgjhg",
+          },
+        })
+      );
+    }
+  ),
+
   rest.delete(
     `${process.env.REACT_APP_API_URL}complaints/delete/${complaintId}`,
     async (_req, res, ctx) => {

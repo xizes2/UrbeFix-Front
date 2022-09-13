@@ -68,17 +68,15 @@ const useUser = () => {
         loginData
       );
 
-      if (token) {
-        const userInfo: IRegisteredUser = fetchToken(token);
-        localStorage.setItem("token", token);
-        dispatch(loginUserActionCreator(userInfo));
+      const userInfo: IRegisteredUser = fetchToken(token);
+      localStorage.setItem("token", token);
+      dispatch(loginUserActionCreator(userInfo));
 
-        toast.dismiss();
-        successModal("Logged with success!");
+      toast.dismiss();
+      successModal("Logged with success!");
 
-        navigateTo("/complaints");
-        return;
-      }
+      navigateTo("/complaints");
+      return;
     } catch (error) {
       toast.dismiss();
       errorModal("User or password not valid.");
