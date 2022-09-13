@@ -57,6 +57,7 @@ const ComplaintDetails = () => {
       setComplaint(complaint);
     })();
   }, [getComplaint, id]);
+
   return (
     <ComplaintDetailsStyled>
       <div className="complaint-card">

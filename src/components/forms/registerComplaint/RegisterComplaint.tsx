@@ -30,7 +30,6 @@ const RegisterComplaint = () => {
   const [newComplaint, setNewComplaint] = useState(initialState);
   const [lat, setLat] = useState(catalunyaSquareLat);
   const [lng, setLng] = useState(catalunyaSquareLng);
-
   const isUserGeolocationActive = navigator.geolocation;
 
   if (!isUserGeolocationActive) {

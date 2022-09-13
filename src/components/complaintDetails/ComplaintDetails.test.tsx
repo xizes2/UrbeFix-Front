@@ -4,7 +4,7 @@ import ComplaintDetails from "./ComplaintDetails";
 
 describe("Given a ComplaintDetails component", () => {
   describe("When instantiated", () => {
-    test("Then it should show", () => {
+    test("Then it should show the complaints details", () => {
       render(
         <Wrapper>
           <ComplaintDetails />
