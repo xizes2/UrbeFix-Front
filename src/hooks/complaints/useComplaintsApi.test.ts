@@ -3,7 +3,6 @@ import axios from "axios";
 import { act } from "react-dom/test-utils";
 import { toast } from "react-toastify";
 import { deleteComplaintActionCreator } from "../../app/store/feature/complaints/complaintsSlicer";
-import { IUnegisteredComplaint } from "../../interfaces/complaints/Complaints";
 import Wrapper from "../../utils/Wrapper";
 import useComplaints from "./useComplaintsApi";
 
@@ -153,13 +152,9 @@ describe("Given a useComplaints hook", () => {
 
   describe("When invoke createComplaint function with a new complaint", () => {
     test("Then it should call the succes modal", async () => {
-      const {
-        result: {
-          current: { createComplaint },
-        },
-      } = renderHook(useComplaints, { wrapper: Wrapper });
+      const mockFormData = new FormData();
 
-      const mockComplaint: IUnegisteredComplaint = {
+      const mockComplaint = {
         category: "Plaga en via pública",
         title: "ratas en el jardin",
         description:
@@ -167,12 +162,28 @@ describe("Given a useComplaints hook", () => {
         countComplaints: 1,
         image:
           "https://www.lavanguardia.com/files/content_image_mobile_filter/uploads/2022/07/28/62e2d7628699e.jpeg",
-        location: "Eixample",
+        location: [41, 2.15],
       };
 
-      await act(async () => {
-        await createComplaint(mockComplaint);
-      });
+      mockFormData.append(
+        "newComplaint",
+        JSON.stringify({
+          category: mockComplaint.category,
+          title: mockComplaint.title,
+          description: mockComplaint.description,
+          countComplaints: mockComplaint.countComplaints,
+          location: mockComplaint.location,
+        })
+      );
+      mockFormData.append("image", "file.jpg");
+
+      const {
+        result: {
+          current: { createComplaint },
+        },
+      } = renderHook(useComplaints, { wrapper: Wrapper });
+
+      await createComplaint(mockFormData);
 
       expect(toast.success).toHaveBeenCalledWith(
         "Your complaint has been correctly registered!",
@@ -192,20 +203,32 @@ describe("Given a useComplaints hook", () => {
         },
       } = renderHook(useComplaints, { wrapper: Wrapper });
 
-      const mockComplaint: IUnegisteredComplaint = {
-        category: "",
+      const mockFormData = new FormData();
+      axios.defaults.headers.post["IsTestError"] = true;
+
+      const mockComplaint = {
+        category: "Plaga en via pública",
         title: "ratas en el jardin",
         description:
           "Especialmente por la noche se ve muchas ratas paseando por el jardin",
         countComplaints: 1,
         image:
           "https://www.lavanguardia.com/files/content_image_mobile_filter/uploads/2022/07/28/62e2d7628699e.jpeg",
-        location: "Eixample",
+        location: [41, 2.15],
       };
 
-      await act(async () => {
-        await createComplaint(mockComplaint);
-      });
+      mockFormData.append(
+        "newComplaint",
+        JSON.stringify({
+          category: mockComplaint.category,
+          title: mockComplaint.title,
+          description: mockComplaint.description,
+          countComplaints: mockComplaint.countComplaints,
+          location: [41, 2.15],
+        })
+      );
+
+      await createComplaint(mockFormData);
 
       expect(toast.error).toHaveBeenCalledWith(
         "Couldn't create the complaint.",

@@ -123,12 +123,13 @@ export const handlers = [
   rest.post(
     `${process.env.REACT_APP_API_URL}complaints/`,
     async (req, res, ctx) => {
-      const body = await req.json();
-      if (!body.category || !body.title || !body.image) {
+      const headerTestError = req.headers.get("IsTestError");
+
+      if (headerTestError) {
         return res(
           ctx.status(400),
           ctx.json({
-            error: "Wrong data",
+            error: "Error creating complaint",
           })
         );
       }
@@ -137,14 +138,14 @@ export const handlers = [
         ctx.status(201),
         ctx.json([
           {
-            category: "",
+            category: "Plaga en via pública",
             title: "ratas en el jardin",
             description:
               "Especialmente por la noche se ve muchas ratas paseando por el jardin",
             countComplaints: 1,
             image:
               "https://www.lavanguardia.com/files/content_image_mobile_filter/uploads/2022/07/28/62e2d7628699e.jpeg",
-            location: "Eixample",
+            location: [41, 2.15],
           },
         ])
       );

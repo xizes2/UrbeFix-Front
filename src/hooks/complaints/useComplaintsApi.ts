@@ -8,10 +8,7 @@ import {
   getAllComplaintsActionCreator,
 } from "../../app/store/feature/complaints/complaintsSlicer";
 import { useAppDispatch, useAppSelector } from "../../app/store/hooks";
-import {
-  IRegisteredComplaint,
-  IUnegisteredComplaint,
-} from "../../interfaces/complaints/Complaints";
+import { IRegisteredComplaint } from "../../interfaces/complaints/Complaints";
 
 export const loadingModal = (message: string) =>
   toast.loading(message, {
@@ -105,7 +102,7 @@ const useComplaints = () => {
   );
 
   const createComplaint = useCallback(
-    async (complaint: IUnegisteredComplaint) => {
+    async (complaint: FormData) => {
       const url: string = `${process.env.REACT_APP_API_URL}complaints/`;
       const token = localStorage.getItem("token");
       try {
@@ -116,6 +113,7 @@ const useComplaints = () => {
             Authorization: `Bearer ${token}`,
           },
         });
+
         successModal("Your complaint has been correctly registered!");
         dispatch(createComplaintActionCreator(newComplaint));
         return newComplaint;

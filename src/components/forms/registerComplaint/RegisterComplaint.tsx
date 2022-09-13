@@ -123,13 +123,6 @@ const RegisterComplaint = () => {
           value={newComplaint.description}
           onChange={handleChange}
         />
-        {/* <input
-          type="text"
-          id="location"
-          placeholder="Ubicación"
-          autoComplete="off"
-          onChange={handleChange}
-        /> */}
         <div className="image-container">
           <label htmlFor="image" className="image-button">
             <span>Añadir foto</span>
