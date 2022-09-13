@@ -57,7 +57,6 @@ const ComplaintDetails = () => {
       setComplaint(complaint);
     })();
   }, [getComplaint, id]);
-
   return (
     <ComplaintDetailsStyled>
       <div className="complaint-card">
@@ -88,7 +87,7 @@ const ComplaintDetails = () => {
         <div className="image-container">
           <img
             src={complaint.imageBackUp}
-            alt={complaint.image}
+            alt={complaint.title}
             className="image-container__image"
             height={100}
             width={100}
