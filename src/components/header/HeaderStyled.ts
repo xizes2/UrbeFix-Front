@@ -5,14 +5,23 @@ const HeaderStyled = styled.div`
   justify-content: space-between;
   align-items: center;
 
+  height: 110px;
+  position: sticky;
+  top: 0;
+  z-index: 2;
+
   background: linear-gradient(
     270deg,
     rgba(137, 227, 255, 1) 0%,
     rgba(63, 184, 123, 1) 71%
   );
 
+  .main-title {
+    height: 100%;
+  }
+
   .urbefix-logo {
-    padding: 20px;
+    padding: 10px 10px 0;
   }
 
   .main-header__logout-button {

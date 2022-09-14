@@ -42,6 +42,10 @@ const ComplaintStyled = styled.div`
       a {
         text-decoration: none;
         color: #000;
+
+        h3 {
+          padding-top: 5px;
+        }
       }
     }
 
@@ -50,6 +54,10 @@ const ComplaintStyled = styled.div`
         text-align: center;
         padding: 10px;
       }
+    }
+
+    &__add-complaint-container {
+      justify-content: center;
     }
 
     &__text {
@@ -62,15 +70,7 @@ const ComplaintStyled = styled.div`
       border: 1px solid red;
       border-radius: 0 10px 10px 0;
       cursor: pointer;
-
-      .add-complaint__delete-icon {
-        color: red;
-        font-size: 20px;
-
-        @media screen and (min-width: 601px) {
-          font-size: 25px;
-        }
-      }
+      z-index: 1;
 
       @media screen and (min-width: 601px) {
         border-radius: 50%;
@@ -79,6 +79,15 @@ const ComplaintStyled = styled.div`
         position: absolute;
         top: 10px;
         right: 10px;
+      }
+
+      .add-complaint__delete-icon {
+        color: red;
+        font-size: 20px;
+
+        @media screen and (min-width: 601px) {
+          font-size: 25px;
+        }
       }
     }
   }
@@ -99,7 +108,6 @@ const ComplaintStyled = styled.div`
 
   .image-container {
     height: 100px;
-    width: 100px;
     width: 40%;
 
     @media screen and (min-width: 601px) {
@@ -112,6 +120,7 @@ const ComplaintStyled = styled.div`
       border-radius: 10px 0 0 10px;
       height: inherit;
       width: 100%;
+      height: 100%;
       object-fit: cover;
 
       @media screen and (min-width: 601px) {
