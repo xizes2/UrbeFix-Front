@@ -24,10 +24,8 @@ const App = (): JSX.Element => {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (token) {
-      const localUser = fetchToken(token);
-      dispatch(loginUserActionCreator(localUser));
-    }
+    const localUser = fetchToken(token!);
+    dispatch(loginUserActionCreator(localUser));
     navigate(pathname);
   }, [dispatch, navigate, pathname]);
 
@@ -38,7 +36,10 @@ const App = (): JSX.Element => {
       <Routes>
         <Route path="/home" element={<HomePage />} />
         <Route path="/register" element={<RegisterPage />} />
-        <Route path="/login" element={<LoginPage />} />
+        <Route
+          path="/login"
+          element={!token ? <LoginPage /> : <Navigate to="/complaints" />}
+        />
         <Route
           path="/complaints"
           element={token ? <ComplaintsPage /> : <Navigate to="/login" />}
