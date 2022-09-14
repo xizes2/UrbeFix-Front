@@ -1,8 +1,6 @@
 import { render } from "@testing-library/react";
-import { Provider } from "react-redux";
-import { BrowserRouter } from "react-router-dom";
 import App from "./App";
-import { store } from "./app/store/store";
+import Wrapper from "./utils/Wrapper";
 
 const mockDispatch = jest.fn();
 
@@ -20,11 +18,9 @@ describe("Given a App component", () => {
       window.localStorage.setItem("token", mockToken);
 
       render(
-        <Provider store={store}>
-          <BrowserRouter>
-            <App />
-          </BrowserRouter>
-        </Provider>
+        <Wrapper>
+          <App />
+        </Wrapper>
       );
 
       expect(mockDispatch).toHaveBeenCalled();
