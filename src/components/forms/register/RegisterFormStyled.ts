@@ -22,7 +22,6 @@ export const RegisterFormStyled = styled.form`
   max-width: 400px;
   margin: 0 auto;
   color: #6d6d6d;
-  min-height: 600px;
 
   .form-fields {
     display: flex;

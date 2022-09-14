@@ -111,7 +111,6 @@ const ComplaintStyled = styled.div`
     width: 40%;
 
     @media screen and (min-width: 601px) {
-      height: 150px;
       width: 100%;
       height: 100%;
     }

@@ -138,16 +138,21 @@ const ComplaintDetailsStyled = styled.div`
   }
 
   .return-button-container {
-    text-align: center;
     position: sticky;
     bottom: 0;
     background-color: #3fb87b;
+    height: 64px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
     @media screen and (min-width: 1000px) {
       width: fit-content;
       border-radius: 10px;
       font-size: 0.9em;
       align-self: center;
+      position: fixed;
+      margin-bottom: 2%;
     }
 
     &__return {

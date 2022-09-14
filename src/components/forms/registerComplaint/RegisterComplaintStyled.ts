@@ -6,8 +6,8 @@ const RegisterComplaintStyled = styled.form`
   justify-content: center;
   max-width: 400px;
   margin: 0 auto;
+  margin-top: 30px;
   color: #6d6d6d;
-  min-height: 600px;
 
   .category-selection {
     background-color: #3fb87b;
@@ -74,11 +74,15 @@ const RegisterComplaintStyled = styled.form`
   .buttons-container {
     display: flex;
     margin-top: 30px;
+    position: absolute;
+    width: 100%;
+    bottom: 0;
 
     @media screen and (min-width: 601px) {
       align-self: center;
-      width: 100%;
       justify-content: space-between;
+      position: unset;
+      width: 400px;
     }
 
     &__return-container {

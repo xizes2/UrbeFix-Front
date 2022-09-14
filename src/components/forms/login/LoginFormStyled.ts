@@ -46,11 +46,16 @@ export const LoginFormStyled = styled.form`
   .buttons-container {
     display: flex;
     margin-top: 30px;
+    bottom: 0;
+    height: 64px;
+    width: 100%;
+    position: absolute;
 
     @media screen and (min-width: 601px) {
       align-self: center;
-      width: 100%;
       justify-content: space-between;
+      position: unset;
+      width: 400px;
     }
 
     &__return-container {
