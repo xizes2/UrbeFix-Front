@@ -7,6 +7,11 @@ const HomePageStyled = styled.div`
   justify-content: center;
   color: #3fb87b;
   padding: 20px;
+  max-width: 400px;
+
+  @media screen and (min-width: 601px) {
+    margin: 0 auto;
+  }
 
   img {
     padding: 20px 20px 40px 20px;
@@ -37,12 +42,27 @@ const HomePageStyled = styled.div`
 
   .buttons-container {
     display: flex;
-    justify-content: space-around;
     margin-top: 30px;
+    bottom: 0;
+    height: 64px;
     width: 100%;
+    position: absolute;
 
     @media screen and (min-width: 601px) {
-      width: 540px;
+      align-self: center;
+      justify-content: space-between;
+      width: 100%;
+      position: unset;
+    }
+
+    &__link {
+      flex-grow: 1;
+      width: 100%;
+
+      @media screen and (min-width: 601px) {
+        flex-grow: unset;
+        width: unset;
+      }
     }
 
     &__login {
@@ -51,9 +71,13 @@ const HomePageStyled = styled.div`
       color: #fff;
       border: 1px solid #3fb87b;
       font-size: 1.2em;
-      border-radius: 10px;
-      width: 140px;
       cursor: pointer;
+      width: 100%;
+
+      @media screen and (min-width: 601px) {
+        width: 150px;
+        border-radius: 10px;
+      }
     }
 
     &__register {
@@ -62,9 +86,13 @@ const HomePageStyled = styled.div`
       color: #3fb87b;
       border: 1px solid #3fb87b;
       font-size: 1.2em;
-      border-radius: 10px;
-      width: 140px;
       cursor: pointer;
+      width: 100%;
+
+      @media screen and (min-width: 601px) {
+        width: 150px;
+        border-radius: 10px;
+      }
     }
   }
 `;
