@@ -63,6 +63,7 @@ const ComplaintsListStyled = styled.div`
   .complaints-container {
     margin: 0 auto;
     padding: 20px;
+    text-align: center;
 
     &__complaint {
       list-style: none;

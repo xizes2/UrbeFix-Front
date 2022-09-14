@@ -48,7 +48,10 @@ const App = (): JSX.Element => {
         />
         <Route path="/details/:id" element={<ComplaintDetailsPage />} />
         <Route path="/complaintsRegister" element={<ComplaintRegisterPage />} />
-        <Route path="" element={token ? <ComplaintsPage /> : <HomePage />} />
+        <Route
+          path=""
+          element={token ? <Navigate to="/complaints" /> : <HomePage />}
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </>

@@ -5,20 +5,36 @@ const ComplaintDetailsStyled = styled.div`
   flex-direction: column;
   position: relative;
 
-  @media screen and (min-width: 601px) {
+  @media screen and (min-width: 1000px) {
     height: 100%;
     max-width: 1000px;
     flex-direction: column;
     margin: auto;
   }
   .complaint-card {
-    .leaflet-container {
-      position: relative;
-      height: 150px;
+    display: flex;
+    flex-direction: column;
+
+    iframe {
+      @media screen and (min-width: 1000px) {
+        height: 300px;
+      }
     }
 
     &__detail-container {
       margin: 10px;
+    }
+
+    &__detail-container:first-of-type {
+      align-self: center;
+      font-size: 1.3em;
+      text-align: center;
+    }
+
+    &__detail-container:not(:first-child) {
+      @media screen and (min-width: 1000px) {
+        max-width: 400px;
+      }
     }
 
     &__title {
@@ -28,6 +44,10 @@ const ComplaintDetailsStyled = styled.div`
 
     &__complaint-count {
       margin: 10px;
+
+      @media screen and (min-width: 1000px) {
+        max-width: 400px;
+      }
 
       span {
         color: #3fb87b;
@@ -40,13 +60,18 @@ const ComplaintDetailsStyled = styled.div`
       border-radius: 50%;
       height: 50px;
       width: 50px;
-      position: absolute;
+      position: sticky;
       right: 20px;
-      top: 160px;
+      bottom: 320px;
+      align-self: flex-end;
 
-      @media screen and (min-width: 601px) {
-        top: 160px;
+      @media screen and (min-width: 1000px) {
+        top: 415px;
+        right: 30px;
         cursor: pointer;
+        position: absolute;
+        height: 70px;
+        width: 70px;
       }
 
       .delete-complaint__delete-icon {
@@ -61,42 +86,53 @@ const ComplaintDetailsStyled = styled.div`
       border-radius: 50%;
       height: 50px;
       width: 50px;
-      position: absolute;
+      position: sticky;
       right: 20px;
-      top: 230px;
+      bottom: 250px;
+      align-self: flex-end;
 
-      @media screen and (min-width: 601px) {
-        top: 160px;
-        right: 100px;
+      @media screen and (min-width: 1000px) {
+        top: 530px;
+        right: 30px;
         cursor: pointer;
+        position: absolute;
+        height: 70px;
+        width: 70px;
       }
 
       .edit-complaint__edit-icon {
         color: #fff;
         font-size: 30px;
+
+        @media screen and (min-width: 1000px) {
+          font-size: 40px;
+        }
       }
     }
   }
 
   .image-container {
-    height: 100px;
+    height: 150px;
     margin: 10px;
     display: flex;
     justify-content: space-around;
 
-    @media screen and (min-width: 601px) {
-      height: 150px;
-      width: 100%;
+    @media screen and (min-width: 1000px) {
+      height: 250px;
+      width: 400px;
+      position: absolute;
+      top: 400px;
+      right: 130px;
     }
 
     &__image {
       height: inherit;
       width: inherit;
       object-fit: contain;
+      border-radius: 10px;
 
-      @media screen and (min-width: 601px) {
-        border-radius: 10px 10px 0 0;
-        height: 100%;
+      @media screen and (min-width: 1000px) {
+        height: fit-content;
       }
     }
   }
@@ -107,14 +143,11 @@ const ComplaintDetailsStyled = styled.div`
     bottom: 0;
     background-color: #3fb87b;
 
-    @media screen and (min-width: 601px) {
-      position: absolute;
-      top: 240px;
-      right: 20px;
+    @media screen and (min-width: 1000px) {
       width: fit-content;
-      bottom: initial;
       border-radius: 10px;
       font-size: 0.9em;
+      align-self: center;
     }
 
     &__return {
@@ -125,7 +158,7 @@ const ComplaintDetailsStyled = styled.div`
       background-color: inherit;
       color: #fff;
 
-      @media screen and (min-width: 601px) {
+      @media screen and (min-width: 1000px) {
         padding: 15px;
       }
     }

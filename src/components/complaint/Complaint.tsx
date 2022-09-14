@@ -28,14 +28,17 @@ const Complaint = ({
   return (
     <ComplaintStyled className="complaint-card">
       <div className="image-container">
-        <img
-          src={imageBackUp}
-          alt={title}
-          className="image-container__image"
-          height={100}
-          width={100}
-        />
+        <Link to={`/details/${id}`}>
+          <img
+            src={imageBackUp}
+            alt={title}
+            className="image-container__image"
+            height={100}
+            width={100}
+          />
+        </Link>
       </div>
+
       <div className="complaint-card__text-container">
         <Link to={`/details/${id}`}>
           <h3 className="complaint-card__title">{category}</h3>
