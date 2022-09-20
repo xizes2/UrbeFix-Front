@@ -15,9 +15,7 @@ const Map = ({ lat, lng }: ICoordinates): JSX.Element => {
       style={{ border: 0 }}
       title={"complaint location"}
       src={`https://www.google.com/maps/embed/v1/place?key=${mapsKey}&q=${
-        [lat, lng]
-          ? [lat, lng] + `&zoom=16`
-          : `Plaza Catalunya, Barcelona&zoom=11`
+        [lat, lng] + `&zoom=16`
       }`}
       allowFullScreen={false}
     ></MapStyled>

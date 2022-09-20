@@ -124,7 +124,8 @@ const ComplaintStyled = styled.div`
 
       @media screen and (min-width: 601px) {
         border-radius: 10px 10px 0 0;
-        height: 100%;
+        /* height: 100%; */
+        max-height: 260px;
       }
     }
   }

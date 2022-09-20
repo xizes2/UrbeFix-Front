@@ -34,7 +34,7 @@ const ComplaintDetails = () => {
   const catalunyaSquareLng = 2.170047;
   const [lat, setLat] = useState(catalunyaSquareLat);
   const [lng, setLng] = useState(catalunyaSquareLng);
-  const [address, setAddres] = useState("Barcelona");
+  const [address, setAddres] = useState("");
 
   useEffect(() => {
     setLat(complaint.location?.[0] ? complaint.location?.[0] : lat);

@@ -23,13 +23,14 @@ const RegisterComplaint = () => {
     image: "",
     location: [],
   };
-  const catalunyaSquareLat = 41.387016;
-  const catalunyaSquareLng = 2.170047;
+
   const navigate = useNavigate();
   const { createComplaint } = useComplaints();
+
   const [newComplaint, setNewComplaint] = useState(initialState);
-  const [lat, setLat] = useState(catalunyaSquareLat);
-  const [lng, setLng] = useState(catalunyaSquareLng);
+  const [lat, setLat] = useState<number | undefined>();
+  const [lng, setLng] = useState<number | undefined>();
+
   const isUserGeolocationActive = navigator.geolocation;
 
   if (!isUserGeolocationActive) {
