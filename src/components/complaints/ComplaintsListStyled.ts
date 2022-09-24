@@ -7,32 +7,25 @@ const ComplaintsListStyled = styled.div`
     margin: 20px;
 
     &__filter-buttons {
+      align-items: center;
       display: flex;
       margin-right: 20px;
     }
 
-    &__category {
-      padding: 10px;
-      background-color: #3fb87b;
-      color: #fff;
-      border: 1px solid #3fb87b;
-      border-radius: 10px;
+    & .button {
       margin-right: 20px;
-      font-size: 1.1em;
-      cursor: pointer;
+    }
 
-      @media screen and (min-width: 601px) {
-        font-size: 1.2em;
-        padding: 20px;
-      }
+    & .button.complaint {
+      margin-right: 0;
     }
 
     &__icon {
       border-radius: 50%;
       background-color: #3fb87b;
       color: #fff;
-      width: 34px;
-      height: 34px;
+      width: 30px;
+      height: 30px;
       padding: 10px;
       cursor: pointer;
 
@@ -40,22 +33,6 @@ const ComplaintsListStyled = styled.div`
         margin: 0 20px;
         width: 44px;
         height: 44px;
-      }
-    }
-
-    &__create-complaint {
-      padding: 10px;
-      background-color: #3fb87b;
-      color: #fff;
-      border: 1px solid #3fb87b;
-      border-radius: 10px;
-      font-size: 1.1em;
-      cursor: pointer;
-      height: 64px;
-
-      @media screen and (min-width: 601px) {
-        font-size: 1.2em;
-        padding: 20px;
       }
     }
   }

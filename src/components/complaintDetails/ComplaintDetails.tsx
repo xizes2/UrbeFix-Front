@@ -7,6 +7,7 @@ import { IRegisteredComplaint } from "../../interfaces/complaints/Complaints";
 import Map from "../map/Map";
 import ComplaintDetailsStyled from "./ComplaintDetailsStyled";
 import Geocode from "react-geocode";
+import Button from "../button/Button";
 
 const geocodeKey = process.env.REACT_APP_GEOCODE_KEY;
 
@@ -94,7 +95,7 @@ const ComplaintDetails = () => {
             width={100}
           />
         </div>
-        <button
+        {/* <button
           className="complaint-card__delete-container"
           onClick={handleDelete}
           aria-label="delete-complaint-button"
@@ -103,25 +104,31 @@ const ComplaintDetails = () => {
             className="delete-complaint__delete-icon"
             icon={faTrashCan}
           />
-        </button>
-        <button
-          className="complaint-card__edit-container"
-          onClick={() => {}}
-          aria-label="edit-complaint-button"
+        </button> */}
+        <Button
+          type="button"
+          buttonClassName="button-round--delete"
+          onClick={handleDelete}
         >
+          <FontAwesomeIcon
+            className="delete-complaint__trashcan-icon"
+            icon={faTrashCan}
+          />
+        </Button>
+        <Button type="button" buttonClassName="button-round" onClick={() => {}}>
           <FontAwesomeIcon
             className="edit-complaint__edit-icon"
             icon={faPenToSquare}
           />
-        </button>
+        </Button>
         <div className="return-button-container">
           <Link
             className="return-button-container__nav-link"
             to={"/complaints"}
           >
-            <button className="return-button-container__return">
+            <Button buttonClassName="button" type="button">
               Volver al Listado
-            </button>
+            </Button>
           </Link>
         </div>
       </div>

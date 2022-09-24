@@ -1,5 +1,6 @@
 import { useLocation } from "react-router-dom";
 import useUser from "../../hooks/users/useUsersApi";
+import Button from "../button/Button";
 import HeaderStyled from "./HeaderStyled";
 
 const Header = (): JSX.Element => {
@@ -41,9 +42,13 @@ const Header = (): JSX.Element => {
       </h1>
       <h2 className="main-header__location">{showLocation()}</h2>
       {showLogoutBUtton() ? (
-        <button className="main-header__logout-button" onClick={logoutUser}>
+        <Button
+          buttonClassName="button-white"
+          type="button"
+          onClick={logoutUser}
+        >
           Logout
-        </button>
+        </Button>
       ) : (
         ""
       )}
