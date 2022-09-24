@@ -54,59 +54,47 @@ const ComplaintDetailsStyled = styled.div`
         font-size: 1.1em;
       }
     }
+  }
 
-    &__delete-container {
-      border: 1px solid red;
-      border-radius: 50%;
-      height: 50px;
-      width: 50px;
-      position: sticky;
-      right: 20px;
-      bottom: 320px;
-      align-self: flex-end;
+  .button-round--delete {
+    position: sticky;
+    right: 20px;
+    bottom: 320px;
+    align-self: flex-end;
 
-      @media screen and (min-width: 1000px) {
-        top: 415px;
-        right: 30px;
-        cursor: pointer;
-        position: absolute;
-        height: 70px;
-        width: 70px;
-      }
-
-      .delete-complaint__delete-icon {
-        color: red;
-        font-size: 30px;
-      }
+    @media screen and (min-width: 1000px) {
+      top: 415px;
+      right: 30px;
+      position: absolute;
+      height: 70px;
+      width: 70px;
     }
 
-    &__edit-container {
-      background-color: #3fb87b;
-      border: 0;
-      border-radius: 50%;
-      height: 50px;
-      width: 50px;
-      position: sticky;
-      right: 20px;
-      bottom: 250px;
-      align-self: flex-end;
+    .delete-complaint__trashcan-icon {
+      font-size: 30px;
+    }
+  }
+
+  .button-round {
+    position: sticky;
+    right: 20px;
+    bottom: 250px;
+    align-self: flex-end;
+
+    @media screen and (min-width: 1000px) {
+      top: 530px;
+      right: 30px;
+      cursor: pointer;
+      position: absolute;
+      height: 70px;
+      width: 70px;
+    }
+
+    .edit-complaint__edit-icon {
+      font-size: 30px;
 
       @media screen and (min-width: 1000px) {
-        top: 530px;
-        right: 30px;
-        cursor: pointer;
-        position: absolute;
-        height: 70px;
-        width: 70px;
-      }
-
-      .edit-complaint__edit-icon {
-        color: #fff;
-        font-size: 30px;
-
-        @media screen and (min-width: 1000px) {
-          font-size: 40px;
-        }
+        font-size: 40px;
       }
     }
   }
@@ -155,17 +143,16 @@ const ComplaintDetailsStyled = styled.div`
       margin-bottom: 2%;
     }
 
-    &__return {
-      padding: 15px;
-      font-size: 1.2em;
-      cursor: pointer;
-      border: none;
-      background-color: inherit;
-      color: #fff;
+    &__nav-link {
+      display: inherit;
+      justify-content: inherit;
+      width: 100%;
+      height: 100%;
+      text-decoration: none;
+    }
 
-      @media screen and (min-width: 1000px) {
-        padding: 15px;
-      }
+    & .button {
+      font-size: 1.2em;
     }
   }
 `;

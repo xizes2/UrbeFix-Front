@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { useAppSelector } from "../../app/store/hooks";
 import useComplaints from "../../hooks/complaints/useComplaintsApi";
 import { IRegisteredComplaint } from "../../interfaces/complaints/Complaints";
+import Button from "../button/Button";
 import Complaint from "../complaint/Complaint";
 import ComplaintsListStyled from "./ComplaintsListStyled";
 
@@ -20,12 +21,9 @@ const ComplaintsList = (): JSX.Element => {
     <ComplaintsListStyled>
       <div className="buttons-container">
         <div className="buttons-container__filter-buttons">
-          <button
-            className="buttons-container__category"
-            aria-label="category-button"
-          >
+          <Button buttonClassName="button" type="button">
             Categoría
-          </button>
+          </Button>
           <FontAwesomeIcon
             className="buttons-container__icon"
             icon={faMapPin}
@@ -35,12 +33,9 @@ const ComplaintsList = (): JSX.Element => {
           className="buttons-container__nav-link"
           to={"/complaintsRegister"}
         >
-          <button
-            className="buttons-container__create-complaint"
-            aria-label="create-complaint-button"
-          >
+          <Button buttonClassName="button complaint" type="button">
             Crear Queja
-          </button>
+          </Button>
         </Link>
       </div>
       <ul className="complaints-container">

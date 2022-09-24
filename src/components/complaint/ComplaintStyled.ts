@@ -20,6 +20,7 @@ const ComplaintStyled = styled.div`
       display: flex;
       position: absolute;
       bottom: 0;
+      justify-content: center;
 
       @media screen and (min-width: 601px) {
         position: relative;
@@ -56,17 +57,13 @@ const ComplaintStyled = styled.div`
       }
     }
 
-    &__add-complaint-container {
-      justify-content: center;
-    }
-
     &__text {
       @media screen and (min-width: 601px) {
         padding: 10px;
       }
     }
 
-    &__delete-container {
+    &__button--delete {
       border: 1px solid red;
       border-radius: 0 10px 10px 0;
       cursor: pointer;
@@ -81,7 +78,7 @@ const ComplaintStyled = styled.div`
         right: 10px;
       }
 
-      .add-complaint__delete-icon {
+      .delete-complaint__trashcan-icon {
         color: red;
         font-size: 20px;
 

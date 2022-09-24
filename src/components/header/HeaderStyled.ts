@@ -24,23 +24,13 @@ const HeaderStyled = styled.div`
     padding: 10px 10px 0;
   }
 
-  .main-header__logout-button {
-    padding: 10px;
-    background-color: #fff;
-    color: #3fb87b;
-    border: 1px solid #3fb87b;
-    border-radius: 10px;
-    font-size: 1.1em;
-    cursor: pointer;
-    height: fit-content;
-    margin: 20px;
-    height: 54px;
+  .button-white {
+    margin-right: 20px;
 
     @media screen and (min-width: 601px) {
       font-size: 1.3rem;
       padding: 10px 20px;
       margin: 20px;
-      height: 64px;
     }
   }
 

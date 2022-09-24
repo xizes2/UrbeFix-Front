@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import useComplaints from "../../hooks/complaints/useComplaintsApi";
 import { IComplaint } from "../../interfaces/complaints/Complaints";
+import Button from "../button/Button";
 import ComplaintStyled from "./ComplaintStyled";
 
 const Complaint = ({
@@ -43,33 +44,36 @@ const Complaint = ({
         <Link to={`/details/${id}`}>
           <h3 className="complaint-card__title">{category}</h3>
           {windowSize ? (
-            <span className="complaint-card__date">
-              Fecha de creación: {creationDate as unknown as string}
-            </span>
+            <>
+              <span className="complaint-card__date">
+                Fecha de creación: {creationDate as unknown as string}
+              </span>
+              <div className="complaint-card__add-complaint-container">
+                <span className="complaint-card__text">Agregar queja</span>
+                <div className="icon-container">
+                  <FontAwesomeIcon
+                    className="icon-container__add-icon"
+                    icon={faCirclePlus}
+                  />
+                </div>
+              </div>
+            </>
           ) : (
             ""
           )}
-          <div className="complaint-card__add-complaint-container">
-            <span className="complaint-card__text">Agregar queja</span>
-            <div className="icon-container">
-              <FontAwesomeIcon
-                className="icon-container__add-icon"
-                icon={faCirclePlus}
-              />
-            </div>
-          </div>
         </Link>
       </div>
-      <button
-        className="complaint-card__delete-container"
+      <Button
+        buttonClassName="complaint-card__button--delete"
+        type="button"
         onClick={handleDelete}
         aria-label="delete-complaint-button"
       >
         <FontAwesomeIcon
-          className="add-complaint__delete-icon"
+          className="delete-complaint__trashcan-icon"
           icon={faTrashCan}
         />
-      </button>
+      </Button>
     </ComplaintStyled>
   );
 };
