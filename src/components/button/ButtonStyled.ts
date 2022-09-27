@@ -9,8 +9,26 @@ const ButtonStyled = styled.button`
     color: #fff;
     border-radius: 10px;
     padding: 10px;
-    font-size: 1.1em;
+    font-size: 1.3em;
     height: 50px;
+
+    &.form {
+      border-radius: unset;
+      width: 100%;
+      height: 100%;
+
+      @media screen and (min-width: 601px) {
+        border-radius: 10px;
+        width: 130px;
+        height: 50px;
+      }
+
+      &.white {
+        background-color: #fff;
+        color: #3fb87b;
+        border: 1px solid #3fb87b;
+      }
+    }
 
     &-white {
       background-color: #fff;
