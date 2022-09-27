@@ -6,6 +6,7 @@ import { ILoginData } from "../../../interfaces/users/User";
 import { SyntheticEvent, useState } from "react";
 import { Link } from "react-router-dom";
 import useUser from "../../../hooks/users/useUsersApi";
+import Button from "../../button/Button";
 
 const LoginForm = () => {
   const { loginUser } = useUser();
@@ -59,12 +60,14 @@ const LoginForm = () => {
           />
         </div>
         <div className="buttons-container">
-          <button className="buttons-container__send" type="submit">
+          <Button buttonClassName="button form" type="submit">
             Enviar
-          </button>
+          </Button>
           <div className="buttons-container__return-container">
             <Link className="buttons-container__nav-link" to={"/home"}>
-              <button className="buttons-container__return">Volver</button>
+              <Button buttonClassName="button form white" type="button">
+                Volver
+              </Button>
             </Link>
           </div>
         </div>

@@ -62,56 +62,21 @@ export const RegisterFormStyled = styled.form`
   .buttons-container {
     display: flex;
     margin-top: 30px;
+    height: 64px;
+    width: 100%;
 
     @media screen and (min-width: 601px) {
       align-self: center;
-      width: 100%;
       justify-content: space-between;
+      position: unset;
+      width: 400px;
     }
 
     &__return-container {
-      flex-grow: 1;
-
-      @media screen and (min-width: 601px) {
-        flex-grow: 0;
-      }
-    }
-
-    > :first-child {
-      flex-grow: 1;
-      padding: 20px;
-      background-color: #3fb87b;
-      color: #fff;
-      border: 1px solid #3fb87b;
-      font-size: 1.2em;
-      cursor: pointer;
-
-      @media screen and (min-width: 601px) {
-        border-radius: 10px;
-        max-width: 100px;
-      }
-    }
-
-    &__nav-link {
-      flex-grow: 1;
-
-      @media screen and (min-width: 601px) {
-        width: 100%;
-      }
-    }
-
-    &__return {
       width: 100%;
-      padding: 20px;
-      background-color: #fff;
-      color: #3fb87b;
-      border: 1px solid #3fb87b;
-      font-size: 1.2em;
-      cursor: pointer;
 
       @media screen and (min-width: 601px) {
-        border-radius: 10px;
-        width: 100px;
+        width: unset;
       }
     }
   }

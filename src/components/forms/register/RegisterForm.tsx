@@ -6,6 +6,7 @@ import { IUnregisteredUser } from "../../../interfaces/users/User";
 import { MainHeader, RegisterFormStyled } from "./RegisterFormStyled";
 import { Link } from "react-router-dom";
 import useUser from "../../../hooks/users/useUsersApi";
+import Button from "../../button/Button";
 
 const RegisterForm = () => {
   const { registerUser } = useUser();
@@ -75,10 +76,14 @@ const RegisterForm = () => {
           />
         </div>
         <div className="buttons-container">
-          <button type="submit">Enviar</button>
+          <Button buttonClassName="button form" type="submit">
+            Enviar
+          </Button>
           <div className="buttons-container__return-container">
             <Link className="buttons-container__nav-link" to={"/home"}>
-              <button className="buttons-container__return">Volver</button>
+              <Button buttonClassName="button form white" type="button">
+                Volver
+              </Button>
             </Link>
           </div>
         </div>

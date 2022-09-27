@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import Button from "../../components/button/Button";
 import Header from "../../components/header/Header";
 import HomePageStyled from "./HomePageStyled";
 
@@ -15,12 +16,15 @@ const HomePage = (): JSX.Element => {
         </p>
         <div className="buttons-container">
           <Link className="buttons-container__link" to={"/login"}>
-            <button className="buttons-container__login" type="submit">
+            <Button buttonClassName="button form" type="button">
               Login
-            </button>
+            </Button>
           </Link>
           <Link className="buttons-container__link" to={"/register"}>
-            <button className="buttons-container__register">Registrarse</button>
+            {/* <button className="buttons-container__register">Registrarse</button> */}
+            <Button buttonClassName="button form white" type="button">
+              Registrarse
+            </Button>
           </Link>
         </div>
       </HomePageStyled>
