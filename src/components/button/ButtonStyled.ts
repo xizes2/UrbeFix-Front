@@ -9,8 +9,9 @@ const ButtonStyled = styled.button`
     color: #fff;
     border-radius: 10px;
     padding: 10px;
-    font-size: 1.3em;
+    font-size: 1.2em;
     height: 50px;
+    align-self: center;
 
     &.form {
       border-radius: unset;

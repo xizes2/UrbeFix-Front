@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import useComplaints from "../../../hooks/complaints/useComplaintsApi";
 import { IUnegisteredComplaint } from "../../../interfaces/complaints/Complaints";
+import Button from "../../button/Button";
 import RegisterComplaintStyled from "./RegisterComplaintStyled";
 
 let formData = new FormData();
@@ -143,10 +144,14 @@ const RegisterComplaint = () => {
           />
         </div>
         <div className="buttons-container">
-          <button type="submit">Enviar</button>
+          <Button buttonClassName="button form" type="submit">
+            Enviar
+          </Button>
           <div className="buttons-container__return-container">
             <Link className="buttons-container__nav-link" to={"/complaints"}>
-              <button className="buttons-container__return">Volver</button>
+              <Button buttonClassName="button form white" type="button">
+                Volver
+              </Button>
             </Link>
           </div>
         </div>

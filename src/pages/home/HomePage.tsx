@@ -21,7 +21,6 @@ const HomePage = (): JSX.Element => {
             </Button>
           </Link>
           <Link className="buttons-container__link" to={"/register"}>
-            {/* <button className="buttons-container__register">Registrarse</button> */}
             <Button buttonClassName="button form white" type="button">
               Registrarse
             </Button>

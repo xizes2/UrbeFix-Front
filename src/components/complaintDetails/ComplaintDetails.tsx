@@ -95,16 +95,7 @@ const ComplaintDetails = () => {
             width={100}
           />
         </div>
-        {/* <button
-          className="complaint-card__delete-container"
-          onClick={handleDelete}
-          aria-label="delete-complaint-button"
-        >
-          <FontAwesomeIcon
-            className="delete-complaint__delete-icon"
-            icon={faTrashCan}
-          />
-        </button> */}
+
         <Button
           type="button"
           buttonClassName="button-round--delete"
