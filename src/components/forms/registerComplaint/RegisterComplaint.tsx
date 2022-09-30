@@ -9,11 +9,13 @@ import Button from "../../button/Button";
 import RegisterComplaintStyled from "./RegisterComplaintStyled";
 
 let formData = new FormData();
-const errorModal = (error: string) =>
+
+const errorModal = (error: string) => {
   toast.error(error, {
     position: toast.POSITION.TOP_CENTER,
     autoClose: 2000,
   });
+};
 
 const RegisterComplaint = () => {
   const initialState: IUnegisteredComplaint = {
@@ -32,20 +34,25 @@ const RegisterComplaint = () => {
   const [lat, setLat] = useState<number | undefined>();
   const [lng, setLng] = useState<number | undefined>();
 
-  const isUserGeolocationActive = navigator.geolocation;
-
-  if (!isUserGeolocationActive) {
-    errorModal("Por favor, activa la ubicación del dispositivo.");
-  } else {
+  const handleLocation = (() => {
     navigator.geolocation.getCurrentPosition(
-      (position) => {
-        setLat(position.coords.latitude);
-        setLng(position.coords.longitude);
+      (position: GeolocationPosition) => {
+        const coordinates = position.coords;
+        setLat(coordinates.latitude);
+        setLng(coordinates.longitude);
       },
-      () => {},
-      { enableHighAccuracy: true }
+
+      () => {
+        errorModal("Por favor, active la ubicación del dispositivo.");
+      },
+
+      {
+        enableHighAccuracy: true,
+        timeout: 5000,
+        maximumAge: 0,
+      }
     );
-  }
+  })();
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -144,7 +151,11 @@ const RegisterComplaint = () => {
           />
         </div>
         <div className="buttons-container">
-          <Button buttonClassName="button form" type="submit">
+          <Button
+            buttonClassName="button form"
+            type="submit"
+            onClick={() => handleLocation}
+          >
             Enviar
           </Button>
           <div className="buttons-container__return-container">
