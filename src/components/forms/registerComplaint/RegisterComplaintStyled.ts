@@ -38,6 +38,22 @@ const RegisterComplaintStyled = styled.form`
     border-bottom: 2px solid #3fb87b;
   }
 
+  .button-geolocation {
+    background-color: #3fb87b;
+    width: inherit;
+    margin: 20px;
+    border: none;
+    padding: 10px;
+    font-size: 1.2em;
+    color: #fff;
+    border-radius: 10px;
+    cursor: pointer;
+  }
+
+  .address-container {
+    text-align: center;
+  }
+
   .image-container {
     display: flex;
     justify-content: center;
@@ -75,7 +91,7 @@ const RegisterComplaintStyled = styled.form`
     display: flex;
     margin-top: 30px;
     height: 64px;
-    position: absolute;
+    position: sticky;
     width: 100%;
     bottom: 0;
 

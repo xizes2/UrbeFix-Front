@@ -7,6 +7,7 @@ import useComplaints from "../../../hooks/complaints/useComplaintsApi";
 import { IUnegisteredComplaint } from "../../../interfaces/complaints/Complaints";
 import Button from "../../button/Button";
 import RegisterComplaintStyled from "./RegisterComplaintStyled";
+import Geocode from "react-geocode";
 
 let formData = new FormData();
 
@@ -33,13 +34,26 @@ const RegisterComplaint = () => {
   const [newComplaint, setNewComplaint] = useState(initialState);
   const [lat, setLat] = useState<number | undefined>();
   const [lng, setLng] = useState<number | undefined>();
+  const [address, setAddres] = useState("");
 
-  const handleLocation = (() => {
+  const handleLocation = () => {
     navigator.geolocation.getCurrentPosition(
       (position: GeolocationPosition) => {
         const coordinates = position.coords;
         setLat(coordinates.latitude);
         setLng(coordinates.longitude);
+
+        try {
+          Geocode.fromLatLng(
+            coordinates.latitude.toString(),
+            coordinates.longitude.toString()
+          ).then((response) => {
+            const address: string = response.results[0].formatted_address;
+            setAddres(address);
+          });
+        } catch {
+          errorModal("Ooops, por favor, intente otra vez.");
+        }
       },
 
       () => {
@@ -52,7 +66,7 @@ const RegisterComplaint = () => {
         maximumAge: 0,
       }
     );
-  })();
+  };
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
@@ -131,6 +145,14 @@ const RegisterComplaint = () => {
           value={newComplaint.description}
           onChange={handleChange}
         />
+        <Button
+          buttonClassName="button-geolocation"
+          type="button"
+          onClick={handleLocation}
+        >
+          Ubicación automática
+        </Button>
+        <span className="address-container">{address}</span>
         <div className="image-container">
           <label htmlFor="image" className="image-button">
             <span>Añadir foto</span>
