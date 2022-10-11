@@ -98,6 +98,14 @@ const RegisterComplaint = () => {
     formData.append("image", event.target.files![0]);
     handleChange(event);
   };
+
+  const isDisabled =
+    newComplaint.category === "" ||
+    newComplaint.title.length < 5 ||
+    !lat ||
+    !lng ||
+    newComplaint.image === "";
+
   return (
     <>
       <RegisterComplaintStyled onSubmit={handleSubmit}>
@@ -177,6 +185,7 @@ const RegisterComplaint = () => {
             buttonClassName="button form"
             type="submit"
             onClick={() => handleLocation}
+            disabled={isDisabled}
           >
             Enviar
           </Button>

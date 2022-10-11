@@ -13,6 +13,11 @@ const ButtonStyled = styled.button`
     height: 50px;
     align-self: center;
 
+    &:disabled {
+      background-color: #3fb87bbb;
+      cursor: unset;
+    }
+
     &.form {
       border-radius: unset;
       width: 100%;
