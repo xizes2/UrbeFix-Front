@@ -56,6 +56,10 @@ const ComplaintDetailsStyled = styled.div`
     }
   }
 
+  .description-container__text {
+    word-break: break-all;
+  }
+
   .button-round--delete {
     position: sticky;
     right: 20px;

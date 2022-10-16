@@ -6,6 +6,7 @@ export interface IRegisteredComplaint {
   image: string;
   creationDate?: Date;
   location?: number[];
+  address: string;
   id: string;
   imageBackUp: string;
 }
@@ -22,4 +23,5 @@ export interface IUnegisteredComplaint {
   image: string;
   creationDate?: Date;
   location?: number[];
+  address: string;
 }

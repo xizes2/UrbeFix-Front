@@ -20,6 +20,7 @@ describe("Given a Complaint component", () => {
         id: "654ds65s",
         imageBackUp:
           "https://gddtzsfibvhkrjzrphxo.supabase.co/storage/v1/object/public/urbefix/1663067160059ocio.jpg",
+        address: "Barcelona",
       };
       Object.defineProperty(window, "innerWidth", {
         writable: true,
@@ -53,6 +54,7 @@ describe("Given a Complaint component", () => {
           "https://thumbs.dreamstime.com/z/contenedor-lleno-dos-y-muchos-bolsos-de-basura-en-la-calle-ciudad-monta%C3%B1a-146937943.jpg",
         title: "Contenedor lleno",
         id: "",
+        address: "Barcelona",
       };
 
       render(

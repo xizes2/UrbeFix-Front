@@ -26,6 +26,7 @@ const RegisterComplaint = () => {
     countComplaints: 0,
     image: "",
     location: [],
+    address: "",
   };
 
   const navigate = useNavigate();
@@ -34,7 +35,7 @@ const RegisterComplaint = () => {
   const [newComplaint, setNewComplaint] = useState(initialState);
   const [lat, setLat] = useState<number | undefined>();
   const [lng, setLng] = useState<number | undefined>();
-  const [address, setAddres] = useState("");
+  const [address, setAddress] = useState("");
 
   const handleLocation = () => {
     navigator.geolocation.getCurrentPosition(
@@ -49,7 +50,7 @@ const RegisterComplaint = () => {
             coordinates.longitude.toString()
           ).then((response) => {
             const address: string = response.results[0].formatted_address;
-            setAddres(address);
+            setAddress(address);
           });
         } catch {
           errorModal("Ooops, por favor, intente otra vez.");
@@ -70,7 +71,6 @@ const RegisterComplaint = () => {
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
-
     formData.append(
       "newComplaint",
       JSON.stringify({
@@ -79,8 +79,10 @@ const RegisterComplaint = () => {
         description: newComplaint.description,
         countComplaints: newComplaint.countComplaints,
         location: [lat, lng],
+        address: address,
       })
     );
+
     await createComplaint(formData);
 
     setNewComplaint(initialState);
