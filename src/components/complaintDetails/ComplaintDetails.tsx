@@ -1,9 +1,8 @@
 import { faPenToSquare, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import useComplaints from "../../hooks/complaints/useComplaintsApi";
-import { IRegisteredComplaint } from "../../interfaces/complaints/Complaints";
+import { IComplaint } from "../../interfaces/complaints/Complaints";
 import Map from "../map/Map";
 import ComplaintDetailsStyled from "./ComplaintDetailsStyled";
 import Geocode from "react-geocode";
@@ -16,60 +15,27 @@ Geocode.setRegion("es");
 Geocode.setLocationType("ROOFTOP");
 Geocode.setApiKey(geocodeKey!);
 
-const ComplaintDetails = () => {
-  const complaintInitialState: IRegisteredComplaint = {
-    category: "",
-    title: "",
-    countComplaints: 0,
-    image: "",
-    id: "",
-    imageBackUp: "",
-  };
-
+const ComplaintDetails = ({ complaint }: IComplaint) => {
   const navigateTo = useNavigate();
-  const [complaint, setComplaint] = useState(complaintInitialState);
-  const { getComplaint, deleteComplaint } = useComplaints();
+  const { deleteComplaint } = useComplaints();
   const { id } = useParams();
-
-  const catalunyaSquareLat = 41.387016;
-  const catalunyaSquareLng = 2.170047;
-  const [lat, setLat] = useState(catalunyaSquareLat);
-  const [lng, setLng] = useState(catalunyaSquareLng);
-  const [address, setAddres] = useState("");
-
-  useEffect(() => {
-    setLat(complaint.location?.[0] ? complaint.location?.[0] : lat);
-    setLng(complaint.location?.[1] ? complaint.location?.[1] : lng);
-  }, [complaint.location, lat, lng]);
-
-  Geocode.fromLatLng(lat.toString(), lng.toString()).then((response) => {
-    const address: string = response.results[0].formatted_address;
-    setAddres(address);
-  });
 
   const handleDelete = () => {
     deleteComplaint(id!);
     navigateTo("/complaints");
   };
 
-  useEffect(() => {
-    (async () => {
-      const complaint = await getComplaint(id!);
-      setComplaint(complaint);
-    })();
-  }, [getComplaint, id]);
-
   return (
     <ComplaintDetailsStyled>
       <div className="complaint-card">
-        <Map lat={lat} lng={lng} />
+        <Map lat={complaint.location![0]} lng={complaint.location![1]} />
         <div className="complaint-card__detail-container">
           <h3 className="complaint-card__title">Categoría:</h3>
           <span className="title-container__text">{complaint.category}</span>
         </div>
         <div className="complaint-card__detail-container">
           <h3 className="complaint-card__title">Ubicación:</h3>
-          <span className="location-container__text">{address}</span>
+          <span className="location-container__text">{complaint.address}</span>
         </div>
         <div className="complaint-card__detail-container">
           <h3 className="complaint-card__title">Fecha:</h3>
