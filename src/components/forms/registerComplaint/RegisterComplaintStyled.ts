@@ -91,9 +91,7 @@ const RegisterComplaintStyled = styled.form`
     display: flex;
     margin-top: 30px;
     height: 64px;
-    position: sticky;
     width: 100%;
-    bottom: 0;
 
     @media screen and (min-width: 601px) {
       align-self: center;

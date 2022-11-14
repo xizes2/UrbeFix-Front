@@ -2,13 +2,14 @@ import { faCirclePlus, faTrashCan } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../../app/store/hooks";
 import useComplaints from "../../hooks/complaints/useComplaintsApi";
 import { IComplaint } from "../../interfaces/complaints/Complaints";
 import Button from "../button/Button";
 import ComplaintStyled from "./ComplaintStyled";
 
 const Complaint = ({
-  complaint: { id, category, image, title, creationDate, imageBackUp },
+  complaint: { id, category, title, creationDate, imageBackUp, owner },
 }: IComplaint): JSX.Element => {
   const [windowSize, setWindowSize] = useState(window.innerWidth > 601);
   const { deleteComplaint } = useComplaints();
@@ -21,6 +22,8 @@ const Complaint = ({
     window.addEventListener("resize", setViewPortSize);
     return () => window.removeEventListener("resize", setViewPortSize);
   });
+
+  const userId = useAppSelector((state) => state.users.id);
 
   const handleDelete = () => {
     deleteComplaint(id);
@@ -63,17 +66,21 @@ const Complaint = ({
           )}
         </Link>
       </div>
-      <Button
-        buttonClassName="complaint-card__button--delete"
-        type="button"
-        onClick={handleDelete}
-        aria-label="delete-complaint-button"
-      >
-        <FontAwesomeIcon
-          className="delete-complaint__trashcan-icon"
-          icon={faTrashCan}
-        />
-      </Button>
+      {userId === owner ? (
+        <Button
+          buttonClassName="complaint-card__button--delete"
+          type="button"
+          onClick={handleDelete}
+          aria-label="delete-complaint-button"
+        >
+          <FontAwesomeIcon
+            className="delete-complaint__trashcan-icon"
+            icon={faTrashCan}
+          />
+        </Button>
+      ) : (
+        ""
+      )}
     </ComplaintStyled>
   );
 };

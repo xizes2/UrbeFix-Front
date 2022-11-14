@@ -14,6 +14,7 @@ describe("Given a ComplaintDetails component", () => {
         imageBackUp: "",
         address: "",
         location: [41.39, 2.15],
+        owner: "631254c916f7acfa6537dad0",
       };
 
       render(

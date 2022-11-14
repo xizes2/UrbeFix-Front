@@ -15,6 +15,7 @@ const ComplaintDetailsPage = (): JSX.Element => {
     imageBackUp: "",
     address: "",
     location: [],
+    owner: "",
   };
 
   const { getComplaint } = useComplaints();

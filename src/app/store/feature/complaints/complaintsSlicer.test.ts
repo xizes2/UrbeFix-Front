@@ -22,6 +22,7 @@ describe("Given a complaintSlice reducer", () => {
           imageBackUp:
             "https://gddtzsfibvhkrjzrphxo.supabase.co/storage/v1/object/public/urbefix/1663067160059ocio.jpg",
           address: "Barcelona",
+          owner: "631254c916f7acfa6537dad0",
         },
       ];
 
@@ -48,6 +49,7 @@ describe("Given a complaintSlice reducer", () => {
           imageBackUp:
             "https://gddtzsfibvhkrjzrphxo.supabase.co/storage/v1/object/public/urbefix/1663067160059ocio.jpg",
           address: "Barcelona",
+          owner: "631254c916f7acfa6537dad0",
         },
       ];
 
@@ -75,6 +77,7 @@ describe("Given a complaintSlice reducer", () => {
         imageBackUp:
           "https://gddtzsfibvhkrjzrphxo.supabase.co/storage/v1/object/public/urbefix/1663067160059ocio.jpg",
         address: "Barcelona",
+        owner: "631254c916f7acfa6537dad0",
       };
 
       const action = createComplaintActionCreator(complaint);

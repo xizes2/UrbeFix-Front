@@ -130,7 +130,6 @@ const ComplaintDetailsStyled = styled.div`
   }
 
   .return-button-container {
-    position: sticky;
     bottom: 0;
     background-color: #3fb87b;
     height: 64px;
