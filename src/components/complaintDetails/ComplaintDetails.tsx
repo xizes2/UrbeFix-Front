@@ -7,6 +7,7 @@ import Map from "../map/Map";
 import ComplaintDetailsStyled from "./ComplaintDetailsStyled";
 import Geocode from "react-geocode";
 import Button from "../button/Button";
+import { useAppSelector } from "../../app/store/hooks";
 
 const geocodeKey = process.env.REACT_APP_GEOCODE_KEY;
 
@@ -19,6 +20,8 @@ const ComplaintDetails = ({ complaint }: IComplaint) => {
   const navigateTo = useNavigate();
   const { deleteComplaint } = useComplaints();
   const { id } = useParams();
+
+  const userId = useAppSelector((state) => state.users.id);
 
   const handleDelete = () => {
     deleteComplaint(id!);
@@ -62,16 +65,20 @@ const ComplaintDetails = ({ complaint }: IComplaint) => {
           />
         </div>
 
-        <Button
-          type="button"
-          buttonClassName="button-round--delete"
-          onClick={handleDelete}
-        >
-          <FontAwesomeIcon
-            className="delete-complaint__trashcan-icon"
-            icon={faTrashCan}
-          />
-        </Button>
+        {userId === complaint.owner ? (
+          <Button
+            type="button"
+            buttonClassName="button-round--delete"
+            onClick={handleDelete}
+          >
+            <FontAwesomeIcon
+              className="delete-complaint__trashcan-icon"
+              icon={faTrashCan}
+            />
+          </Button>
+        ) : (
+          ""
+        )}
         <Button type="button" buttonClassName="button-round" onClick={() => {}}>
           <FontAwesomeIcon
             className="edit-complaint__edit-icon"
