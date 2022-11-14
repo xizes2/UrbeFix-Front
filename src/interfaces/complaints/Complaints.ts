@@ -9,6 +9,7 @@ export interface IRegisteredComplaint {
   address: string;
   id: string;
   imageBackUp: string;
+  owner: string;
 }
 
 export interface IComplaint {
