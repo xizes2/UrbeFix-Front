@@ -87,6 +87,7 @@ export const handlers = [
               image: "fuente.jpg",
               creationDate: new Date(),
               id: "987654",
+              owner: "631254c916f7acfa6537dad0",
             },
           ],
         })
@@ -109,6 +110,7 @@ export const handlers = [
               "https://thumbs.dreamstime.com/z/contenedor-lleno-dos-y-muchos-bolsos-de-basura-en-la-calle-ciudad-monta%C3%B1a-146937943.jpg",
             title: "Contenedor lleno",
             id: "654654jhgjhg",
+            owner: "631254c916f7acfa6537dad0",
           },
         })
       );
@@ -167,6 +169,7 @@ export const handlers = [
             image:
               "https://www.lavanguardia.com/files/content_image_mobile_filter/uploads/2022/07/28/62e2d7628699e.jpeg",
             location: [41, 2.15],
+            owner: "631254c916f7acfa6537dad0",
           },
         ])
       );
