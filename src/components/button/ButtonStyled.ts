@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
 const ButtonStyled = styled.button`
+  cursor: pointer;
   &.button {
     text-align: center;
     background-color: #3fb87b;
-    cursor: pointer;
     border: 0;
     color: #fff;
     border-radius: 10px;
