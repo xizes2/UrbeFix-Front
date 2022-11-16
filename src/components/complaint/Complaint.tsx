@@ -66,7 +66,7 @@ const Complaint = ({
           )}
         </Link>
       </div>
-      {userId === owner ? (
+      {userId === owner && (
         <Button
           buttonClassName="complaint-card__button--delete"
           type="button"
@@ -78,8 +78,6 @@ const Complaint = ({
             icon={faTrashCan}
           />
         </Button>
-      ) : (
-        ""
       )}
     </ComplaintStyled>
   );
