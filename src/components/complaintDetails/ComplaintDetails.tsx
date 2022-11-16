@@ -65,7 +65,7 @@ const ComplaintDetails = ({ complaint }: IComplaint) => {
           />
         </div>
 
-        {userId === complaint.owner ? (
+        {userId === complaint.owner && (
           <Button
             type="button"
             buttonClassName="button-round--delete"
@@ -76,8 +76,6 @@ const ComplaintDetails = ({ complaint }: IComplaint) => {
               icon={faTrashCan}
             />
           </Button>
-        ) : (
-          ""
         )}
         <Button type="button" buttonClassName="button-round" onClick={() => {}}>
           <FontAwesomeIcon
