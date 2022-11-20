@@ -31,8 +31,8 @@ const ComplaintsListStyled = styled.div`
 
       @media screen and (min-width: 601px) {
         margin: 0 20px;
-        width: 44px;
-        height: 44px;
+        width: 30px;
+        height: 30px;
       }
     }
   }
