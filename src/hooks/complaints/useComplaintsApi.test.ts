@@ -128,6 +128,7 @@ describe("Given a useComplaints hook", () => {
           "https://thumbs.dreamstime.com/z/contenedor-lleno-dos-y-muchos-bolsos-de-basura-en-la-calle-ciudad-monta%C3%B1a-146937943.jpg",
         title: "Contenedor lleno",
         id: "654654jhgjhg",
+        owner: "631254c916f7acfa6537dad0",
       };
 
       const {
