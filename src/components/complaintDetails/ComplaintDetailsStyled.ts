@@ -11,7 +11,7 @@ const ComplaintDetailsStyled = styled.div`
     flex-direction: column;
     margin: auto;
   }
-  .complaint-card {
+  .complaint {
     display: flex;
     flex-direction: column;
 
@@ -37,9 +37,13 @@ const ComplaintDetailsStyled = styled.div`
       }
     }
 
-    &__title {
+    .field-title {
       color: #6d6d6d;
       font-size: 1em;
+    }
+
+    .field-text {
+      word-break: break-all;
     }
 
     &__complaint-count {
@@ -56,10 +60,6 @@ const ComplaintDetailsStyled = styled.div`
     }
   }
 
-  .description-container__text {
-    word-break: break-all;
-  }
-
   .button-round--delete {
     position: sticky;
     right: 20px;
@@ -74,7 +74,7 @@ const ComplaintDetailsStyled = styled.div`
       width: 70px;
     }
 
-    .delete-complaint__trashcan-icon {
+    .delete-icon {
       font-size: 30px;
     }
   }
@@ -94,7 +94,7 @@ const ComplaintDetailsStyled = styled.div`
       width: 70px;
     }
 
-    .edit-complaint__edit-icon {
+    .edit-icon {
       font-size: 30px;
 
       @media screen and (min-width: 1000px) {
@@ -136,14 +136,14 @@ const ComplaintDetailsStyled = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
+    margin-top: 100px;
 
     @media screen and (min-width: 1000px) {
       width: fit-content;
       border-radius: 10px;
       font-size: 0.9em;
       align-self: center;
-      position: fixed;
-      margin-bottom: 2%;
+      margin-bottom: 30px;
     }
 
     &__nav-link {
@@ -152,10 +152,6 @@ const ComplaintDetailsStyled = styled.div`
       width: 100%;
       height: 100%;
       text-decoration: none;
-    }
-
-    & .button {
-      font-size: 1.2em;
     }
   }
 `;

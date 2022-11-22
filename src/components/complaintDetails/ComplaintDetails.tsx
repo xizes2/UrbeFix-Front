@@ -30,30 +30,28 @@ const ComplaintDetails = ({ complaint }: IComplaint) => {
 
   return (
     <ComplaintDetailsStyled>
-      <div className="complaint-card">
+      <div className="complaint">
         <Map lat={complaint.location![0]} lng={complaint.location![1]} />
-        <div className="complaint-card__detail-container">
-          <h3 className="complaint-card__title">Categoría:</h3>
-          <span className="title-container__text">{complaint.category}</span>
+        <div className="complaint__detail-container">
+          <h3 className="field-title">Categoría:</h3>
+          <span className="field-text">{complaint.category}</span>
         </div>
-        <div className="complaint-card__detail-container">
-          <h3 className="complaint-card__title">Ubicación:</h3>
-          <span className="location-container__text">{complaint.address}</span>
+        <div className="complaint__detail-container">
+          <h3 className="field-title">Ubicación:</h3>
+          <span className="field-text">{complaint.address}</span>
         </div>
-        <div className="complaint-card__detail-container">
-          <h3 className="complaint-card__title">Fecha:</h3>
-          <span className="date-container__text">
+        <div className="complaint__detail-container">
+          <h3 className="field-title">Fecha:</h3>
+          <span className="field-text">
             {new Date(complaint.creationDate as Date).toDateString()}
           </span>
         </div>
-        <span className="complaint-card__complaint-count">
+        <span className="complaint__complaint-count">
           Queja repetida <span>{complaint.countComplaints}</span> vez
         </span>
-        <div className="complaint-card__detail-container">
-          <h3 className="complaint-card__title">Descripción:</h3>
-          <span className="description-container__text">
-            {complaint.description}
-          </span>
+        <div className="complaint__detail-container">
+          <h3 className="field-title">Descripción:</h3>
+          <span className="field-text">{complaint.description}</span>
         </div>
         <div className="image-container">
           <img
@@ -66,23 +64,24 @@ const ComplaintDetails = ({ complaint }: IComplaint) => {
         </div>
 
         {userId === complaint.owner && (
-          <Button
-            type="button"
-            buttonClassName="button-round--delete"
-            onClick={handleDelete}
-          >
-            <FontAwesomeIcon
-              className="delete-complaint__trashcan-icon"
-              icon={faTrashCan}
-            />
-          </Button>
+          <>
+            <Button
+              type="button"
+              buttonClassName="button-round--delete"
+              onClick={handleDelete}
+            >
+              <FontAwesomeIcon className="delete-icon" icon={faTrashCan} />
+            </Button>
+
+            <Button
+              type="button"
+              buttonClassName="button-round"
+              onClick={() => {}}
+            >
+              <FontAwesomeIcon className="edit-icon" icon={faPenToSquare} />
+            </Button>
+          </>
         )}
-        <Button type="button" buttonClassName="button-round" onClick={() => {}}>
-          <FontAwesomeIcon
-            className="edit-complaint__edit-icon"
-            icon={faPenToSquare}
-          />
-        </Button>
         <div className="return-button-container">
           <Link
             className="return-button-container__nav-link"
