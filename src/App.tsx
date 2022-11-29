@@ -9,6 +9,7 @@ import {
 import { loginUserActionCreator } from "./app/store/feature/user/userSlicer";
 import { useAppDispatch, useAppSelector } from "./app/store/hooks";
 import ComplaintDetailsPage from "./pages/complaintDetails/ComplaintDetailsPage";
+import ComplaintEditPage from "./pages/complaintEdit/ComplaintEditPage";
 import ComplaintRegisterPage from "./pages/complaintRegister/ComplaintRegisterPage";
 import ComplaintsPage from "./pages/complaints/ComplaintsPage";
 import HomePage from "./pages/home/HomePage";
@@ -48,6 +49,7 @@ const App = (): JSX.Element => {
         />
         <Route path="/details/:id" element={<ComplaintDetailsPage />} />
         <Route path="/complaintsRegister" element={<ComplaintRegisterPage />} />
+        <Route path="/editComplaint/:id" element={<ComplaintEditPage />} />
         <Route
           path=""
           element={token ? <Navigate to="/complaints" /> : <HomePage />}

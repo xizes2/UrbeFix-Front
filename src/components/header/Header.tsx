@@ -11,7 +11,8 @@ const Header = (): JSX.Element => {
     if (
       pathname === "/complaints" ||
       pathname.includes("details") ||
-      pathname === "/complaintsRegister"
+      pathname === "/complaintsRegister" ||
+      pathname.includes("editComplaint")
     ) {
       return true;
     }
@@ -26,6 +27,9 @@ const Header = (): JSX.Element => {
     }
     if (pathname === "/complaintsRegister") {
       return "Completar Queja";
+    }
+    if (pathname.includes("/editComplaint")) {
+      return "Editar Queja";
     }
   };
 
