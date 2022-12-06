@@ -73,13 +73,18 @@ const ComplaintDetails = ({ complaint }: IComplaint) => {
               <FontAwesomeIcon className="delete-icon" icon={faTrashCan} />
             </Button>
 
-            <Button
-              type="button"
-              buttonClassName="button-round"
-              onClick={() => {}}
+            <Link
+              className="edit-button-link"
+              to={`/editComplaint/${complaint.id}`}
             >
-              <FontAwesomeIcon className="edit-icon" icon={faPenToSquare} />
-            </Button>
+              <Button
+                type="button"
+                buttonClassName="button-round"
+                onClick={() => {}}
+              >
+                <FontAwesomeIcon className="edit-icon" icon={faPenToSquare} />
+              </Button>
+            </Link>
           </>
         )}
         <div className="return-button-container">

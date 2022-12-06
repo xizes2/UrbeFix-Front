@@ -98,7 +98,7 @@ const ComplaintDetailsStyled = styled.div`
       font-size: 30px;
 
       @media screen and (min-width: 1000px) {
-        font-size: 40px;
+        font-size: 30px;
       }
     }
   }
