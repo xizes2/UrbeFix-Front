@@ -1,91 +1,38 @@
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { SyntheticEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
-import { toast } from "react-toastify";
+import React, { SyntheticEvent, useEffect, useState } from "react";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import useComplaints from "../../../hooks/complaints/useComplaintsApi";
-import { IUnegisteredComplaint } from "../../../interfaces/complaints/Complaints";
+import { IComplaint } from "../../../interfaces/complaints/Complaints";
 import Button from "../../button/Button";
-import RegisterComplaintStyled from "./RegisterComplaintStyled";
-import Geocode from "react-geocode";
+import RegisterComplaintStyled from "../registerComplaint/RegisterComplaintStyled";
 
 let formData = new FormData();
 
-const errorModal = (error: string) => {
-  toast.error(error, {
-    position: toast.POSITION.TOP_CENTER,
-    autoClose: 2000,
-  });
-};
-
-const RegisterComplaint = () => {
-  const initialState: IUnegisteredComplaint = {
-    category: "",
-    title: "",
-    description: "",
-    countComplaints: 0,
-    image: "",
-    location: [],
-    address: "",
-  };
-
+const EditComplaint = ({ complaint }: IComplaint) => {
+  const { id } = useParams();
   const navigate = useNavigate();
-  const { createComplaint } = useComplaints();
+  const { editComplaint } = useComplaints();
 
-  const [newComplaint, setNewComplaint] = useState(initialState);
-  const [lat, setLat] = useState<number | undefined>();
-  const [lng, setLng] = useState<number | undefined>();
-  const [address, setAddress] = useState("");
+  const [editedComplaint, setEditedComplaint] = useState(complaint);
 
-  const handleLocation = () => {
-    navigator.geolocation.getCurrentPosition(
-      (position: GeolocationPosition) => {
-        const coordinates = position.coords;
-        setLat(coordinates.latitude);
-        setLng(coordinates.longitude);
-
-        try {
-          Geocode.fromLatLng(
-            coordinates.latitude.toString(),
-            coordinates.longitude.toString()
-          ).then((response) => {
-            const address: string = response.results[0].formatted_address;
-            setAddress(address);
-          });
-        } catch {
-          errorModal("Ooops, por favor, intente otra vez.");
-        }
-      },
-
-      () => {
-        errorModal("Por favor, active la ubicación del dispositivo.");
-      },
-
-      {
-        enableHighAccuracy: true,
-        timeout: 5000,
-        maximumAge: 0,
-      }
-    );
-  };
+  useEffect(() => {
+    setEditedComplaint({ ...complaint });
+  }, [complaint]);
 
   const handleSubmit = async (event: SyntheticEvent) => {
     event.preventDefault();
+
     formData.append(
       "complaint",
       JSON.stringify({
-        category: newComplaint.category,
-        title: newComplaint.title,
-        description: newComplaint.description,
-        countComplaints: newComplaint.countComplaints,
-        location: [lat, lng],
-        address: address,
+        ...editedComplaint,
       })
     );
 
-    await createComplaint(formData);
+    await editComplaint(formData, id!);
 
-    setNewComplaint(initialState);
+    setEditedComplaint(complaint);
     formData = new FormData();
     navigate("/complaints");
   };
@@ -93,7 +40,10 @@ const RegisterComplaint = () => {
   const handleChange = (
     event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
   ) => {
-    setNewComplaint({ ...newComplaint, [event.target.id]: event.target.value });
+    setEditedComplaint({
+      ...editedComplaint,
+      [event.target.id]: event.target.value,
+    });
   };
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,11 +52,9 @@ const RegisterComplaint = () => {
   };
 
   const isDisabled =
-    newComplaint.category === "" ||
-    newComplaint.title.length < 5 ||
-    !lat ||
-    !lng ||
-    newComplaint.image === "";
+    editedComplaint.category === "" ||
+    editedComplaint.title.length < 5 ||
+    formData.keys.name.includes("image");
 
   return (
     <>
@@ -115,12 +63,10 @@ const RegisterComplaint = () => {
           className="category-selection"
           data-testid="select-category"
           id="category"
-          placeholder="Category"
-          value={newComplaint.category}
+          value={editedComplaint.category}
           onChange={handleChange}
           required
         >
-          <option value="select">Seleccione una categoría</option>
           <option value="Acera">Acera</option>
           <option value="Bicing">Bicing</option>
           <option value="Arbolado en via pública">
@@ -141,28 +87,20 @@ const RegisterComplaint = () => {
         <input
           type="text"
           id="title"
-          placeholder="Título"
-          required
           autoComplete="off"
-          value={newComplaint.title}
+          value={editedComplaint.title}
           onChange={handleChange}
+          required
         />
         <input
           type="text"
           id="description"
-          placeholder="Descripción"
           autoComplete="off"
-          value={newComplaint.description}
+          value={editedComplaint.description}
           onChange={handleChange}
         />
-        <Button
-          buttonClassName="button-geolocation"
-          type="button"
-          onClick={handleLocation}
-        >
-          Ubicación automática
-        </Button>
-        <span className="address-container">{address}</span>
+
+        <span className="address-container">{editedComplaint.address}</span>
         <div className="image-container">
           <label htmlFor="image" className="image-button">
             <span>Añadir foto</span>
@@ -178,7 +116,7 @@ const RegisterComplaint = () => {
             id="image"
             name="image"
             style={{ display: "none" }}
-            value={newComplaint.image}
+            value={""}
             onChange={handleFileChange}
           />
         </div>
@@ -186,7 +124,7 @@ const RegisterComplaint = () => {
           <Button
             buttonClassName="button form"
             type="submit"
-            onClick={() => handleLocation}
+            onClick={() => {}}
             disabled={isDisabled}
           >
             Enviar
@@ -204,4 +142,4 @@ const RegisterComplaint = () => {
   );
 };
 
-export default RegisterComplaint;
+export default EditComplaint;

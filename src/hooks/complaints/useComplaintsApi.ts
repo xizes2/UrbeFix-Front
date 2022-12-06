@@ -105,6 +105,7 @@ const useComplaints = () => {
     async (complaint: FormData) => {
       const url: string = `${process.env.REACT_APP_API_URL}complaints/`;
       const token = localStorage.getItem("token");
+
       try {
         const {
           data: { newComplaint },
@@ -124,12 +125,33 @@ const useComplaints = () => {
     [dispatch]
   );
 
+  const editComplaint = useCallback(
+    async (complaint: FormData, complaintId: string) => {
+      const url: string = `${process.env.REACT_APP_API_URL}complaints/edit/${complaintId}`;
+      const token = localStorage.getItem("token");
+
+      try {
+        await axios.put(url, complaint, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+
+        successModal("This complaint has been correctly edited!");
+      } catch (error) {
+        errorModal("Couldn't edit complaint.");
+      }
+    },
+    []
+  );
+
   return {
     complaints,
     getAllComplaints,
     deleteComplaint,
     getComplaint,
     createComplaint,
+    editComplaint,
   };
 };
 
