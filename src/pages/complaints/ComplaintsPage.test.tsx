@@ -5,7 +5,6 @@ import ComplaintsPage from "./ComplaintsPage";
 describe("Given a route '/complaints'", () => {
   describe("When it  is accessed", () => {
     test("Then it should show the complaints", () => {
-      const buttonText = "Categoría";
       const createComplaintText = "Crear Queja";
 
       render(
@@ -14,10 +13,8 @@ describe("Given a route '/complaints'", () => {
         </Wrapper>
       );
 
-      const categoryButton = screen.getByText(buttonText);
       const createComplaintButton = screen.getByText(createComplaintText);
 
-      expect(categoryButton).toBeInTheDocument();
       expect(createComplaintButton).toBeInTheDocument();
     });
   });
