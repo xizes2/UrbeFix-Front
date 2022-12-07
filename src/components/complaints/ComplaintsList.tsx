@@ -1,6 +1,6 @@
 import { faMapPin } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import { useAppSelector } from "../../app/store/hooks";
 import useComplaints from "../../hooks/complaints/useComplaintsApi";
@@ -10,12 +10,35 @@ import Complaint from "../complaint/Complaint";
 import ComplaintsListStyled from "./ComplaintsListStyled";
 
 const ComplaintsList = (): JSX.Element => {
-  const complaintsList = useAppSelector((state) => state.complaints);
+  let initialComplaintsList = useAppSelector((state) => state.complaints);
   const { getAllComplaints } = useComplaints();
+  const [filteredComplaints, setFilteredComplaints] = useState(
+    initialComplaintsList
+  );
+  const [categoryFilter, setCategoryFilter] = useState("");
 
   useEffect(() => {
+    window.scrollTo({ top: 0 });
     getAllComplaints();
   }, [getAllComplaints]);
+
+  useEffect(() => {
+    if (categoryFilter !== "") {
+      setFilteredComplaints(
+        initialComplaintsList.filter(
+          (complaint) => complaint.category === categoryFilter
+        )
+      );
+    } else {
+      setFilteredComplaints(initialComplaintsList);
+    }
+  }, [initialComplaintsList, categoryFilter]);
+
+  const handleCategoryChange = (
+    event: React.ChangeEvent<HTMLSelectElement>
+  ) => {
+    setCategoryFilter(event.target.value);
+  };
 
   return (
     <ComplaintsListStyled>
@@ -24,9 +47,9 @@ const ComplaintsList = (): JSX.Element => {
           <select
             className="filter-category"
             id="category"
-            placeholder="Categoria"
+            onChange={handleCategoryChange}
           >
-            <option value="select">Seleccione una categoría</option>
+            <option value="">Seleccione una categoría</option>
             <option value="Acera">Acera</option>
             <option value="Bicing">Bicing</option>
             <option value="Arbolado en via pública">
@@ -61,7 +84,7 @@ const ComplaintsList = (): JSX.Element => {
         </Link>
       </div>
       <ul className="complaints-container">
-        {complaintsList.map((complaintItem: IRegisteredComplaint) => (
+        {filteredComplaints.map((complaintItem: IRegisteredComplaint) => (
           <li
             className="complaints-container__complaint"
             key={complaintItem.id}
