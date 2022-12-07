@@ -10,6 +10,16 @@ const ComplaintsListStyled = styled.div`
       align-items: center;
       display: flex;
       margin-right: 20px;
+
+      & .filter-category {
+        background-color: #3fb87b;
+        border: none;
+        padding: 10px;
+        font-size: 1.2em;
+        color: #fff;
+        border-radius: 10px;
+        height: 50px;
+      }
     }
 
     & .button {
