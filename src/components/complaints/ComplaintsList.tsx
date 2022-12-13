@@ -93,6 +93,13 @@ const ComplaintsList = (): JSX.Element => {
           </li>
         ))}
       </ul>
+      <Button
+        buttonClassName="load-more-button"
+        type="button"
+        onClick={() => {}}
+      >
+        Cargar más
+      </Button>
     </ComplaintsListStyled>
   );
 };
