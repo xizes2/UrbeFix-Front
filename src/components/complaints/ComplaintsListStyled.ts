@@ -67,6 +67,18 @@ const ComplaintsListStyled = styled.div`
       }
     }
   }
+
+  .load-more-button {
+    background-color: #3fb87b;
+    border: none;
+    padding: 10px;
+    font-size: 1.2em;
+    color: #fff;
+    border-radius: 10px;
+    height: 50px;
+    display: flex;
+    margin: auto;
+  }
 `;
 
 export default ComplaintsListStyled;
