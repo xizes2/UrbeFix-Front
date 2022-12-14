@@ -65,7 +65,7 @@ describe("Given a useUser hook", () => {
       await registerUser(mockUser2);
 
       expect(toast.error).toHaveBeenCalledWith(
-        "NoOoOoOoo! Email already exists.",
+        "NoOoOoOoo! Hubo un error. Por favor, intente otra vez",
         {
           position: toast.POSITION.TOP_CENTER,
           autoClose: 2000,
@@ -122,7 +122,7 @@ describe("Given a useUser hook", () => {
         await loginUser(mockUser);
 
         expect(toast.error).toHaveBeenCalledWith(
-          "User or password not valid.",
+          "NoOoOoOoo! Hubo un error. Por favor, intente otra vez",
           {
             position: toast.POSITION.TOP_CENTER,
             autoClose: 2000,
