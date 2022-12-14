@@ -52,7 +52,7 @@ const useUser = () => {
       navigateTo("/complaints");
     } catch (error) {
       toast.dismiss();
-      errorModal("NoOoOoOoo! Email already exists.");
+      errorModal("NoOoOoOoo! Hubo un error. Por favor, intente otra vez");
     }
   };
 
@@ -79,7 +79,7 @@ const useUser = () => {
       return;
     } catch (error) {
       toast.dismiss();
-      errorModal("User or password not valid.");
+      errorModal("NoOoOoOoo! Hubo un error. Por favor, intente otra vez");
     }
   };
 
