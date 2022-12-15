@@ -77,7 +77,12 @@ const ComplaintsListStyled = styled.div`
     border-radius: 10px;
     height: 50px;
     display: flex;
-    margin: auto;
+    margin: 0 auto 20px auto;
+    align-items: center;
+    :disabled {
+      background-color: #3fb87b77;
+      cursor: unset;
+    }
   }
 `;
 

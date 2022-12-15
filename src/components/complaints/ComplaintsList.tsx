@@ -10,29 +10,38 @@ import Complaint from "../complaint/Complaint";
 import ComplaintsListStyled from "./ComplaintsListStyled";
 
 const ComplaintsList = (): JSX.Element => {
-  let initialComplaintsList = useAppSelector((state) => state.complaints);
-  const { getAllComplaints } = useComplaints();
-  const [filteredComplaints, setFilteredComplaints] = useState(
-    initialComplaintsList
-  );
+  let complaintsList = useAppSelector((state) => state.complaints);
+  const { getAllComplaints, totalPages } = useComplaints();
+  const [filteredComplaints, setFilteredComplaints] = useState(complaintsList);
   const [categoryFilter, setCategoryFilter] = useState("");
+  let [page, setPage] = useState(1);
 
   useEffect(() => {
     window.scrollTo({ top: 0 });
-    getAllComplaints();
+    getAllComplaints(1);
   }, [getAllComplaints]);
+
+  const loadMoreComplaints = () => {
+    const updatedPage = page + 1;
+    getAllComplaints(updatedPage);
+    setPage(updatedPage);
+  };
+
+  const isLoadMoreButtonActive = () => {
+    return page >= totalPages;
+  };
 
   useEffect(() => {
     if (categoryFilter !== "") {
       setFilteredComplaints(
-        initialComplaintsList.filter(
+        complaintsList.filter(
           (complaint) => complaint.category === categoryFilter
         )
       );
     } else {
-      setFilteredComplaints(initialComplaintsList);
+      setFilteredComplaints(complaintsList);
     }
-  }, [initialComplaintsList, categoryFilter]);
+  }, [complaintsList, categoryFilter]);
 
   const handleCategoryChange = (
     event: React.ChangeEvent<HTMLSelectElement>
@@ -96,7 +105,10 @@ const ComplaintsList = (): JSX.Element => {
       <Button
         buttonClassName="load-more-button"
         type="button"
-        onClick={() => {}}
+        onClick={() => {
+          loadMoreComplaints();
+        }}
+        disabled={isLoadMoreButtonActive()}
       >
         Cargar más
       </Button>
