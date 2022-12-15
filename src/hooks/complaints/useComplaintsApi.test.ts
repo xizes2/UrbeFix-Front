@@ -16,6 +16,8 @@ jest.mock("../../app/store/hooks", () => ({
 }));
 
 describe("Given a useComplaints hook", () => {
+  const page = 1;
+
   describe("When invoke getAllComplaints function", () => {
     test("Then it should show a loading modal", async () => {
       const {
@@ -25,7 +27,7 @@ describe("Given a useComplaints hook", () => {
       } = renderHook(useComplaints, { wrapper: Wrapper });
 
       await act(async () => {
-        await getAllComplaints();
+        await getAllComplaints(page);
       });
 
       await waitFor(() => {
@@ -52,7 +54,7 @@ describe("Given a useComplaints hook", () => {
         },
       } = renderHook(useComplaints, { wrapper: Wrapper });
 
-      await getAllComplaints();
+      await getAllComplaints(page);
 
       expect(toast.error).toHaveBeenCalledWith("NoOoOoOoo! Please try again.", {
         position: toast.POSITION.TOP_CENTER,

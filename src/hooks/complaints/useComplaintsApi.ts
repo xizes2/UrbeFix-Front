@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useCallback } from "react";
+import { useCallback, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import {
@@ -33,33 +33,36 @@ const useComplaints = () => {
   const dispatch = useAppDispatch();
   const navigateTo = useNavigate();
   const complaints = useAppSelector((complaints) => complaints);
+  const [totalPages, setTotalPages] = useState(0);
 
-  const getAllComplaints = useCallback(async (): Promise<void> => {
-    const token = localStorage.getItem("token");
-    const url: string = `${process.env.REACT_APP_API_URL}complaints`;
-
-    try {
-      loadingModal("Give us a second...");
-      const {
-        data: { complaints },
-      } = await axios.get(url, {
-        headers: { authorization: `Bearer ${token}` },
-      });
-      const complaintsList = complaints.map(
-        (complaint: IRegisteredComplaint) => ({
-          ...complaint,
-          creationDate: new Date(
-            complaint.creationDate as Date
-          ).toLocaleDateString(),
-        })
-      );
-
-      dispatch(getAllComplaintsActionCreator(complaintsList));
-      toast.dismiss("loading modal");
-    } catch (error) {
-      errorModal("NoOoOoOoo! Please try again.");
-    }
-  }, [dispatch]);
+  const getAllComplaints = useCallback(
+    async (page: number): Promise<void> => {
+      const token = localStorage.getItem("token");
+      const url: string = `${process.env.REACT_APP_API_URL}complaints?page=${page}`;
+      try {
+        loadingModal("Give us a second...");
+        const {
+          data: { complaints, totalPages },
+        } = await axios.get(url, {
+          headers: { authorization: `Bearer ${token}` },
+        });
+        const complaintsList = complaints.map(
+          (complaint: IRegisteredComplaint) => ({
+            ...complaint,
+            creationDate: new Date(
+              complaint.creationDate as Date
+            ).toLocaleDateString(),
+          })
+        );
+        dispatch(getAllComplaintsActionCreator(complaintsList));
+        setTotalPages(totalPages);
+        toast.dismiss("loading modal");
+      } catch (error) {
+        errorModal("NoOoOoOoo! Please try again.");
+      }
+    },
+    [dispatch]
+  );
 
   const deleteComplaint = useCallback(
     async (complaintId: string) => {
@@ -147,6 +150,7 @@ const useComplaints = () => {
 
   return {
     complaints,
+    totalPages,
     getAllComplaints,
     deleteComplaint,
     getComplaint,
