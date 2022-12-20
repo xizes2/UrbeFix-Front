@@ -30,8 +30,6 @@ const ComplaintEditPage = (): JSX.Element => {
     })();
   }, [getComplaint, id]);
 
-  // console.log(complaintToEdit);
-
   return (
     <>
       <Header />
