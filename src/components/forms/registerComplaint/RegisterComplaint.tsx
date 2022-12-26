@@ -1,7 +1,7 @@
 import { faCamera } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { SyntheticEvent, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
 import useComplaints from "../../../hooks/complaints/useComplaintsApi";
 import { IUnegisteredComplaint } from "../../../interfaces/complaints/Complaints";
@@ -29,13 +29,15 @@ const RegisterComplaint = () => {
     address: "",
   };
 
-  const navigate = useNavigate();
+  const fileReader = new FileReader();
+
   const { createComplaint } = useComplaints();
 
   const [newComplaint, setNewComplaint] = useState(initialState);
   const [lat, setLat] = useState<number | undefined>();
   const [lng, setLng] = useState<number | undefined>();
   const [address, setAddress] = useState("");
+  const [imageSrc, setImageSrc] = useState("");
 
   const handleLocation = () => {
     navigator.geolocation.getCurrentPosition(
@@ -87,7 +89,7 @@ const RegisterComplaint = () => {
 
     setNewComplaint(initialState);
     formData = new FormData();
-    navigate("/complaints");
+    debugger;
   };
 
   const handleChange = (
@@ -98,6 +100,13 @@ const RegisterComplaint = () => {
 
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     formData.append("image", event.target.files![0]);
+
+    fileReader.onload = function (e) {
+      setImageSrc(e.target!.result as string);
+    };
+
+    fileReader.readAsDataURL(event.target.files![0]);
+
     handleChange(event);
   };
 
@@ -167,10 +176,14 @@ const RegisterComplaint = () => {
           <label htmlFor="image" className="image-button">
             <span>Añadir foto</span>
             <span className="icon-container">
-              <FontAwesomeIcon
-                className="image-button__icon-camera"
-                icon={faCamera}
-              />
+              {newComplaint.image ? (
+                <img src={imageSrc} alt="complaint loaded" width={300} />
+              ) : (
+                <FontAwesomeIcon
+                  className="image-button__icon-camera"
+                  icon={faCamera}
+                />
+              )}
             </span>
           </label>
           <input
