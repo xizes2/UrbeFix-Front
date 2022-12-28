@@ -89,7 +89,6 @@ const RegisterComplaint = () => {
 
     setNewComplaint(initialState);
     formData = new FormData();
-    debugger;
   };
 
   const handleChange = (
@@ -153,6 +152,8 @@ const RegisterComplaint = () => {
           placeholder="Título"
           required
           autoComplete="off"
+          minLength={5}
+          maxLength={15}
           value={newComplaint.title}
           onChange={handleChange}
         />
@@ -199,7 +200,6 @@ const RegisterComplaint = () => {
           <Button
             buttonClassName="button form"
             type="submit"
-            onClick={() => handleLocation}
             disabled={isDisabled}
           >
             Enviar

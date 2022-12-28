@@ -31,11 +31,16 @@ const RegisterComplaintStyled = styled.form`
     border: 0;
     border-bottom: 1px solid #6d6d6d;
     font-family: inherit;
-  }
 
-  input:focus {
-    outline: none;
-    border-bottom: 2px solid #3fb87b;
+    :focus {
+      outline: none;
+      border-bottom: 2px solid #3fb87b;
+    }
+
+    :invalid {
+      outline: none;
+      border-bottom: 2px solid red;
+    }
   }
 
   .button-geolocation {
