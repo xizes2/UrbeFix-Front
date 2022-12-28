@@ -1,22 +1,44 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { IRegisteredComplaint } from "../../../../interfaces/complaints/Complaints";
 
-const complaintsInitialState: IRegisteredComplaint[] = [];
+export interface IComplaintsExtended {
+  complaints: IRegisteredComplaint[];
+  currentPage: number;
+  totalPages: number;
+}
+
+const complaintsInitialState: IComplaintsExtended = {
+  complaints: [],
+  currentPage: 0,
+  totalPages: 0,
+};
 
 const complaintsSlice = createSlice({
   name: "complaints",
   initialState: complaintsInitialState,
   reducers: {
-    getAllComplaints: (
+    getAllComplaints(
       previousState,
-      action: PayloadAction<Array<IRegisteredComplaint>>
-    ) => [...previousState, ...action.payload],
-    deleteComplaint: (previouState, action: PayloadAction<string>) =>
-      previouState.filter((complaint) => complaint.id !== action.payload),
-    createComplaint: (
+      action: PayloadAction<IComplaintsExtended>
+    ) {
+      previousState.complaints = [
+        ...previousState.complaints,
+        ...action.payload.complaints,
+      ];
+      previousState.currentPage = action.payload.currentPage;
+      previousState.totalPages = action.payload.totalPages;
+    },
+    deleteComplaint(previousState, action: PayloadAction<string>) {
+      previousState.complaints.filter(
+        (complaint: IRegisteredComplaint) => complaint.id !== action.payload
+      );
+    },
+    createComplaint(
       previousState,
       action: PayloadAction<IRegisteredComplaint>
-    ) => [...previousState, action.payload],
+    ) {
+      previousState.complaints = [...previousState.complaints, action.payload];
+    },
   },
 });
 
