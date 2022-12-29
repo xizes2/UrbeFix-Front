@@ -17,7 +17,7 @@ Geocode.setLocationType("ROOFTOP");
 Geocode.setApiKey(geocodeKey!);
 
 const ComplaintDetails = ({ complaint }: IComplaint) => {
-  const navigateTo = useNavigate();
+  const navigate = useNavigate();
   const { deleteComplaint } = useComplaints();
   const { id } = useParams();
 
@@ -25,7 +25,7 @@ const ComplaintDetails = ({ complaint }: IComplaint) => {
 
   const handleDelete = () => {
     deleteComplaint(id!);
-    navigateTo("/complaints");
+    navigate("/complaints");
   };
 
   return (
