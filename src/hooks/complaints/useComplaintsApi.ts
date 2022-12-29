@@ -32,7 +32,7 @@ export const errorModal = (error: string) =>
 const useComplaints = () => {
   const dispatch = useAppDispatch();
   const navigateTo = useNavigate();
-  const complaints = useAppSelector((complaints) => complaints);
+  const complaints = useAppSelector((state) => state.complaints.complaints);
 
   const getAllComplaints = useCallback(
     async (pageReceived = 1): Promise<void> => {
@@ -108,29 +108,25 @@ const useComplaints = () => {
     [navigateTo]
   );
 
-  const createComplaint = useCallback(
-    async (complaint: FormData) => {
-      const url: string = `${process.env.REACT_APP_API_URL}complaints/`;
-      const token = localStorage.getItem("token");
+  const createComplaint = async (complaint: FormData) => {
+    const url: string = `${process.env.REACT_APP_API_URL}complaints/`;
+    const token = localStorage.getItem("token");
+    try {
+      const {
+        data: { newComplaint },
+      } = await axios.post(url, complaint, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
 
-      try {
-        const {
-          data: { newComplaint },
-        } = await axios.post(url, complaint, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        successModal("Your complaint has been correctly registered!");
-        dispatch(createComplaintActionCreator(newComplaint));
-        return newComplaint;
-      } catch (error) {
-        errorModal("Couldn't create the complaint.");
-      }
-    },
-    [dispatch]
-  );
+      successModal("Your complaint has been correctly registered!");
+      dispatch(createComplaintActionCreator(newComplaint));
+      navigateTo("/complaints");
+    } catch (error) {
+      errorModal("Couldn't create the complaint.");
+    }
+  };
 
   const editComplaint = useCallback(
     async (complaint: FormData, complaintId: string) => {

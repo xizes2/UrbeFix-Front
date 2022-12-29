@@ -10,36 +10,38 @@ import Complaint from "../complaint/Complaint";
 import ComplaintsListStyled from "./ComplaintsListStyled";
 
 const ComplaintsList = (): JSX.Element => {
-  let complaintsList = useAppSelector((state) => state.complaints);
-  const { getAllComplaints, totalPages } = useComplaints();
-  const [filteredComplaints, setFilteredComplaints] = useState(complaintsList);
+  const complaintsList = useAppSelector((state) => state.complaints);
+  const currentPage = complaintsList.currentPage;
+  const totalPages = complaintsList.totalPages;
+  const { getAllComplaints } = useComplaints();
+  const [filteredComplaints, setFilteredComplaints] = useState(
+    complaintsList.complaints
+  );
   const [categoryFilter, setCategoryFilter] = useState("");
-  let [page, setPage] = useState(1);
+  const [page, setPage] = useState(1);
 
   useEffect(() => {
-    window.scrollTo({ top: 0 });
-    getAllComplaints(1);
-  }, [getAllComplaints]);
+    currentPage < page && getAllComplaints();
+  }, []);
 
-  const loadMoreComplaints = () => {
-    const updatedPage = page + 1;
-    getAllComplaints(updatedPage);
-    setPage(updatedPage);
+  const loadMoreComplaints = (page: number) => {
+    getAllComplaints(currentPage + 1);
+    setPage(page + 1);
   };
 
   const isLoadMoreButtonActive = () => {
-    return page >= totalPages;
+    return currentPage >= totalPages!;
   };
 
   useEffect(() => {
     if (categoryFilter !== "") {
       setFilteredComplaints(
-        complaintsList.filter(
+        complaintsList.complaints.filter(
           (complaint) => complaint.category === categoryFilter
         )
       );
     } else {
-      setFilteredComplaints(complaintsList);
+      setFilteredComplaints(complaintsList.complaints);
     }
   }, [complaintsList, categoryFilter]);
 
@@ -106,7 +108,7 @@ const ComplaintsList = (): JSX.Element => {
         buttonClassName="load-more-button"
         type="button"
         onClick={() => {
-          loadMoreComplaints();
+          loadMoreComplaints(page);
         }}
         disabled={isLoadMoreButtonActive()}
       >
